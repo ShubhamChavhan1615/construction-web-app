@@ -1,16 +1,14 @@
 
 import express from 'express';
-import {dbConnect} from "./db/db.js"
-
-const app = express();  
+import { dbConnect } from "./db/db.js"
+const PORT = process.env.PORT
+const app = express();
 
 app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   dbConnect();
-  console.log('Server is running on http://localhost:3000');
-}
-);  
-
+  console.log(`Server is running on http://localhost:${PORT}`)
+});
