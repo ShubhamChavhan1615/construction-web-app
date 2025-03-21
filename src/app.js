@@ -10,8 +10,8 @@ app.get("/", (req, res) => {
   res.render("index", { title: "Home" });
   
 });
-app.get("/slider", (req, res) => {
-    res.render("partials/Slider");
+app.get("/Aboute", (req, res) => {
+    res.render("partials/Aboute", { title: "Aboute" });
     
   });
 
