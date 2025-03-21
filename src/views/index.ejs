@@ -1,35 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Construction Clone</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
+  </head>
+  <body class="bg-gray-100">
     <nav class="bg-blue-600 text-white shadow-lg">
-        <div class="container mx-auto flex justify-between items-center p-4">
-            <h1 class="text-3xl font-extrabold">Construction Clone</h1>
-            <ul class="hidden md:flex space-x-8 text-lg font-medium">
-                <li><a href="#" class="hover:text-gray-300 transition duration-300">Home</a></li>
-                <li><a href="#" class="hover:text-gray-300 transition duration-300">About</a></li>
-                <li><a href="#" class="hover:text-gray-300 transition duration-300">Services</a></li>
-                <li><a href="#" class="hover:text-gray-300 transition duration-300">Contact</a></li>
-            </ul>
-            <button class="md:hidden text-white text-2xl focus:outline-none" id="menu-toggle">☰</button>
-        </div>
-        <ul class="md:hidden hidden flex-col space-y-3 p-4 bg-blue-500 text-lg font-medium" id="mobile-menu">
-            <li><a href="#" class="block py-2 hover:text-gray-300 transition duration-300">Home</a></li>
-            <li><a href="#" class="block py-2 hover:text-gray-300 transition duration-300">About</a></li>
-            <li><a href="#" class="block py-2 hover:text-gray-300 transition duration-300">Services</a></li>
-            <li><a href="#" class="block py-2 hover:text-gray-300 transition duration-300">Contact</a></li>
+      <div class="container mx-auto flex justify-between items-center p-4">
+        <h1 class="text-3xl font-extrabold">Construction Clone</h1>
+        <ul class="hidden md:flex space-x-8 text-lg font-medium">
+          <li>
+            <a href="#" class="hover:text-gray-300 transition duration-300"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a href="#" class="hover:text-gray-300 transition duration-300"
+              >About</a
+            >
+          </li>
+          <li>
+            <a href="#" class="hover:text-gray-300 transition duration-300"
+              >Services</a
+            >
+          </li>
+          <li>
+            <a href="#" class="hover:text-gray-300 transition duration-300"
+              >Contact</a
+            >
+          </li>
         </ul>
+        <button
+          class="md:hidden text-white text-2xl focus:outline-none"
+          id="menu-toggle"
+        >
+          ☰
+        </button>
+      </div>
+      <ul
+        class="md:hidden hidden flex-col space-y-3 p-4 bg-blue-500 text-lg font-medium"
+        id="mobile-menu"
+      >
+        <li>
+          <a
+            href="#"
+            class="block py-2 hover:text-gray-300 transition duration-300"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="block py-2 hover:text-gray-300 transition duration-300"
+            >About</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="block py-2 hover:text-gray-300 transition duration-300"
+            >Services</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="block py-2 hover:text-gray-300 transition duration-300"
+            >Contact</a
+          >
+        </li>
+      </ul>
     </nav>
 
     <script>
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
+      document
+        .getElementById("menu-toggle")
+        .addEventListener("click", function () {
+          document.getElementById("mobile-menu").classList.toggle("hidden");
         });
     </script>
-</body>
+  </body>
 </html>
