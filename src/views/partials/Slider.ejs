@@ -1,50 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Responsive Full-Width Slider</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 p-0">
-
-    <div class="relative w-full h-[480px] md:[380px] overflow-hidden rounded-md">
-        <div class="flex transition-transform duration-700 ease-in-out" id="slider">
-            <div class="w-screen flex-shrink-0">
-                <img src="https://media.istockphoto.com/id/1179153745/photo/multi-ethic-workers-talking-at-construction-site-reviewing-plans.webp?a=1&b=1&s=612x612&w=0&k=20&c=oFThCbz6q8abbqbt6q_t1Zd2TqQw9TeGwYwyclkBM-c=" class="w-full h-[500px] object-cover" alt="Slide 1">
-            </div>
-            <div class="w-screen flex-shrink-0">
-                <img src="https://media.istockphoto.com/id/940251778/photo/construction-site-view-with-tower-crane.webp?a=1&b=1&s=612x612&w=0&k=20&c=ZrxFv9tibOXh2IE1NThsiY75pFGIfBGAydwyVinOYzo=" class="w-full h-[500px] object-cover" alt="Slide 2">
-            </div>
-            <div class="w-screen flex-shrink-0">
-                <img src="https://media.istockphoto.com/id/810293400/photo/female-architect-and-two-consruction-workers-on-a-construction-site.webp?a=1&b=1&s=612x612&w=0&k=20&c=eWbLlSRynN20W6p-Txt8JVRx9cwpieuBs81_qKKOp6E=" class="w-full h-[500px] object-cover" alt="Slide 3">
-            </div>
-            <div class="w-screen flex-shrink-0">
-                <img src="https://media.istockphoto.com/id/868951824/photo/home-building.webp?a=1&b=1&s=612x612&w=0&k=20&c=0aItE4d5oRflklifBsUux0XNs1TwnGIr_fH3HGlIw1o=" class="w-full h-[500px] object-cover" alt="Slide 4">
-            </div>
+  </head>
+  <body class="bg-gray-100 p-0">
+    <div class="relative w-full h-[480px] overflow-hidden rounded-md">
+      <div
+        class="flex transition-transform duration-700 ease-in-out"
+        id="slider"
+      >
+        <div class="w-screen flex-shrink-0">
+          <img
+            src="https://media.istockphoto.com/id/1179153745/photo/multi-ethic-workers-talking-at-construction-site-reviewing-plans.webp?a=1&b=1&s=612x612&w=0&k=20&c=oFThCbz6q8abbqbt6q_t1Zd2TqQw9TeGwYwyclkBM-c="
+            class="w-full h-[500px] object-cover"
+            alt="Slide 1"
+          />
         </div>
+        <div class="w-screen flex-shrink-0">
+          <img
+            src="https://media.istockphoto.com/id/940251778/photo/construction-site-view-with-tower-crane.webp?a=1&b=1&s=612x612&w=0&k=20&c=ZrxFv9tibOXh2IE1NThsiY75pFGIfBGAydwyVinOYzo="
+            class="w-full h-[500px] object-cover"
+            alt="Slide 2"
+          />
+        </div>
+        <div class="w-screen flex-shrink-0">
+          <img
+            src="https://media.istockphoto.com/id/810293400/photo/female-architect-and-two-consruction-workers-on-a-construction-site.webp?a=1&b=1&s=612x612&w=0&k=20&c=eWbLlSRynN20W6p-Txt8JVRx9cwpieuBs81_qKKOp6E="
+            class="w-full h-[500px] object-cover"
+            alt="Slide 3"
+          />
+        </div>
+        <div class="w-screen flex-shrink-0">
+          <img
+            src="https://media.istockphoto.com/id/868951824/photo/home-building.webp?a=1&b=1&s=612x612&w=0&k=20&c=0aItE4d5oRflklifBsUux0XNs1TwnGIr_fH3HGlIw1o="
+            class="w-full h-[500px] object-cover"
+            alt="Slide 4"
+          />
+        </div>
+      </div>
 
-        <!-- Navigation Buttons -->
-        <button class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white p-3 rounded-full opacity-75 hover:opacity-100" id="prev">❮</button>
-        <button class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white p-3 rounded-full opacity-75 hover:opacity-100" id="next">❯</button>
+      <!-- Navigation Buttons -->
+      <button
+        class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white p-3 rounded-full opacity-75 hover:opacity-100"
+        id="prev"
+      >
+        ❮
+      </button>
+      <button
+        class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white p-3 rounded-full opacity-75 hover:opacity-100"
+        id="next"
+      >
+        ❯
+      </button>
     </div>
 
     <script>
-        const slider = document.getElementById('slider');
-        const slides = slider.children;
-        const totalSlides = slides.length;
-        let index = 0;
+      const slider = document.getElementById("slider");
+      const slides = slider.children;
+      const totalSlides = slides.length;
+      let index = 0;
 
-        function showSlide(i) {
-            index = (i + totalSlides) % totalSlides;
-            slider.style.transform = `translateX(-${index * 100}vw)`;
-        }
+      function showSlide(i) {
+        index = (i + totalSlides) % totalSlides;
+        slider.style.transform = `translateX(-${index * 100}vw)`;
+      }
 
-        document.getElementById('prev').addEventListener('click', () => showSlide(index - 1));
-        document.getElementById('next').addEventListener('click', () => showSlide(index + 1));
+      document
+        .getElementById("prev")
+        .addEventListener("click", () => showSlide(index - 1));
+      document
+        .getElementById("next")
+        .addEventListener("click", () => showSlide(index + 1));
 
-        setInterval(() => showSlide(index + 1), 3000); // Auto-slide every 3 seconds
+      setInterval(() => showSlide(index + 1), 3000); // Auto-slide every 3 seconds
     </script>
-
-</body>
+  </body>
 </html>

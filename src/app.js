@@ -8,12 +8,10 @@ app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
   res.render("index", { title: "Home" });
-  
 });
-app.get("/Aboute", (req, res) => {
-    res.render("partials/Aboute", { title: "Aboute" });
-    
-  });
+app.get("/About", (req, res) => {
+  res.render("About", { title: "About" });
+});
 
 app.listen(PORT, () => {
   dbConnect();
