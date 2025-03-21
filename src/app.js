@@ -1,5 +1,6 @@
 
 import express from 'express';
+import {dbConnect} from "./db/db.js"
 
 const app = express();  
 
