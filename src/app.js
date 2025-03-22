@@ -9,6 +9,7 @@ app.set("view engine", "ejs");
 app.get("/", (req, res) => {
   res.render("index", { title: "Home" });
 });
+
 app.get("/About", (req, res) => {
   res.render("About", { title: "About" });
 });
