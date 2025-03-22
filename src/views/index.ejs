@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
   </head>
+
   <body class="bg-gray-100">
     <!-- Include Header -->
     <%- include('partials/Header') %>
@@ -13,7 +19,254 @@
     <main class="container mx-auto p-1">
       <!-- Include Slider -->
       <%- include('partials/Slider') %>
+
+      <!-- About Us Section -->
+      <section class="bg-white py-16 px-4 text-center">
+        <h2 class="text-4xl font-bold text-gray-800">About Us</h2>
+        <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+          We are a leading construction management company with expertise in
+          delivering quality projects on time and within budget. Our team
+          specializes in residential, commercial, and industrial projects.
+        </p>
+      </section>
+
+      <!-- Our Services Section with Icons and Animation -->
+      <section class="bg-gray-100 py-16">
+        <h2 class="text-4xl font-bold text-center text-gray-800">
+          Our Services
+        </h2>
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-8"
+        >
+          <div class="bg-white p-6 rounded-lg shadow-md text-center group">
+            <div
+              class="text-orange-500 text-5xl mx-auto group-hover:animate-bounce transition"
+            >
+              🏗️
+            </div>
+            <h3 class="text-2xl font-semibold mt-4">Project Management</h3>
+            <p class="text-gray-600 mt-2">
+              Ensure efficient project execution with real-time monitoring and
+              reporting.
+            </p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md text-center group">
+            <div
+              class="text-blue-500 text-5xl mx-auto group-hover:animate-bounce transition"
+            >
+              🏢
+            </div>
+            <h3 class="text-2xl font-semibold mt-4">Structural Engineering</h3>
+            <p class="text-gray-600 mt-2">
+              Advanced structural solutions ensuring safety and durability.
+            </p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md text-center group">
+            <div
+              class="text-green-500 text-5xl mx-auto group-hover:animate-bounce transition"
+            >
+              🌱
+            </div>
+            <h3 class="text-2xl font-semibold mt-4">Geotechnical Analysis</h3>
+            <p class="text-gray-600 mt-2">
+              Comprehensive soil analysis and ground engineering expertise.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Projects Section -->
+      <section class="bg-white py-16">
+        <h2 class="text-4xl font-bold text-center text-gray-800">
+          Featured Projects
+        </h2>
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-8"
+        >
+          <div
+            class="bg-gray-100 rounded-lg overflow-hidden shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl"
+          >
+            <img
+              src="https://via.placeholder.com/400"
+              alt="Project 1"
+              class="w-full h-56 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-semibold">Commercial Complex</h3>
+              <p class="text-gray-600 mt-2">Completed in 2024</p>
+            </div>
+          </div>
+          <div
+            class="bg-gray-100 rounded-lg overflow-hidden shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl"
+          >
+            <img
+              src="https://via.placeholder.com/400"
+              alt="Project 2"
+              class="w-full h-56 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-semibold">Industrial Plant</h3>
+              <p class="text-gray-600 mt-2">Ongoing Project</p>
+            </div>
+          </div>
+          <div
+            class="bg-gray-100 rounded-lg overflow-hidden shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl"
+          >
+            <img
+              src="https://via.placeholder.com/400"
+              alt="Project 3"
+              class="w-full h-56 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-semibold">Residential Villas</h3>
+              <p class="text-gray-600 mt-2">Completed in 2023</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Make an Appointment Section -->
+      <section class="bg-blue-900 text-white py-16">
+        <h2 class="text-4xl font-bold text-center">Make an Appointment</h2>
+        <div class="max-w-4xl mx-auto mt-8">
+          <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <input
+              type="text"
+              placeholder="Name"
+              class="p-3 rounded-lg w-full text-gray-800"
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              class="p-3 rounded-lg w-full text-gray-800"
+            />
+            <input
+              type="text"
+              placeholder="Phone Number"
+              class="p-3 rounded-lg w-full text-gray-800"
+            />
+            <select class="p-3 rounded-lg w-full text-gray-800" required>
+              <option value="" disabled selected>Select Service</option>
+              <option value="Project Management">Project Management</option>
+              <option value="Structural Engineering">
+                Structural Engineering
+              </option>
+              <option value="Geotechnical Analysis">
+                Geotechnical Analysis
+              </option>
+            </select>
+            <input type="date" class="p-3 rounded-lg w-full text-gray-800" />
+            <input type="time" class="p-3 rounded-lg w-full text-gray-800" />
+            <textarea
+              rows="5"
+              placeholder="Additional Comments"
+              class="p-3 rounded-lg w-full text-gray-800 md:col-span-2"
+            ></textarea>
+            <button
+              type="submit"
+              class="bg-orange-500 text-white font-bold p-3 rounded-lg w-full md:col-span-2 hover:bg-orange-600 transition"
+            >
+              Book Appointment
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Customer Reviews Section with Swiper Slider -->
+      <section class="bg-white py-16">
+        <h2 class="text-4xl font-bold text-center text-gray-800">
+          Customer Reviews
+        </h2>
+
+        <!-- Swiper Container -->
+        <div class="swiper max-w-6xl mx-auto mt-8 overflow-hidden">
+          <div class="swiper-wrapper">
+            <!-- Review 1 -->
+            <div
+              class="swiper-slide bg-gray-100 p-6 rounded-lg shadow-md text-center"
+            >
+              <img
+                src="https://via.placeholder.com/100"
+                alt="Customer 1"
+                class="w-24 h-24 mx-auto rounded-full"
+              />
+              <h3 class="text-2xl font-semibold mt-4">John Doe</h3>
+              <p class="text-gray-600 mt-2 italic">
+                "The team delivered exceptional results and completed the
+                project ahead of schedule. Highly recommended!"
+              </p>
+            </div>
+
+            <!-- Review 2 -->
+            <div
+              class="swiper-slide bg-gray-100 p-6 rounded-lg shadow-md text-center"
+            >
+              <img
+                src="https://via.placeholder.com/100"
+                alt="Customer 2"
+                class="w-24 h-24 mx-auto rounded-full"
+              />
+              <h3 class="text-2xl font-semibold mt-4">Jane Smith</h3>
+              <p class="text-gray-600 mt-2 italic">
+                "Professional service and outstanding craftsmanship. Will
+                definitely hire them again!"
+              </p>
+            </div>
+
+            <!-- Review 3 -->
+            <div
+              class="swiper-slide bg-gray-100 p-6 rounded-lg shadow-md text-center"
+            >
+              <img
+                src="https://via.placeholder.com/100"
+                alt="Customer 3"
+                class="w-24 h-24 mx-auto rounded-full"
+              />
+              <h3 class="text-2xl font-semibold mt-4">David Johnson</h3>
+              <p class="text-gray-600 mt-2 italic">
+                "Impressive attention to detail and adherence to safety
+                protocols. Great experience overall!"
+              </p>
+            </div>
+          </div>
+
+          <!-- Pagination -->
+          <div class="swiper-pagination mt-4"></div>
+        </div>
+      </section>
     </main>
+
+    <!-- Include Footer -->
     <%- include('partials/Footer') %>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Swiper Slider Configuration -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var swiper = new Swiper(".swiper", {
+          loop: true,
+          autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+          },
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          slidesPerView: 1,
+          spaceBetween: 30,
+          breakpoints: {
+            768: {
+              slidesPerView: 2,
+            },
+            1024: {
+              slidesPerView: 3,
+            },
+          },
+        });
+      });
+    </script>
   </body>
 </html>
