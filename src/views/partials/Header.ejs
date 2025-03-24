@@ -3,84 +3,128 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Construction Clone</title>
+    <title>InfraConnect</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
-    <!-- Swiper CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
+    <style>
+      /* Smooth Mobile Menu Animation */
+      #mobile-menu {
+        transition: max-height 0.4s ease-in-out;
+      }
+
+      /* Timeline Animation for Navbar */
+      .nav-link {
+        position: relative;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -4px;
+        width: 0;
+        height: 3px;
+        background: linear-gradient(to right, #f97316, #ef4444);
+        transition: width 0.3s ease, left 0.3s ease;
+      }
+      .nav-link:hover::after {
+        width: 100%;
+        left: 0;
+      }
+    </style>
   </head>
   <body class="bg-gray-100">
     <!-- Top Bar Section -->
-    <div class="w-full bg-blue-900">
-      <ul class="container mx-auto flex justify-end text-sm text-white">
-        <li
-          class="px-4 py-2 text-md font-medium hover:bg-gray-800 hover:text-white cursor-pointer transition-all duration-300"
-        >
-          <i class="fas fa-newspaper mr-2"></i> News
-        </li>
-        <li
-          class="px-4 py-2 text-md font-medium hover:bg-gray-800 hover:text-white cursor-pointer transition-all duration-300"
-        >
-          <i class="fas fa-book mr-2"></i> Resources
-        </li>
-        <li
-          class="px-4 py-2 text-md font-medium hover:bg-gray-800 hover:text-white cursor-pointer transition-all duration-300"
-        >
-          <i class="fas fa-briefcase mr-2"></i> Careers
-        </li>
-        <li
-          class="px-4 py-2 text-md font-medium hover:bg-gray-800 hover:text-white cursor-pointer transition-all duration-300"
-        >
-          <i class="fas fa-phone-alt mr-2"></i> +91 7835478325
-        </li>
-      </ul>
+    <div class="w-full bg-gray-900">
+      <div
+        class="container mx-auto flex justify-between items-center text-white text-sm py-2 px-4"
+      >
+        <div class="flex space-x-4">
+          <p><i class="fas fa-phone-alt mr-2"></i> +91 7835478325</p>
+          <p><i class="fas fa-envelope mr-2"></i> info@infraconnect.com</p>
+        </div>
+        <div class="hidden md:flex space-x-4">
+          <a
+            href="#"
+            class="hover:text-orange-500 transition duration-300 text-sm"
+            >News</a
+          >
+          <a
+            href="#"
+            class="hover:text-orange-500 transition duration-300 text-sm"
+            >Careers</a
+          >
+          <a
+            href="#"
+            class="hover:text-orange-500 transition duration-300 text-sm"
+            >Resources</a
+          >
+        </div>
+      </div>
     </div>
 
     <!-- Navbar Section -->
-    <nav class="bg-orange-500 text-white shadow-lg sticky top-0 z-50">
-      <div class="container mx-auto flex justify-between items-center p-4">
-        <h1 class="text-3xl font-extrabold">Civil Hub</h1>
-        <ul class="hidden md:flex space-x-8 text-lg font-medium">
-          <li>
-            <a href="/" class="hover:text-gray-300 transition duration-300"
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+      <div
+        class="container mx-auto flex justify-between items-center py-4 px-6"
+      >
+        <!-- Logo -->
+        <a href="/" class="text-3xl font-bold text-orange-600">InfraConnect</a>
+
+        <!-- Search Bar -->
+        <div class="hidden md:flex items-center relative">
+          <input
+            type="text"
+            class="w-80 p-2 pl-10 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            placeholder="Search Projects, Contractors..."
+          />
+          <i class="fas fa-search absolute left-4 top-3 text-gray-500"></i>
+        </div>
+
+        <!-- Navigation Links -->
+        <ul class="hidden md:flex space-x-8 text-lg font-medium text-gray-700">
+          <li class="nav-link">
+            <a href="/" class="hover:text-orange-500 transition duration-300"
               >Home</a
             >
           </li>
-          <li>
-            <a href="/About" class="hover:text-gray-300 transition duration-300"
+          <li class="nav-link">
+            <a
+              href="/About"
+              class="hover:text-orange-500 transition duration-300"
               >About</a
             >
           </li>
-          <li>
-            <a href="#" class="hover:text-gray-300 transition duration-300"
-              >Products</a
+          <li class="nav-link">
+            <a href="#" class="hover:text-orange-500 transition duration-300"
+              >Projects</a
             >
           </li>
-          <li>
-            <a href="#" class="hover:text-gray-300 transition duration-300"
-              >Gallery</a
+          <li class="nav-link">
+            <a href="#" class="hover:text-orange-500 transition duration-300"
+              >Services</a
             >
           </li>
-          <li>
-            <a href="#" class="hover:text-gray-300 transition duration-300"
+          <li class="nav-link">
+            <a href="#" class="hover:text-orange-500 transition duration-300"
               >Contact</a
             >
           </li>
-          <li>
-            <a href="#" class="hover:text-gray-300 transition duration-300"
-              >Enquiry</a
-            >
-          </li>
         </ul>
+
+        <!-- Contact Button -->
+        <a
+          href="#"
+          class="hidden md:inline-block bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-2 px-6 rounded-full shadow-md hover:shadow-lg transition duration-300"
+        >
+          <i class="fas fa-phone-alt mr-2"></i> Get in Touch
+        </a>
+
         <!-- Mobile Menu Button -->
         <button
-          class="md:hidden text-white text-2xl focus:outline-none"
+          class="md:hidden text-3xl text-orange-600 focus:outline-none"
           id="menu-toggle"
         >
           ☰
@@ -89,61 +133,63 @@
 
       <!-- Mobile Menu Section -->
       <ul
-        class="md:hidden hidden flex-col space-y-3 p-4 bg-blue-500 text-lg font-medium transition-all duration-300"
+        class="md:hidden hidden flex-col space-y-3 p-4 bg-gray-100 text-lg font-medium transition-all duration-300"
         id="mobile-menu"
       >
-        <li>
+        <li class="nav-link">
           <a
             href="/"
-            class="block py-2 hover:text-gray-300 transition duration-300"
+            class="block py-2 hover:text-orange-500 transition duration-300"
             >Home</a
           >
         </li>
-        <li>
+        <li class="nav-link">
           <a
             href="/About"
-            class="block py-2 hover:text-gray-300 transition duration-300"
+            class="block py-2 hover:text-orange-500 transition duration-300"
             >About</a
           >
         </li>
-        <li>
+        <li class="nav-link">
           <a
             href="#"
-            class="block py-2 hover:text-gray-300 transition duration-300"
-            >Products</a
+            class="block py-2 hover:text-orange-500 transition duration-300"
+            >Projects</a
           >
         </li>
-        <li>
+        <li class="nav-link">
           <a
             href="#"
-            class="block py-2 hover:text-gray-300 transition duration-300"
-            >Gallery</a
+            class="block py-2 hover:text-orange-500 transition duration-300"
+            >Services</a
           >
         </li>
-        <li>
+        <li class="nav-link">
           <a
             href="#"
-            class="block py-2 hover:text-gray-300 transition duration-300"
+            class="block py-2 hover:text-orange-500 transition duration-300"
             >Contact</a
           >
         </li>
         <li>
           <a
             href="#"
-            class="block py-2 hover:text-gray-300 transition duration-300"
-            >Enquiry</a
+            class="block py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white text-center rounded-md hover:shadow-lg transition duration-300"
           >
+            <i class="fas fa-phone-alt mr-2"></i> Get in Touch
+          </a>
         </li>
       </ul>
     </nav>
 
     <!-- JavaScript for Menu Toggle -->
     <script>
-      document
-        .getElementById("menu-toggle")
-        .addEventListener("click", function () {
-          document.getElementById("mobile-menu").classList.toggle("hidden");
-        });
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
     </script>
   </body>
 </html>

@@ -3,22 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Us | Construction Co.</title>
+    <title>About Us | Construction Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="bg-gray-100">
+
+  <body class="bg-gray-50">
     <%- include('partials/Header') %>
+
     <!-- Hero Section -->
     <section
-      class="relative bg-cover bg-center h-[400px] flex items-center justify-center text-white"
+      class="relative bg-cover bg-center h-[200px] flex items-center justify-center text-white"
       style="
-        background-image: url('https://source.unsplash.com/1600x900/?construction,building');
+        background-image: url('https://media.istockphoto.com/id/862758024/photo/construction-site.jpg?s=612x612&w=0&k=20&c=gYl455m4B91lwQpIidx9YBCxwLaeLKFR632FRaPqffc=');
       "
     >
-      <div class="bg-black bg-opacity-50 p-8 rounded-lg text-center">
-        <h1 class="text-4xl font-bold">About Us</h1>
-        <p class="text-lg mt-2">
-          Building the future, one structure at a time.
+      <div class="bg-black bg-opacity-60 p-8 rounded-lg text-center">
+        <h1 class="text-5xl font-bold text-orange-500">About Us</h1>
+        <p class="text-lg mt-2 text-white">
+          Building Excellence with Precision and Passion.
         </p>
       </div>
     </section>
@@ -26,37 +28,88 @@
     <!-- About Company Section -->
     <section class="container mx-auto px-6 py-12">
       <div class="grid md:grid-cols-2 gap-8 items-center">
+        <!-- Left Content -->
         <div>
-          <h2 class="text-3xl font-bold text-gray-800">Who We Are</h2>
-          <p class="mt-4 text-gray-600">
-            We are a leading construction company dedicated to excellence and
-            innovation. With years of experience, we provide top-notch services
-            in building, infrastructure, and renovation projects.
+          <h2 class="text-4xl font-bold text-orange-500">Who We Are ?</h2>
+          <p class="mt-4 text-gray-700 leading-relaxed">
+            We are a leading construction management company, delivering
+            innovative solutions and high-quality projects. With years of
+            expertise, we ensure precision, efficiency, and customer
+            satisfaction in every project we undertake.
           </p>
-          <p class="mt-2 text-gray-600">
-            Our team of professionals ensures the highest standards in every
-            project we undertake.
+          <p class="mt-2 text-gray-700 leading-relaxed">
+            Our mission is to create sustainable structures that stand the test
+            of time, while keeping safety and quality at the core of our
+            operations.
           </p>
+          <a
+            href="/projects"
+            class="mt-6 inline-block bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition"
+            >View Our Projects</a
+          >
         </div>
-        <div>
+        <!-- Right Image -->
+        <div class="relative">
           <img
-            src="https://source.unsplash.com/600x400/?construction,workers"
+            src="https://media.istockphoto.com/id/1456699734/photo/the-engineer-talks-to-the-contractor-to-supervise-and-plan-the-work.jpg?s=612x612&w=0&k=20&c=DCdd8ZpB6A2y6u4mHtvVO9XOfkpS-TqwFaJKq_4Eos4="
             alt="Construction Image"
             class="rounded-lg shadow-lg"
           />
+          <div
+            class="absolute bottom-4 left-4 bg-white p-4 rounded-lg shadow-lg"
+          >
+            <p class="text-sm text-gray-600">500+ Completed Projects</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Vision Section -->
+    <section class="bg-white py-12">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold text-orange-500">Our Vision & Mission</h2>
+        <p class="text-gray-700 mt-4 max-w-2xl mx-auto">
+          To revolutionize the construction industry through cutting-edge
+          technology and a commitment to sustainability.
+        </p>
+        <div class="grid md:grid-cols-2 gap-8 mt-8">
+          <!-- Vision Card -->
+          <div
+            class="bg-orange-100 p-6 rounded-lg shadow-md hover:shadow-lg transition"
+          >
+            <h3 class="text-xl font-semibold text-gray-800">Our Vision</h3>
+            <p class="text-gray-600 mt-2">
+              To be the most trusted construction partner, delivering projects
+              that inspire communities and drive progress.
+            </p>
+          </div>
+          <!-- Mission Card -->
+          <div
+            class="bg-orange-200 p-6 rounded-lg shadow-md hover:shadow-lg transition"
+          >
+            <h3 class="text-xl font-semibold text-gray-800">Our Mission</h3>
+            <p class="text-gray-600 mt-2">
+              To provide exceptional services by adhering to the highest
+              industry standards and building long-lasting relationships with
+              our clients.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Our Team Section -->
-    <section class="bg-white py-12">
-      <div class="container mx-auto text-center">
-        <h2 class="text-3xl font-bold text-gray-800">Meet Our Team</h2>
-        <p class="text-gray-600 mt-2">
-          Dedicated professionals behind our success.
+    <section class="bg-gray-50 py-12">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold text-orange-500">Meet Our Team</h2>
+        <p class="text-gray-700 mt-4">
+          Experienced professionals dedicated to excellence.
         </p>
         <div class="grid md:grid-cols-3 gap-6 mt-8">
-          <div class="bg-gray-100 p-6 rounded-lg shadow">
+          <!-- Team Member 1 -->
+          <div
+            class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition"
+          >
             <img
               src="https://source.unsplash.com/150x150/?man,engineer"
               class="rounded-full mx-auto"
@@ -65,16 +118,22 @@
             <h3 class="text-lg font-semibold mt-4">John Doe</h3>
             <p class="text-gray-600">Senior Engineer</p>
           </div>
-          <div class="bg-gray-100 p-6 rounded-lg shadow">
+          <!-- Team Member 2 -->
+          <div
+            class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition"
+          >
             <img
               src="https://source.unsplash.com/150x150/?woman,architect"
               class="rounded-full mx-auto"
               alt="Team Member"
             />
             <h3 class="text-lg font-semibold mt-4">Jane Smith</h3>
-            <p class="text-gray-600">Architect</p>
+            <p class="text-gray-600">Lead Architect</p>
           </div>
-          <div class="bg-gray-100 p-6 rounded-lg shadow">
+          <!-- Team Member 3 -->
+          <div
+            class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition"
+          >
             <img
               src="https://source.unsplash.com/150x150/?construction,worker"
               class="rounded-full mx-auto"
@@ -87,23 +146,47 @@
       </div>
     </section>
 
+    <!-- Our Achievements Section -->
+    <section class="bg-orange-500 text-white py-12">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold">Our Achievements</h2>
+        <div class="grid md:grid-cols-3 gap-8 mt-8">
+          <!-- Achievement 1 -->
+          <div class="bg-white text-orange-500 p-6 rounded-lg shadow-lg">
+            <h3 class="text-2xl font-bold">500+</h3>
+            <p class="text-gray-600">Projects Completed</p>
+          </div>
+          <!-- Achievement 2 -->
+          <div class="bg-white text-orange-500 p-6 rounded-lg shadow-lg">
+            <h3 class="text-2xl font-bold">300+</h3>
+            <p class="text-gray-600">Happy Clients</p>
+          </div>
+          <!-- Achievement 3 -->
+          <div class="bg-white text-orange-500 p-6 rounded-lg shadow-lg">
+            <h3 class="text-2xl font-bold">15+</h3>
+            <p class="text-gray-600">Years of Excellence</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Call-to-Action Section -->
-    <section class="bg-blue-600 text-white py-12">
-      <div class="container mx-auto text-center">
-        <h2 class="text-3xl font-bold">Ready to Build With Us?</h2>
-        <p class="mt-2 text-lg">
-          Contact us today for a consultation on your next big project.
+    <section class="bg-white py-12">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold text-orange-500">
+          Ready to Build With Us?
+        </h2>
+        <p class="mt-4 text-gray-600">
+          Contact us today to get started on your next project!
         </p>
         <a
           href="/contact"
-          class="mt-4 inline-block bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-200"
+          class="mt-6 inline-block bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition"
           >Get In Touch</a
         >
       </div>
     </section>
-
-    <!-- Footer -->
     <%- include('partials/Footer') %>
-    <!-- Footer -->
+
   </body>
 </html>
