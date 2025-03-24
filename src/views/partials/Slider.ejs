@@ -7,79 +7,109 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       .slide {
-        width: 100vw;
+        display: none;
+        width: 100%;
         height: 500px;
-        flex-shrink: 0;
       }
-      .slide-wrapper {
-        display: flex;
-        transition: transform 0.5s ease-in-out;
+      .active {
+        display: block;
+      }
+      .nav-btn {
+        width: 50px;
+        height: 50px;
+        background-color: rgba(0, 0, 0, 0.6);
+        transition: background-color 0.3s ease;
+      }
+      .nav-btn:hover {
+        background-color: #f97316;
+      }
+      .indicator-active {
+        background-color: #f97316;
+        transform: scale(1.2);
       }
     </style>
   </head>
-  <body>
+  <body class="bg-gray-100">
     <!-- Slider Section -->
-    <div class="relative h-[25rem] w-full overflow-hidden">
-      <div class="slide-wrapper" id="slider">
+    <div class="relative h-[25rem] w-full overflow-hidden rounded-lg shadow-lg">
+      <div class="slide-wrapper relative w-full h-full">
         <!-- Slide 1 -->
-        <div class="slide flex items-center bg-blue-900/90 text-white">
-          <div class="w-1/2 p-10">
-            <h1 class="text-4xl font-bold">Welcome to Construction Pro</h1>
-            <p class="mt-4 text-lg">
-              We build your dreams with quality and precision.
-            </p>
-          </div>
-          <div class="w-1/2 h-full object-cover">
-            <img
-              src="https://www.wcu.edu/WebGraphicsNew/learn-academics/ConstructManagement-Ug.jpg"
-              alt="Construction Work"
-              class="w-full h-full object-cover"
-            />
+        <div class="slide active">
+          <img
+            src="https://www.wcu.edu/WebGraphicsNew/learn-academics/ConstructManagement-Ug.jpg"
+            alt="Construction Work"
+            class="w-full h-full object-cover"
+          />
+          <div
+            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-start pl-10"
+          >
+            <h1 class="text-2xl md:text-4xl font-bold text-white">
+              🏗️ Build with Precision and Excellence!
+            </h1>
           </div>
         </div>
+
         <!-- Slide 2 -->
-        <div class="slide flex items-center bg-blue-900 text-white">
-          <div class="w-1/2 p-10">
-            <h1 class="text-4xl font-bold">Expert Project Management</h1>
-            <p class="mt-4 text-lg">
-              We ensure timely and budget-friendly solutions.
-            </p>
-          </div>
-          <div class="w-1/2 h-full object-cover">
-            <img
-              src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.xlzd0JsPXGXYJwTEbx_KHgHaE8%26pid%3DApi&f=1&ipt=2c3146caf4187a929c67321808a1f6ad17513af4bd850e2fae395f5a0d3b39d4&ipo=images"
-              alt="Project Management"
-              class="w-full h-full object-cover"
-            />
+        <div class="slide">
+          <img
+            src="https://media.istockphoto.com/id/1319742252/photo/home-design.jpg?s=612x612&w=0&k=20&c=A6dzBZe9tA3noy1NxtQr8lPjDxIHF0L3Jdngr3bKn98="
+            alt="Home Design"
+            class="w-full h-full object-cover"
+          />
+          <div
+            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-start pl-10"
+          >
+            <h1 class="text-2xl md:text-4xl font-bold text-white">
+              🏡 Modern Home Design at Its Best!
+            </h1>
           </div>
         </div>
+
         <!-- Slide 3 -->
-        <div class="slide flex items-center bg-blue-900 text-white">
-          <div class="w-1/2 p-10 justify-center items-center">
-            <h1 class="text-4xl font-bold">Innovative Construction Ideas</h1>
-            <p class="mt-4 text-lg">
-              Explore our cutting-edge designs and concepts.
-            </p>
-          </div>
-          <div class="w-1/2 h-full object-cover">
-            <img
-              src="https://tse1.mm.bing.net/th?id=OIP.PtrKs2BbVTVlXelvM0sB6wHaFc&pid=Api"
-              alt="Innovative Designs"
-              class="w-full h-full object-cover"
-            />
+        <div class="slide">
+          <img
+            src="https://media.istockphoto.com/id/1225226901/photo/street-with-modern-and-beautiful-houses.jpg?s=612x612&w=0&k=20&c=pkYSL1F0QAgNAg-e494XSZU_5o1UCAakzS2gZNJVr7k="
+            alt="Beautiful Homes"
+            class="w-full h-full object-cover"
+          />
+          <div
+            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-start pl-10"
+          >
+            <h1 class="text-2xl md:text-4xl font-bold text-white">
+              🏢 Elevate Your Living with Innovation!
+            </h1>
           </div>
         </div>
       </div>
 
+      <!-- Slide Indicators -->
+      <div
+        class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3"
+        id="indicators"
+      >
+        <span
+          class="h-3 w-3 bg-white rounded-full cursor-pointer transition-all"
+          onclick="showSlide(0)"
+        ></span>
+        <span
+          class="h-3 w-3 bg-white rounded-full cursor-pointer transition-all"
+          onclick="showSlide(1)"
+        ></span>
+        <span
+          class="h-3 w-3 bg-white rounded-full cursor-pointer transition-all"
+          onclick="showSlide(2)"
+        ></span>
+      </div>
+
       <!-- Navigation Buttons -->
       <button
-        class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white p-3 rounded-full opacity-75 hover:opacity-100"
+        class="absolute left-4 top-1/2 transform -translate-y-1/2 nav-btn text-white flex items-center justify-center rounded-full shadow-lg"
         id="prev"
       >
         ❮
       </button>
       <button
-        class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white p-3 rounded-full opacity-75 hover:opacity-100"
+        class="absolute right-4 top-1/2 transform -translate-y-1/2 nav-btn text-white flex items-center justify-center rounded-full shadow-lg"
         id="next"
       >
         ❯
@@ -87,13 +117,23 @@
     </div>
 
     <script>
-      const slider = document.getElementById("slider");
       const slides = document.querySelectorAll(".slide");
+      const indicators = document.querySelectorAll("#indicators span");
       let index = 0;
+      let interval = setInterval(nextSlide, 4000); // Auto-slide every 4 sec
 
       function showSlide(i) {
+        slides.forEach((slide, idx) => {
+          slide.classList.remove("active");
+          indicators[idx].classList.remove("indicator-active");
+        });
         index = (i + slides.length) % slides.length;
-        slider.style.transform = `translateX(-${index * 100}vw)`;
+        slides[index].classList.add("active");
+        indicators[index].classList.add("indicator-active");
+      }
+
+      function nextSlide() {
+        showSlide(index + 1);
       }
 
       document
@@ -103,7 +143,24 @@
         .getElementById("next")
         .addEventListener("click", () => showSlide(index + 1));
 
-      setInterval(() => showSlide(index + 1), 3000); // Auto-slide every 3 seconds
+      // Pause auto-slide on hover
+      document.querySelector(".relative").addEventListener("mouseenter", () => {
+        clearInterval(interval);
+      });
+      document.querySelector(".relative").addEventListener("mouseleave", () => {
+        interval = setInterval(nextSlide, 4000);
+      });
     </script>
+
+    <div class="w-full">
+      <marquee
+        ><p class="py-1 bg-orange-500 text-white px-2 rounded">
+          At InfraConnect, we bring expertise, precision, and innovation to
+          every project. Our mission is to deliver top-quality construction
+          services that exceed expectations, ensuring that every structure we
+          build stands the test of time.
+        </p></marquee
+      >
+    </div>
   </body>
 </html>
