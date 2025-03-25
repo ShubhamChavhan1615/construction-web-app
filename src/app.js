@@ -25,6 +25,10 @@ app.get("/Login", (req, res) => {
   res.render("Login");
 });
 
+app.get("/signup", (req, res) => {
+  res.render("Register");
+});
+
 app.listen(PORT, () => {
   dbConnect();
   console.log(`Server is running on http://localhost:${PORT}`);

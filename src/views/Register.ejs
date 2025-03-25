@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login | InfraConnect</title>
+    <title>Register | InfraConnect</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -102,11 +102,11 @@
       >
         <!-- Heading Section -->
         <h2 class="text-3xl font-bold text-gray-800 text-center mb-6">
-          Welcome to <span class="text-orange-500">InfraConnect</span>
+          Create an Account on <span class="text-orange-500">InfraConnect</span>
         </h2>
 
-        <!-- Login Form -->
-        <form action="/auth/login" method="POST">
+        <!-- Register Form -->
+        <form action="/auth/register" method="POST">
           <!-- Role Selection with New Radio Buttons -->
           <div class="flex justify-center space-x-6 mb-6">
             <label class="custom-radio">
@@ -117,6 +117,20 @@
               <input type="radio" name="role" value="admin" />
               <span>Admin</span>
             </label>
+          </div>
+
+          <!-- Full Name Input -->
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2"
+              >Full Name</label
+            >
+            <input
+              type="text"
+              name="fullname"
+              class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              placeholder="Enter your full name"
+              required
+            />
           </div>
 
           <!-- Email Input -->
@@ -140,7 +154,21 @@
               type="password"
               name="password"
               class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
-              placeholder="Enter your password"
+              placeholder="Create a strong password"
+              required
+            />
+          </div>
+
+          <!-- Confirm Password Input -->
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2"
+              >Confirm Password</label
+            >
+            <input
+              type="password"
+              name="confirmPassword"
+              class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              placeholder="Re-enter your password"
               required
             />
           </div>
@@ -150,7 +178,7 @@
             type="submit"
             class="w-full bg-orange-500 text-white py-3 rounded-full hover:bg-orange-600 transition duration-300"
           >
-            Login
+            Register
           </button>
 
           <!-- Continue with Google Button -->
@@ -167,20 +195,11 @@
             Continue with Google
           </button>
 
-          <!-- Forgot Password Link -->
+          <!-- Already have an account Link -->
           <div class="text-center mt-4">
-            <a
-              href="/forgot-password"
-              class="text-orange-500 hover:underline text-sm"
-              >Forgot Password?</a
-            >
-          </div>
-
-          <!-- Sign Up Link -->
-          <div class="text-center mt-1">
-            Don't have an account?
-            <a href="/signup" class="text-orange-500 hover:underline text-sm"
-              >Sign up</a
+            Already have an account?
+            <a href="/login" class="text-orange-500 hover:underline text-sm"
+              >Log in</a
             >
           </div>
         </form>
