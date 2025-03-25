@@ -10,7 +10,7 @@ const AppointmentSchema = new Schema({
         required: true,
     },
     contact: {
-        type: Number,
+        type: String, // Changed from Number to String to handle leading zeros
         required: true,
     },
     service: {
@@ -20,7 +20,6 @@ const AppointmentSchema = new Schema({
     date: {
         type: Date,
         required: true,
-        default: "",
     },
     time: {
         type: String,
@@ -28,13 +27,13 @@ const AppointmentSchema = new Schema({
     },
     addComments: {
         type: String,
-        required: String,
+        default: "",
     },
     status: {
         type: String,
         enum: ["pending", "accepted", "cancelled"],
-        default: "pending"
-    }
-})
+        default: "pending",
+    },
+});
 
-export default mongoose.model("AppointmentModels", AppointmentSchema)
+export default mongoose.model("AppointmentModel", AppointmentSchema); // Singular model name

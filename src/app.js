@@ -5,6 +5,7 @@ import "dotenv/config";
 const PORT = process.env.PORT;
 const app = express();
 import UserRout from "./routes/user.js";
+import appointmentRoutes from "./routes/appointment.js"
 
 Router();
 app.set("view engine", "ejs");
@@ -30,6 +31,8 @@ app.get("/Login", (req, res) => {
 app.get("/signup", (req, res) => {
   res.render("Register");
 });
+
+app.use("/api/appointment", appointmentRoutes)
 
 app.listen(PORT, () => {
   dbConnect();
