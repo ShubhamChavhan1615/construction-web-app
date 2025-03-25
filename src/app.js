@@ -15,6 +15,8 @@ app.get("/", (req, res) => {
   res.render("index", { title: "Home" });
 });
 
+app.use("api-user", UserRout)
+
 app.get("/About", (req, res) => {
   res.render("About", { title: "About" });
 });
