@@ -1,10 +1,11 @@
-import express from "express";
+import express, { Router } from "express";
 import { dbConnect } from "./db/db.js";
 import "dotenv/config";
 const PORT = process.env.PORT;
 const app = express();
 import UserRout from "./routes/user.js"
 
+Router();
 app.set("view engine", "ejs");
 
 app.use(express.json());
@@ -17,8 +18,6 @@ app.get("/", (req, res) => {
 app.get("/About", (req, res) => {
   res.render("About", { title: "About" });
 });
-
-app.use("/api-user", UserRout)
 
 app.listen(PORT, () => {
   dbConnect();
