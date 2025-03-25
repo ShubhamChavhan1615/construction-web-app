@@ -10,11 +10,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <style>
-      /* Smooth Mobile Menu Animation */
-      #mobile-menu {
-        transition: max-height 0.4s ease-in-out;
-      }
-
       /* Timeline Animation for Navbar */
       .nav-link {
         position: relative;
@@ -73,8 +68,8 @@
         <!-- Logo -->
         <a href="/" class="text-3xl font-bold text-orange-600">InfraConnect</a>
 
-        <!-- Search Bar -->
-        <div class="hidden md:flex items-center relative">
+        <!-- Search Bar (Hidden on Mobile) -->
+        <div class="hidden lg:flex items-center relative">
           <input
             type="text"
             class="w-80 p-2 pl-10 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
@@ -83,8 +78,8 @@
           <i class="fas fa-search absolute left-4 top-3 text-gray-500"></i>
         </div>
 
-        <!-- Navigation Links -->
-        <ul class="hidden md:flex space-x-8 text-lg font-medium text-gray-700">
+        <!-- Desktop Navigation Links -->
+        <ul class="hidden lg:flex space-x-8 text-lg font-medium text-gray-700">
           <li class="nav-link">
             <a href="/" class="hover:text-orange-500 transition duration-300"
               >Home</a
@@ -114,26 +109,28 @@
           </li>
         </ul>
 
-        <!-- Contact Button -->
-        <a
-          href="#"
-          class="hidden md:inline-block bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-2 px-6 rounded-full shadow-md hover:shadow-lg transition duration-300"
-        >
-          <i class="fas fa-phone-alt mr-2"></i> Get in Touch
-        </a>
+        <!-- Login Button Section with Gradient -->
+        <div class="hidden lg:flex items-center">
+          <a
+            href="/login"
+            class="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-2 px-6 rounded-full shadow-md"
+          >
+            <i class="fas fa-user mr-2"></i> Login
+          </a>
+        </div>
 
         <!-- Mobile Menu Button -->
         <button
-          class="md:hidden text-3xl text-orange-600 focus:outline-none"
+          class="lg:hidden text-3xl text-orange-600 focus:outline-none"
           id="menu-toggle"
         >
           ☰
         </button>
       </div>
 
-      <!-- Mobile Menu Section -->
+      <!-- Mobile/Tablet Menu Section -->
       <ul
-        class="md:hidden hidden flex-col space-y-3 p-4 bg-gray-100 text-lg font-medium transition-all duration-300"
+        class="lg:hidden hidden flex-col space-y-3 p-4 bg-gray-100 text-lg font-medium transition-all duration-300"
         id="mobile-menu"
       >
         <li class="nav-link">
@@ -171,12 +168,13 @@
             >Contact</a
           >
         </li>
+        <!-- Mobile View Login Button with Gradient -->
         <li>
           <a
-            href="#"
-            class="block py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white text-center rounded-md hover:shadow-lg transition duration-300"
+            href="/login"
+            class="block py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white text-center rounded-md"
           >
-            <i class="fas fa-phone-alt mr-2"></i> Get in Touch
+            <i class="fas fa-user mr-2"></i> Login
           </a>
         </li>
       </ul>
