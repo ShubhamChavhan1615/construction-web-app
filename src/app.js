@@ -1,9 +1,10 @@
-import express from "express";
+import express, { Router } from "express";
 import { dbConnect } from "./db/db.js";
 import "dotenv/config";
 const PORT = process.env.PORT;
 const app = express();
 
+Router();
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
@@ -12,6 +13,10 @@ app.get("/", (req, res) => {
 
 app.get("/About", (req, res) => {
   res.render("About", { title: "About" });
+});
+
+app.get("/Login", (req, res) => {
+  res.render("Login");
 });
 
 app.listen(PORT, () => {

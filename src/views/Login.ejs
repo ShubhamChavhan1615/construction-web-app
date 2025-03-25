@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | InfraConnect</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Tailwind CSS -->
+    <style>
+      /* Smooth transition for form swap */
+      .form-container {
+        transition: all 0.5s ease-in-out;
+      }
+      .hidden-form {
+        opacity: 0;
+        transform: translateY(20px);
+        pointer-events: none;
+        position: absolute;
+        z-index: -1;
+      }
+      .visible-form {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+        position: relative;
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('partials/Header') %>
+    <div
+      class="bg-gradient-to-r from-orange-500 to-red-500 min-h-screen flex items-center justify-center"
+    >
+      <div
+        class="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-2xl relative"
+      >
+        <!-- Heading Section -->
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-6">
+          Login to <span class="text-orange-500">InfraConnect</span>
+        </h2>
+
+        <!-- Form Switch Buttons -->
+        <div class="flex justify-center space-x-6 mb-6">
+          <button
+            id="showUserForm"
+            class="bg-orange-500 text-white px-6 py-2 rounded-full focus:outline-none transition duration-300"
+          >
+            User Login
+          </button>
+          <button
+            id="showAdminForm"
+            class="bg-gray-200 text-gray-700 px-6 py-2 rounded-full hover:bg-gray-300 focus:outline-none transition duration-300"
+          >
+            Admin Login
+          </button>
+        </div>
+
+        <!-- User Login Form -->
+        <div id="userForm" class="form-container visible-form">
+          <form action="/auth/login" method="POST">
+            <div class="mb-4">
+              <label class="block text-gray-700 font-medium mb-2"
+                >Email Address</label
+              >
+              <input
+                type="email"
+                name="email"
+                class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 font-medium mb-2"
+                >Password</label
+              >
+              <input
+                type="password"
+                name="password"
+                class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-orange-500 text-white py-3 rounded-full hover:bg-orange-600 transition duration-300"
+            >
+              Login as User
+            </button>
+          </form>
+        </div>
+
+        <!-- Admin Login Form -->
+        <div id="adminForm" class="form-container hidden-form">
+          <form action="/auth/admin-login" method="POST">
+            <div class="mb-4">
+              <label class="block text-gray-700 font-medium mb-2"
+                >Admin Username</label
+              >
+              <input
+                type="text"
+                name="username"
+                class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                placeholder="Enter admin username"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 font-medium mb-2"
+                >Password</label
+              >
+              <input
+                type="password"
+                name="password"
+                class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                placeholder="Enter admin password"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-red-500 text-white py-3 rounded-full hover:bg-red-600 transition duration-300"
+            >
+              Login as Admin
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- JavaScript to Swap Forms -->
+    <script>
+      const userForm = document.getElementById("userForm");
+      const adminForm = document.getElementById("adminForm");
+      const showUserForm = document.getElementById("showUserForm");
+      const showAdminForm = document.getElementById("showAdminForm");
+
+      // Swap to User Form
+      showUserForm.addEventListener("click", () => {
+        userForm.classList.add("visible-form");
+        userForm.classList.remove("hidden-form");
+        adminForm.classList.add("hidden-form");
+        adminForm.classList.remove("visible-form");
+
+        // Highlight active button
+        showUserForm.classList.add("bg-orange-500", "text-white");
+        showUserForm.classList.remove("bg-gray-200", "text-gray-700");
+        showAdminForm.classList.add("bg-gray-200", "text-gray-700");
+        showAdminForm.classList.remove("bg-orange-500", "text-white");
+      });
+
+      // Swap to Admin Form
+      showAdminForm.addEventListener("click", () => {
+        adminForm.classList.add("visible-form");
+        adminForm.classList.remove("hidden-form");
+        userForm.classList.add("hidden-form");
+        userForm.classList.remove("visible-form");
+
+        // Highlight active button
+        showAdminForm.classList.add("bg-orange-500", "text-white");
+        showAdminForm.classList.remove("bg-gray-200", "text-gray-700");
+        showUserForm.classList.add("bg-gray-200", "text-gray-700");
+        showUserForm.classList.remove("bg-orange-500", "text-white");
+      });
+    </script>
+    <!-- Include Footer -->
+    <%- include('partials/Footer') %>
+  </body>
+</html>
