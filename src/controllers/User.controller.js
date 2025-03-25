@@ -5,6 +5,7 @@ import bcrypt from "bcrypt"
 export const UserSignup = async (req, res) => {
     try {
         const { name, email, password } = req.body;
+        console.log(req.body);
 
         if (!name || !email || !password) {
             return res.status(400).json({ message: "All Field Required!" })
@@ -22,10 +23,11 @@ export const UserSignup = async (req, res) => {
             password: haspassword,
         })
         await UserRegister.save();
-
+    
         const token = generated(UserRegister.id)
-
-        return res.status(200).json({ message: "User Register Successfully!", token })
+        res.cookie("authToken", token, { httpOnly: true, secure: true, maxAge: 3600000 });
+        res.redirect("/")
+        // return res.status(200).json({ message: "User Register Successfully!", token })
 
     } catch (error) {
         console.log(error);
@@ -49,7 +51,9 @@ export const usersignin = async (req, res) => {
         }
 
         const token = generated(emailcheck.id);
-        return res.status(200).json({ message: "Login Successfully", token })
+        res.redirect("/")
+
+        // return res.status(200).json({ message: "Login Successfully", token })
 
     } catch (error) {
         console.log(error);

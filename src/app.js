@@ -1,4 +1,5 @@
 import express, { Router } from "express";
+import cookieParser from "cookie-parser"
 import { dbConnect } from "./db/db.js";
 import "dotenv/config";
 const PORT = process.env.PORT;
@@ -9,6 +10,7 @@ Router();
 app.set("view engine", "ejs");
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
