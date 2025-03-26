@@ -1,16 +1,22 @@
 import express from "express";
-import { createAppointment, deleteAppointment, getAppointments, getSingleAppointmet, updateAppointment } from "../controllers/appointment.controls.js";
+import {
+  createAppointment,
+  deleteAppointment,
+  getAppointments,
+  getSingleAppointmet,
+  updateAppointment,
+} from "../controllers/appointment.controls.js";
 
 const router = express.Router();
 
 // Create a new appointment
-router.route("/appointments").post(createAppointment);
+router.route("/appointments").post(createAppointment).get(getAppointments);
 
-//get all appointments
-router.route("/appointments").get(getAppointments);
+// //get all appointments
+// router.route("/appointments").get(getAppointments);
 
 // Get a single appointment by ID
-router.route("/appointments/:id").get(getSingleAppointmet)
+router.route("/appointments/:id").get(getSingleAppointmet);
 
 // Update an appointment by ID
 router.route("/appointments/:id").put(updateAppointment);
