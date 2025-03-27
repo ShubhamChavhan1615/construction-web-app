@@ -6,6 +6,8 @@ const PORT = process.env.PORT;
 const app = express();
 import UserRout from "./routes/user.js";
 import appointmentRoutes from "./routes/appointment.js"
+import { checkAuth } from "./middleware/jwt.middleware.js";
+import UserModel from "./models/UserModel.js";
 
 Router();
 app.set("view engine", "ejs");
@@ -14,8 +16,21 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  res.render("index", { title: "Home" });
+app.get("/admin", (req, res) => {
+  res.render("Admin/admin", { title: "Admin" });
+})
+
+app.get("/dashbord", (req, res) => {
+  res.render("Admin/dashboard");
+})
+
+app.get("/", checkAuth, async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.user);
+    res.render("index", { title: "Home", user: user.name });
+  } catch (error) {
+    res.render("error")
+  }
 });
 
 app.use("/api-user", UserRout);
