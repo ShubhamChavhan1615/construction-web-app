@@ -31,11 +31,90 @@ app.get("/admin/manage/plan", (req, res) => {
   res.render("Admin/plan");
 });
 
+// index Page
 app.get("/", async (req, res) => {
   try {
-    // const user = await UserModel.findById(req.user);
-    // res.render("index", { title: "Home", user: user.name });
-    res.render("index", { title: "Home" });
+    const news = [
+      {
+        title: "New Project Launched",
+        description:
+          "We recently initiated a multi-story commercial project to enhance city infrastructure.",
+        image:
+          "https://media.istockphoto.com/id/915518326/photo/digital-tablet-and-hardhat-on-blueprint.jpg",
+        link: "/news/1",
+      },
+      {
+        title: "Enhanced Safety Protocols",
+        description:
+          "Our updated safety guidelines ensure smooth and secure project management for all.",
+        image:
+          "https://media.istockphoto.com/id/2196936311/photo/two-construction-workers-working-together-while-visiting-a-new-building.jpg",
+        link: "/news/2",
+      },
+      {
+        title: "Sustainability Award 2025",
+        description:
+          "Honored with a prestigious award for integrating eco-friendly practices in construction.",
+        image:
+          "https://media.istockphoto.com/id/2190041308/photo/silhouette-of-construction-camp-site-with-cranes.jpg",
+        link: "/news/3",
+      },
+    ];
+
+    const projects = [
+      {
+        title: "🏢 Commercial Complex",
+        status: "✅ Completed in 2024",
+        image:
+          "https://media.istockphoto.com/id/1165384568/photo/europe-modern-complex-of-residential-buildings.jpg",
+        link: "/projects/1",
+      },
+      {
+        title: "🏭 Industrial Plant",
+        status: "🚧 Ongoing Project",
+        image:
+          "https://media.istockphoto.com/id/922601466/photo/engineering-is-use-notebook-check.jpg",
+        link: "/projects/2",
+      },
+      {
+        title: "🏡 Residential Villas",
+        status: "✅ Completed in 2023",
+        image:
+          "https://media.istockphoto.com/id/1151832961/photo/evening-view-of-a-modern-large-house-with-swimming-pool.jpg",
+        link: "/projects/3",
+      },
+    ];
+
+    const services = [
+      {
+        title: "Project Management",
+        description:
+          "Ensure efficient project execution with real-time monitoring and reporting.",
+        icon: "🏗️",
+        link: "/services/1",
+      },
+      {
+        title: "Structural Engineering",
+        description:
+          "Advanced structural solutions ensuring safety and durability.",
+        icon: "🏢",
+        link: "/services/2",
+      },
+      {
+        title: "Geotechnical Analysis",
+        description:
+          "Comprehensive soil analysis and ground engineering expertise.",
+        icon: "🌱",
+        link: "/services/3",
+      },
+    ];
+
+    res.render("index", {
+      title: "Construction Management",
+      news,
+      projects,
+      services,
+    });
   } catch (error) {
     res.render("error");
   }
@@ -44,7 +123,45 @@ app.get("/", async (req, res) => {
 app.use("/api-user", UserRout);
 
 app.get("/About", (req, res) => {
-  res.render("About", { title: "About" });
+  const teamMembers = [
+    {
+      name: "John Doe",
+      role: "Senior Engineer",
+      img: "https://source.unsplash.com/150x150/?man,engineer",
+    },
+    {
+      name: "Jane Smith",
+      role: "Lead Architect",
+      img: "https://source.unsplash.com/150x150/?woman,architect",
+    },
+    {
+      name: "Michael Brown",
+      role: "Project Manager",
+      img: "https://source.unsplash.com/150x150/?construction,worker",
+    },
+  ];
+  const milestones = [
+    { year: 2010, event: "Founded the company with a vision to excel." },
+    { year: 2015, event: "Completed 100 successful projects." },
+    {
+      year: 2020,
+      event: "Expanded operations to 5 major cities.",
+    },
+  ];
+  const achievements = [
+    { title: "500+", description: "Projects Completed" },
+    {
+      title: "300+",
+      description: "Happy Clients",
+    },
+    { title: "15+", description: "Years of Excellence" },
+  ];
+  res.render("About", {
+    title: "About",
+    teamMembers,
+    milestones,
+    achievements,
+  });
 });
 
 app.get("/Login", (req, res) => {

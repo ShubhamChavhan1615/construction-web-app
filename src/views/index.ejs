@@ -19,217 +19,109 @@
     <main class="container mx-auto p-1">
       <!-- Include Slider -->
       <%- include('partials/Slider') %>->
-        <!-- Recent News Section -->
-        <section class="bg-gray-100 py-12">
-          <div class="container mx-auto px-6">
-            <!-- Section Header -->
-            <div class="text-center mb-12">
-              <h2 class="text-4xl font-bold text-orange-600">📰 Recent News</h2>
-              <p class="text-gray-600 mt-2">
-                Stay updated with our latest construction insights and updates.
-              </p>
-            </div>
-
-            <!-- News Grid -->
-            <div class="grid md:grid-cols-3 gap-8">
-              <!-- News Item 1 -->
-              <div
-                class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-transform transform hover:-translate-y-2">
-                <img
-                  src="https://media.istockphoto.com/id/915518326/photo/digital-tablet-and-hardhat-on-blueprint.jpg?s=612x612&w=0&k=20&c=j9L_Me-ZjzphtEBvb2BnNPZ1E0RRd0_z8Cql6jbSOys="
-                  alt="Construction Progress" class="w-full h-48 object-cover" />
-                <div class="p-6">
-                  <h3 class="text-2xl font-bold text-gray-800">New Project Launched</h3>
-                  <p class="text-gray-600 mt-2">
-                    We recently initiated a multi-story commercial project to enhance
-                    city infrastructure.
-                  </p>
-                  <a href="#"
-                    class="mt-4 inline-block text-orange-600 font-semibold hover:text-orange-700 transition">Read More
-                    →</a>
-                </div>
-              </div>
-
-              <!-- News Item 2 -->
-              <div
-                class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-transform transform hover:-translate-y-2">
-                <img
-                  src="https://media.istockphoto.com/id/2196936311/photo/two-construction-workers-working-together-while-visiting-a-new-building.jpg?s=612x612&w=0&k=20&c=5N3mjWGp2_z4QCBR1zO82TPiZqLeRgwSuk7agHhQcpQ="
-                  alt="Safety Measures" class="w-full h-48 object-cover" />
-                <div class="p-6">
-                  <h3 class="text-2xl font-bold text-gray-800">Enhanced Safety Protocols</h3>
-                  <p class="text-gray-600 mt-2">
-                    Our updated safety guidelines ensure smooth and secure project
-                    management for all.
-                  </p>
-                  <a href="#"
-                    class="mt-4 inline-block text-orange-600 font-semibold hover:text-orange-700 transition">Read More
-                    →</a>
-                </div>
-              </div>
-
-              <!-- News Item 3 -->
-              <div
-                class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-transform transform hover:-translate-y-2">
-                <img
-                  src="https://media.istockphoto.com/id/2190041308/photo/silhouette-of-construction-camp-site-with-cranes-building-construction-prepare-to-welcome-the.jpg?s=612x612&w=0&k=20&c=77MR0GjCNhzucIriqjR-GgC2_mTFmO7zIrwFmldLvR0="
-                  alt="Sustainability Award" class="w-full h-48 object-cover" />
-                <div class="p-6">
-                  <h3 class="text-2xl font-bold text-gray-800">Sustainability Award 2025</h3>
-                  <p class="text-gray-600 mt-2">
-                    Honored with a prestigious award for integrating eco-friendly
-                    practices in construction.
-                  </p>
-                  <a href="#"
-                    class="mt-4 inline-block text-orange-600 font-semibold hover:text-orange-700 transition">Read More
-                    →</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- View All Button -->
-            <div class="text-center mt-12">
-              <a href="/news"
-                class="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition">View
-                All News</a>
-            </div>
-          </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section class="bg-white py-16">
+      <section class="bg-gray-100 py-12">
+        <div class="container mx-auto px-6">
           <!-- Section Header -->
-          <h2 class="text-4xl font-bold text-center text-orange-600">🚧 Our Projects</h2>
-          <p class="text-center text-gray-600 mt-2">
-            Explore our latest completed and ongoing construction ventures.
-          </p>
+          <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-orange-600">📰 Recent News</h2>
+            <p class="text-gray-600 mt-2">
+              Stay updated with our latest construction insights and updates.
+            </p>
+          </div>
 
-          <!-- Project Grid -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-12">
-            <!-- Project 1 -->
-            <div
-              class="bg-gray-50 rounded-2xl overflow-hidden shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl">
-              <img
-                src="https://media.istockphoto.com/id/1165384568/photo/europe-modern-complex-of-residential-buildings.jpg?s=612x612&w=0&k=20&c=iW4NBiMPKEuvaA7h8wIsPHikhS64eR-5EVPfjQ9GPOA="
-                alt="Project 1" class="w-full h-56 object-cover" />
-              <div class="p-6 bg-white">
-                <h3 class="text-2xl font-bold text-gray-800">🏢 Commercial Complex</h3>
-                <p class="text-gray-600 mt-2">✅ Completed in 2024</p>
-                <a href="#"
-                  class="mt-4 inline-block text-orange-600 font-semibold hover:text-orange-700 transition">View Details
-                  →</a>
+          <!-- News Grid -->
+          <div class="grid md:grid-cols-3 gap-8">
+            <% news.forEach(item => { %>
+              <div
+                class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-transform transform hover:-translate-y-2">
+                <img src="<%= item.image %>" alt="<%= item.title %>" class="w-full h-48 object-cover" />
+                <div class="p-6">
+                  <h3 class="text-2xl font-bold text-gray-800"><%= item.title %></h3>
+                  <p class="text-gray-600 mt-2">
+                    <%= item.description %>
+                  </p>
+                  <a href="<%= item.link %>"
+                    class="mt-4 inline-block text-orange-600 font-semibold hover:text-orange-700 transition">Read More
+                    →</a>
+                </div>
               </div>
-            </div>
-
-            <!-- Project 2 -->
-            <div
-              class="bg-gray-50 rounded-2xl overflow-hidden shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl">
-              <img
-                src="https://media.istockphoto.com/id/922601466/photo/engineering-is-use-notebook-check-and-standing-in-front-of-oil-refinery-building-structure-in.jpg?s=612x612&w=0&k=20&c=jefHShMVnAfQ6tfkJTe4NO7AD09lIZdJ3xYNyg2IdOk="
-                alt="Project 2" class="w-full h-56 object-cover" />
-              <div class="p-6 bg-white">
-                <h3 class="text-2xl font-bold text-gray-800">🏭 Industrial Plant</h3>
-                <p class="text-gray-600 mt-2">🚧 Ongoing Project</p>
-                <a href="#"
-                  class="mt-4 inline-block text-orange-600 font-semibold hover:text-orange-700 transition">View Details
-                  →</a>
-              </div>
-            </div>
-
-            <!-- Project 3 -->
-            <div
-              class="bg-gray-50 rounded-2xl overflow-hidden shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl">
-              <img
-                src="https://media.istockphoto.com/id/1151832961/photo/evening-view-of-a-modern-large-house-with-swimming-pool.jpg?s=612x612&w=0&k=20&c=1CP0id1zUGmhmAooj03ocSBipihju7CjCmmGs_LPwhA="
-                alt="Project 3" class="w-full h-56 object-cover" />
-              <div class="p-6 bg-white">
-                <h3 class="text-2xl font-bold text-gray-800">🏡 Residential Villas</h3>
-                <p class="text-gray-600 mt-2">✅ Completed in 2023</p>
-                <a href="#"
-                  class="mt-4 inline-block text-orange-600 font-semibold hover:text-orange-700 transition">View Details
-                  →</a>
-              </div>
-            </div>
+            <% }) %>
           </div>
 
           <!-- View All Button -->
           <div class="text-center mt-12">
-            <a href="/projects"
+            <a href="/news"
               class="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition">View
-              All Projects</a>
+              All News</a>
           </div>
-        </section>
+        </div>
+      </section>
 
+      <!-- Projects Section -->
+      <section class="bg-white py-16">
+        <h2 class="text-4xl font-bold text-center text-orange-600">🚧 Our Projects</h2>
+        <p class="text-center text-gray-600 mt-2">
+          Explore our latest completed and ongoing construction ventures.
+        </p>
 
-        <!-- Our Services Section with Icons and Animation -->
-        <section class="bg-orange-50 py-16">
-          <!-- Section Header -->
-          <h2 class="text-4xl font-bold text-center text-orange-600">
-            🚧 Our Services
-          </h2>
-          <p class="text-center text-gray-600 mt-2">
-            Delivering excellence in every aspect of construction management.
-          </p>
+        <!-- Project Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-12">
+          <% projects.forEach(project => { %>
+            <div
+              class="bg-gray-50 rounded-2xl overflow-hidden shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+              <img src="<%= project.image %>" alt="<%= project.title %>" class="w-full h-56 object-cover" />
+              <div class="p-6 bg-white">
+                <h3 class="text-2xl font-bold text-gray-800"><%= project.title %></h3>
+                <p class="text-gray-600 mt-2"><%= project.status %></p>
+                <a href="<%= project.link %>"
+                  class="mt-4 inline-block text-orange-600 font-semibold hover:text-orange-700 transition">View Details
+                  →</a>
+              </div>
+            </div>
+          <% }) %>
+        </div>
 
-          <!-- Services Grid -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-12">
-            <!-- Service 1 -->
+        <div class="text-center mt-12">
+          <a href="/projects"
+            class="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition">View
+            All Projects</a>
+        </div>
+      </section>
+
+      <!-- Our Services Section -->
+      <section class="bg-orange-50 py-16">
+        <h2 class="text-4xl font-bold text-center text-orange-600">🚧 Our Services</h2>
+        <p class="text-center text-gray-600 mt-2">
+          Delivering excellence in every aspect of construction management.
+        </p>
+
+        <!-- Services Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-12">
+          <% services.forEach(service => { %>
             <div
               class="bg-white p-8 rounded-2xl shadow-lg text-center group hover:bg-orange-100 transition duration-300">
-              <div class="text-orange-500 text-6xl mx-auto group-hover:animate-bounce transition">
-                🏗️
+              <div class="text-6xl mx-auto group-hover:animate-bounce transition">
+                <%= service.icon %>
               </div>
               <h3 class="text-2xl font-bold mt-4 text-gray-800">
-                Project Management
+                <%= service.title %>
               </h3>
               <p class="text-gray-600 mt-2">
-                Ensure efficient project execution with real-time monitoring and
-                reporting.
+                <%= service.description %>
               </p>
-              <a href="#" class="mt-4 inline-block text-orange-600 font-semibold hover:text-orange-700 transition">Learn
-                More →</a>
+              <a href="<%= service.link %>"
+                class="mt-4 inline-block text-orange-600 font-semibold hover:text-orange-700 transition">Learn More
+                →</a>
             </div>
+          <% }) %>
+        </div>
 
-            <!-- Service 2 -->
-            <div
-              class="bg-white p-8 rounded-2xl shadow-lg text-center group hover:bg-orange-100 transition duration-300">
-              <div class="text-blue-500 text-6xl mx-auto group-hover:animate-bounce transition">
-                🏢
-              </div>
-              <h3 class="text-2xl font-bold mt-4 text-gray-800">
-                Structural Engineering
-              </h3>
-              <p class="text-gray-600 mt-2">
-                Advanced structural solutions ensuring safety and durability.
-              </p>
-              <a href="#" class="mt-4 inline-block text-orange-600 font-semibold hover:text-orange-700 transition">Learn
-                More →</a>
-            </div>
-
-            <!-- Service 3 -->
-            <div
-              class="bg-white p-8 rounded-2xl shadow-lg text-center group hover:bg-orange-100 transition duration-300">
-              <div class="text-green-500 text-6xl mx-auto group-hover:animate-bounce transition">
-                🌱
-              </div>
-              <h3 class="text-2xl font-bold mt-4 text-gray-800">
-                Geotechnical Analysis
-              </h3>
-              <p class="text-gray-600 mt-2">
-                Comprehensive soil analysis and ground engineering expertise.
-              </p>
-              <a href="#" class="mt-4 inline-block text-orange-600 font-semibold hover:text-orange-700 transition">Learn
-                More →</a>
-            </div>
-          </div>
-
-          <!-- Call to Action -->
-          <div class="text-center mt-12">
-            <a href="/services"
-              class="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition">Explore
-              All Services</a>
-          </div>
-        </section>
+        <div class="text-center mt-12">
+          <a href="/services"
+            class="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition">Explore
+            All Services</a>
+        </div>
+      </section>
 
 
 
