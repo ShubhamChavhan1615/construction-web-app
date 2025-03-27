@@ -23,11 +23,15 @@ app.get("/admin", (req, res) => {
 app.get("/dashbord", (req, res) => {
   res.render("Admin/dashboard");
 })
+app.get("/admin/manage/service", (req, res) => {
+  res.render("Admin/servises");
+})
 
 app.get("/", checkAuth, async (req, res) => {
   try {
-    const user = await UserModel.findById(req.user);
-    res.render("index", { title: "Home", user: user.name });
+    // const user = await UserModel.findById(req.user);
+    // res.render("index", { title: "Home", user: user.name });
+    res.render("index", { title: "Home"});
   } catch (error) {
     res.render("error")
   }
