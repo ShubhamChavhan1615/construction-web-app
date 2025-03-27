@@ -1,0 +1,53 @@
+<!-- /views/projects.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Header Section -->
+    <%- include('partials/Header') %>
+    <!-- Projects Section -->
+    <div class="container mx-auto px-4 pb-5 pt-10">
+      <h1
+        class="bg-orange-500 rounded text-white py-4 mb-4 text-3xl text-center font-bold"
+      >
+        Projects
+      </h1>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-5 gap-8">
+        <% projects.forEach((project) => { %>
+        <!-- Project Card with Hover Shadow Effect -->
+        <div
+          class="bg-white rounded-lg shadow-lg overflow-hidden transition duration-300 ease-in-out transform hover:shadow-2xl hover:scale-105"
+        >
+          <img
+            src="<%= project.image %>"
+            alt="<%= project.name %>"
+            class="w-full h-52 object-cover"
+          />
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold text-gray-800">
+              <%= project.name %>
+            </h3>
+            <p class="mt-2 text-gray-600"><%= project.description %></p>
+            <a
+              href="<%= project.link %>"
+              class="mt-4 inline-block text-orange-500 font-semibold hover:underline"
+              target="_blank"
+            >
+              View Project →
+            </a>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+
+    <!-- Footer Section  -->
+    <%- include('partials/Footer') %>
+  </body>
+</html>
