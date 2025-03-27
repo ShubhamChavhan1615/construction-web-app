@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Manage Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <button><a href="/admin">Back</a></button>
+        <h1 class="text-2xl font-bold mb-4">Manage Projects</h1>
+        <form id="projectForm" action="/admin/projects" method="POST" enctype="multipart/form-data" class="space-y-4">
+            <div>
+                <label class="block font-semibold">Project Images</label>
+                <input type="file" id="imageInput" name="images" multiple class="mt-1 block w-full p-2 border rounded-md" accept="image/*">
+            </div>
+            <div id="imagePreview" class="flex flex-wrap gap-4"></div>
+            <div>
+                <label class="block font-semibold">Title</label>
+                <input type="text" name="title" class="mt-1 block w-full p-2 border rounded-md">
+            </div>
+            <div>
+                <label class="block font-semibold">Completion Date</label>
+                <input type="date" name="completionDate" class="mt-1 block w-full p-2 border rounded-md">
+            </div>
+            <div>
+                <label class="block font-semibold">Description</label>
+                <textarea name="description" rows="4" class="mt-1 block w-full p-2 border rounded-md"></textarea>
+            </div>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        let selectedFiles = [];
+
+        document.getElementById('imageInput').addEventListener('change', function(event) {
+            let preview = document.getElementById('imagePreview');
+            let newFiles = Array.from(event.target.files);
+            
+            newFiles.forEach(file => {
+                if (!selectedFiles.some(f => f.name === file.name)) {
+                    selectedFiles.push(file);
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        let div = document.createElement('div');
+                        div.classList.add('relative', 'w-32', 'h-32', 'border', 'rounded-md', 'overflow-hidden');
+                        div.innerHTML = `
+                            <img src="${e.target.result}" class="w-full h-full object-cover">
+                            <button type="button" class="absolute top-1 right-1 bg-red-500 text-white text-xs px-2 py-1 rounded-md remove-btn" data-name="${file.name}">X</button>
+                        `;
+                        preview.appendChild(div);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+
+        document.getElementById('imagePreview').addEventListener('click', function(event) {
+            if (event.target.classList.contains('remove-btn')) {
+                let fileNameToRemove = event.target.getAttribute('data-name');
+                selectedFiles = selectedFiles.filter(file => file.name !== fileNameToRemove);
+                
+                let newFileList = new DataTransfer();
+                selectedFiles.forEach(file => newFileList.items.add(file));
+                document.getElementById('imageInput').files = newFileList.files;
+                event.target.parentElement.remove();
+            }
+        });
+    </script>
+</body>
+</html>
