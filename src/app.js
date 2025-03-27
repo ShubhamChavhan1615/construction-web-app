@@ -26,6 +26,9 @@ app.get("/dashbord", (req, res) => {
 app.get("/admin/manage/service", (req, res) => {
   res.render("Admin/servises");
 })
+app.get("/admin/manage/plan", (req, res) => {
+  res.render("Admin/plan");
+})
 
 app.get("/", checkAuth, async (req, res) => {
   try {
@@ -49,7 +52,7 @@ app.get("/Login", (req, res) => {
 
 app.get("/signup", (req, res) => {
   res.render("Register");
-});
+}); 
 
 app.use("/api/appointment", appointmentRoutes)
 
