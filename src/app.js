@@ -5,7 +5,7 @@ import "dotenv/config";
 const PORT = process.env.PORT;
 const app = express();
 import UserRout from "./routes/user.js";
-import appointmentRoutes from "./routes/appointment.js"
+import appointmentRoutes from "./routes/appointment.js";
 
 Router();
 
@@ -17,27 +17,27 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/admin", (req, res) => {
   res.render("Admin/admin", { title: "Admin" });
-})
+});
 
 app.get("/dashbord", (req, res) => {
   res.render("Admin/dashboard");
-})
+});
 
 app.get("/admin/manage/service", (req, res) => {
   res.render("Admin/servises");
-})
+});
 
 app.get("/admin/manage/plan", (req, res) => {
   res.render("Admin/plan");
-})
+});
 
-app.get("/", checkAuth, async (req, res) => {
+app.get("/", async (req, res) => {
   try {
     // const user = await UserModel.findById(req.user);
     // res.render("index", { title: "Home", user: user.name });
     res.render("index", { title: "Home" });
   } catch (error) {
-    res.render("error")
+    res.render("error");
   }
 });
 
