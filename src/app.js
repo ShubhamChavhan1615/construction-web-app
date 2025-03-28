@@ -127,17 +127,17 @@ app.get("/About", (req, res) => {
     {
       name: "John Doe",
       role: "Senior Engineer",
-      img: "https://source.unsplash.com/150x150/?man,engineer",
+      img: "https://media.istockphoto.com/id/916160804/photo/construction-workers-at-outdoor-drilling-site.jpg?s=612x612&w=0&k=20&c=zXcJ8mBqky98xLu85kx0WSTR2jOiAbOAtkeGqwbs4zw=",
     },
     {
       name: "Jane Smith",
       role: "Lead Architect",
-      img: "https://source.unsplash.com/150x150/?woman,architect",
+      img: "https://media.istockphoto.com/id/1499135871/photo/construction-team-collaboration-and-portrait-outdoor-for-building-and-architecture-happy.jpg?s=612x612&w=0&k=20&c=nch12b6ANUTZsEixHEJ4yU3-nPVq5V_Bj7R4Srn6kms=",
     },
     {
       name: "Michael Brown",
       role: "Project Manager",
-      img: "https://source.unsplash.com/150x150/?construction,worker",
+      img: "https://media.istockphoto.com/id/1331285358/photo/portrait-of-smiling-construction-engineers-with-protective-helmets-and-reflective-wests.jpg?s=612x612&w=0&k=20&c=8zrO23i_1tzd2RAcOa8abRYUWREKZ7u1T5V6mtdwK60=",
     },
   ];
   const milestones = [
