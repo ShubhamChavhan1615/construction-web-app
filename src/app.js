@@ -6,6 +6,9 @@ const PORT = process.env.PORT;
 const app = express();
 import UserRout from "./routes/user.js";
 import appointmentRoutes from "./routes/appointment.js";
+import contactrouter from "./routes/contact.js";
+import planRouter from "./routes/plans.js"
+import gallaryroute from "./routes/gallery.js"
 
 Router();
 
@@ -15,6 +18,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api-user", UserRout);
+app.use("/api-contact",contactrouter)
+app.use("/api-plan", planRouter)
+
+app.use("/api-gallary", gallaryroute)
 app.get("/admin", (req, res) => {
   res.render("Admin/admin", { title: "Admin" });
 });
@@ -120,7 +128,7 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.use("/api-user", UserRout);
+
 
 app.get("/About", (req, res) => {
   const teamMembers = [
