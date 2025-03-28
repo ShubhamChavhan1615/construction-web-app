@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Management Slider</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-md w-96">
+        <button class="mb-4 bg-blue-500 text-white px-4 py-2 rounded">
+            <a href="/admin">Back</a>
+        </button>
+        <h2 class="text-xl font-bold mb-4">Management Slider</h2>
+        <form id="sliderForm" class="space-y-4">
+            <input type="file" name="image" id="image" class="block w-full p-2 border rounded" accept="image/*">
+            <img id="preview" src="#" alt="Image Preview" class="hidden w-full h-40 object-cover mt-2 rounded">
+            <input type="text" name="title" id="title" placeholder="Enter title" class="block w-full p-2 border rounded">
+            <input type="text" name="description" id="description" placeholder="Enter description" class="block w-full p-2 border rounded">
+            <button type="submit" class="w-full bg-green-500 text-white px-4 py-2 rounded">Upload</button>
+        </form>
+        <p id="message" class="mt-4 text-center text-sm text-gray-600"></p>
+    </div>
+
+    <script>
+        document.getElementById("image").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById("preview");
+                    preview.src = e.target.result;
+                    preview.classList.remove("hidden");
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById("sliderForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const formData = new FormData();
+            formData.append("image", document.getElementById("image").files[0]);
+            formData.append("title", document.getElementById("title").value);
+            formData.append("description", document.getElementById("description").value);
+            console.log(Object.fromEntries(formData));
+            const response = await fetch("/upload", {
+                method: "POST",
+                body: formData
+            });
+
+            const result = await response.json();
+            document.getElementById("message").textContent = result.message;
+        });
+    </script>
+</body>
+</html>

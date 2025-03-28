@@ -6,6 +6,8 @@ const PORT = process.env.PORT;
 const app = express();
 import UserRout from "./routes/user.js";
 import appointmentRoutes from "./routes/appointment.js";
+import { checkAuth } from "./middleware/jwt.middleware.js";
+import UserModel from "./models/UserModel.js";
 
 Router();
 
@@ -30,10 +32,15 @@ app.get("/admin/manage/service", (req, res) => {
 app.get("/admin/manage/plan", (req, res) => {
   res.render("Admin/plan");
 });
+app.get("/admin/manage/slider", (req, res) => {
+  res.render("Admin/slider");
+});
 
 // index Page
-app.get("/", async (req, res) => {
+app.get("/", checkAuth,async (req, res) => {
+  console.log(req.user)
   try {
+    const user = await UserModel.findById(req.user);
     const news = [
       {
         title: "New Project Launched",
@@ -112,6 +119,7 @@ app.get("/", async (req, res) => {
     res.render("index", {
       title: "Construction Management",
       news,
+      user,
       projects,
       services,
     });
@@ -306,7 +314,8 @@ app.get("/services", (req, res) => {
 // Plans Page
 
 const plans = [
-  {
+  { 
+    image: "https://media.istockphoto.com/id/1164943425/photo/turning-dreams-into-winning-designs.jpg?s=612x612&w=0&k=20&c=SFAZx9crVcqMxaSpkOIhF4ZQOIPwSGfelcseU2aURXs=",
     name: "Basic Plan",
     description: "Perfect for small projects and startups.",
     price: 299,
@@ -317,6 +326,7 @@ const plans = [
     ],
   },
   {
+    image: "https://media.istockphoto.com/id/1164943425/photo/turning-dreams-into-winning-designs.jpg?s=612x612&w=0&k=20&c=SFAZx9crVcqMxaSpkOIhF4ZQOIPwSGfelcseU2aURXs=",
     name: "Standard Plan",
     description: "Ideal for medium-sized projects.",
     price: 599,
@@ -328,6 +338,7 @@ const plans = [
     ],
   },
   {
+    image: "https://media.istockphoto.com/id/1164943425/photo/turning-dreams-into-winning-designs.jpg?s=612x612&w=0&k=20&c=SFAZx9crVcqMxaSpkOIhF4ZQOIPwSGfelcseU2aURXs=",
     name: "Premium Plan",
     description: "Best for large-scale and complex projects.",
     price: 999,
