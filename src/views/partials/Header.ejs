@@ -59,6 +59,7 @@
         </div>
       </div>
     </div>
+    
 
     <!-- Navbar Section -->
     <nav class="bg-white shadow-lg sticky top-0 z-50">
@@ -109,15 +110,22 @@
             >
           </li>
         </ul>
-
+       
         <!-- Login Button Section with Gradient -->
         <div class="hidden lg:flex items-center">
-          <a
-            href="/login"
-            class="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-2 px-6 rounded-full shadow-md"
-          >
-            <i class="fas fa-user mr-2"></i> Login
-          </a>
+          <% if (user && user.name) { %>
+            
+           <a href="/profile" class="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-2 px-6 rounded-full shadow-md
+            nav-link text-lg font-medium text-white hover:text-orange-500 transition duration-300"><i class="fas fa-user mr-2"></i><%= user.name %></a>
+          <% } else { %>
+            <a
+              href="/login"
+              class="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-2 px-6 rounded-full shadow-md"
+            >
+              <i class="fas fa-user mr-2"></i> Login
+            </a>
+          <% } %>
+          
         </div>
 
         <!-- Mobile Menu Button -->
