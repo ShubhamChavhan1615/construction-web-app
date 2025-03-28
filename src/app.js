@@ -38,7 +38,6 @@ app.get("/admin/manage/slider", (req, res) => {
 
 // index Page
 app.get("/", checkAuth,async (req, res) => {
-  console.log(req.user)
   try {
     const user = await UserModel.findById(req.user);
     const news = [
