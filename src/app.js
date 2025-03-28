@@ -6,6 +6,10 @@ const PORT = process.env.PORT;
 const app = express();
 import UserRout from "./routes/user.js";
 import appointmentRoutes from "./routes/appointment.js";
+import contactrouter from "./routes/contact.js"
+import planRouter from "./routes/plans.js"
+import gallaryroute from "./routes/gallery.js"
+import { checkAuth } from "./middleware/jwt.middleware.js";
 
 Router();
 
