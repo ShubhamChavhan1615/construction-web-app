@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - Construction Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Header Section -->
+    <%- include('partials/Header') %>
+
+    <!-- Contact Section -->
+    <div class="">
+      <!-- Hero Section -->
+      <section
+        class="relative bg-cover bg-center h-[300px] flex items-center justify-center text-white"
+        style="
+          background-image: url('https://media.istockphoto.com/id/1071154136/photo/3d-rendering-technological-digital-background-consisting-of-a-futuristic-city-with-data.jpg?s=612x612&w=0&k=20&c=kUcrhiXambwIQmgaZymI367pqTYs4dnNMdNuY4LCcKM=');
+        "
+      >
+        <div class="bg-black bg-opacity-60 p-8 rounded-lg text-center">
+          <h1 class="text-5xl font-bold text-orange-500">Contact</h1>
+          <p class="text-lg mt-2 text-white">
+            Expert solutions tailored for your construction needs.
+          </p>
+        </div>
+      </section>
+
+      <div
+        class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12"
+      >
+        <!-- Contact Info Cards -->
+        <div class="w-full md:w-1/3 space-y-6">
+          <% contactInfo.forEach((info) => { %>
+          <div
+            class="bg-white rounded-lg shadow-md p-6 flex items-center gap-4 transition-transform transform hover:scale-105 duration-300"
+          >
+            <div
+              class="bg-orange-500 text-white p-4 rounded-full text-2xl flex items-center justify-center w-12 h-12"
+            >
+              <%= info.icon %>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-800"><%= info.title %></h3>
+              <p class="text-gray-600"><%= info.detail %></p>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="w-full md:w-2/3 bg-white rounded-lg shadow-lg p-8 m-4">
+          <h3 class="text-2xl font-bold text-orange-600 mb-6">Get in Touch</h3>
+          <form action="/contact/submit" method="POST" class="space-y-6">
+            <div>
+              <label for="name" class="block text-gray-700 font-semibold"
+                >Name</label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+                placeholder="Enter your name"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="email" class="block text-gray-700 font-semibold"
+                >Email</label
+              >
+              <input type="email" id="email" " class="w-full px-4 py-2 border
+              rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+              placeholder="Enter your email" required />
+            </div>
+
+            <div>
+              <label for="message" class="block text-gray-700 font-semibold"
+                >Message</label
+              >
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+                placeholder="Write your message"
+                required
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600 transition-all"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+    <%- include('partials/Footer') %>
+  </body>
+</html>

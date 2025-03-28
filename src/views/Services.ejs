@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services | Construction Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Include Custom Header -->
+    <%- include('partials/header') %>
+
+    <!-- Hero Section -->
+    <section
+      class="relative bg-cover bg-center h-[300px] flex items-center justify-center text-white"
+      style="
+        background-image: url('https://media.istockphoto.com/id/1327569483/photo/male-and-female-industrial-engineers-using-tablet-computer-and-blueprints-checking-and.jpg?s=612x612&w=0&k=20&c=XigMdfVTBrXnmhZXSDEaAuiqfZ76-jBFnq-JYUigSmE=');
+      "
+    >
+      <div class="bg-black bg-opacity-60 p-8 rounded-lg text-center">
+        <h1 class="text-5xl font-bold text-orange-500">Our Services</h1>
+        <p class="text-lg mt-2 text-white">
+          Expert solutions tailored for your construction needs.
+        </p>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="bg-gray-50 py-12">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold text-orange-500">Our Core Services</h2>
+        <p class="text-gray-700 mt-4">
+          Comprehensive solutions for successful project execution.
+        </p>
+        <div class="grid md:grid-cols-3 gap-6 mt-8">
+          <% services.forEach((service) => { %>
+          <div
+            class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition"
+          >
+            <div class="text-4xl mb-4"><%= service.icon %></div>
+            <h3 class="text-lg font-semibold"><%= service.title %></h3>
+            <p class="text-gray-600 mt-2"><%= service.description %></p>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="bg-white py-12">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold text-orange-500">Why Choose Us?</h2>
+        <p class="text-gray-700 mt-4">
+          We bring value, expertise, and commitment to every project.
+        </p>
+        <div class="grid md:grid-cols-3 gap-6 mt-8">
+          <% benefits.forEach((benefit) => { %>
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-xl font-bold text-orange-500">
+              <%= benefit.title %>
+            </h3>
+            <p class="text-gray-700 mt-2"><%= benefit.description %></p>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </section>
+
+    <!-- Client Testimonials Section -->
+    <section class="bg-gray-100 py-12">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold text-orange-500">Client Testimonials</h2>
+        <p class="text-gray-700 mt-4">
+          See what our satisfied clients have to say.
+        </p>
+        <div class="grid md:grid-cols-3 gap-6 mt-8">
+          <% testimonials.forEach((testimonial) => { %>
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <p class="text-gray-600 italic">" <%= testimonial.feedback %> "</p>
+            <h3 class="mt-4 font-semibold"><%= testimonial.name %></h3>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <section class="bg-orange-500 text-white py-12">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold">Ready to Start Your Next Project?</h2>
+        <p class="mt-4">Get in touch with our team today!</p>
+        <a
+          href="/contact"
+          class="mt-6 inline-block bg-white text-orange-500 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition"
+          >Contact Us</a
+        >
+      </div>
+    </section>
+
+    <!-- Include Custom Footer -->
+    <%- include('partials/footer') %>
+  </body>
+</html>

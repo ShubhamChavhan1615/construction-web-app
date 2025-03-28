@@ -40,7 +40,7 @@ app.get("/", async (req, res) => {
         description:
           "We recently initiated a multi-story commercial project to enhance city infrastructure.",
         image:
-          "https://media.istockphoto.com/id/915518326/photo/digital-tablet-and-hardhat-on-blueprint.jpg",
+          "https://media.istockphoto.com/id/1018091598/photo/construction-plan-and-skyline-building-with-a-crane.jpg?s=612x612&w=0&k=20&c=Mhn3VDsiY2XerdCxfS9bppMGKrce71Xt9Q_hU1GrRAY=",
         link: "/news/1",
       },
       {
@@ -48,7 +48,7 @@ app.get("/", async (req, res) => {
         description:
           "Our updated safety guidelines ensure smooth and secure project management for all.",
         image:
-          "https://media.istockphoto.com/id/2196936311/photo/two-construction-workers-working-together-while-visiting-a-new-building.jpg",
+          "https://media.istockphoto.com/id/2193657947/photo/construction-site-worker-and-engineer-discussing-on-blueprint-project.jpg?s=612x612&w=0&k=20&c=KkBDlT0S6xFG6xTgH-3-dDVYa_VHfZuoHpPwuU2HCSk=",
         link: "/news/2",
       },
       {
@@ -56,7 +56,7 @@ app.get("/", async (req, res) => {
         description:
           "Honored with a prestigious award for integrating eco-friendly practices in construction.",
         image:
-          "https://media.istockphoto.com/id/2190041308/photo/silhouette-of-construction-camp-site-with-cranes.jpg",
+          "https://media.istockphoto.com/id/2151288367/vector/2025-black-silhouette-of-staff-works-as-a-team-to-prepare-to-welcome-the-new-year-2025.jpg?s=612x612&w=0&k=20&c=-_Zx7cTAADXEoPYCH3KqknfDwywNDj_6zeRzDfebx8k=",
         link: "/news/3",
       },
     ];
@@ -66,21 +66,21 @@ app.get("/", async (req, res) => {
         title: "🏢 Commercial Complex",
         status: "✅ Completed in 2024",
         image:
-          "https://media.istockphoto.com/id/1165384568/photo/europe-modern-complex-of-residential-buildings.jpg",
+          "https://media.istockphoto.com/id/932755326/photo/modern-office-buildings-made-of-glass-and-concret.jpg?s=612x612&w=0&k=20&c=GfBzrP3HF5XOwqh6sBrOo-_2Jv6pB1a77t0R3-X6L1o=   ",
         link: "/projects/1",
       },
       {
         title: "🏭 Industrial Plant",
         status: "🚧 Ongoing Project",
         image:
-          "https://media.istockphoto.com/id/922601466/photo/engineering-is-use-notebook-check.jpg",
+          "https://media.istockphoto.com/id/922601466/photo/engineering-is-use-notebook-check-and-standing-in-front-of-oil-refinery-building-structure-in.jpg?s=612x612&w=0&k=20&c=jefHShMVnAfQ6tfkJTe4NO7AD09lIZdJ3xYNyg2IdOk=",
         link: "/projects/2",
       },
       {
         title: "🏡 Residential Villas",
         status: "✅ Completed in 2023",
         image:
-          "https://media.istockphoto.com/id/1151832961/photo/evening-view-of-a-modern-large-house-with-swimming-pool.jpg",
+          "https://media.istockphoto.com/id/1063723682/photo/hand-sketching-a-designer-villa-with-pool.jpg?s=612x612&w=0&k=20&c=SlIacvwSEEsZ-2imWLDk6dC0glhaWEg-pOGFSK4YQuI=",
         link: "/projects/3",
       },
     ];
@@ -227,6 +227,163 @@ const projects = [
 
 app.get("/projects", (req, res) => {
   res.render("Project", { projects });
+});
+
+// Services Page
+
+app.get("/services", (req, res) => {
+  const services = [
+    {
+      title: "Project Planning",
+      description:
+        "Detailed project plans that ensure timely delivery with minimal risks.",
+      icon: "📋",
+    },
+    {
+      title: "Site Management",
+      description: "Effective on-site management to oversee daily operations.",
+      icon: "🏗️",
+    },
+    {
+      title: "Budget Estimation",
+      description: "Accurate cost estimation to ensure budget control.",
+      icon: "💰",
+    },
+    {
+      title: "Quality Assurance",
+      description: "Ensuring high-quality standards in every phase.",
+      icon: "✅",
+    },
+    {
+      title: "Safety Management",
+      description:
+        "Safety protocols to protect workers and maintain compliance.",
+      icon: "⚠️",
+    },
+    {
+      title: "Post-Construction Support",
+      description: "Reliablesupport even after project completion.",
+      icon: "🏢",
+    },
+  ];
+  const benefits = [
+    {
+      title: "Expert Professionals",
+      description:
+        "Our team is skilled and experienced in handling complex projects.",
+    },
+    {
+      title: "Advanced Technology",
+      description:
+        "We use the latest tools and technology to streamline operations.",
+    },
+    {
+      title: "Client Satisfaction",
+      description: "Our priority is to meet and exceed client expectations.",
+    },
+  ];
+  const testimonials = [
+    {
+      name: "Rajesh Kumar",
+      feedback:
+        "Exceptional service and timely completion of our project. Highly recommended!",
+    },
+    {
+      name: "Neha Sharma",
+      feedback:
+        "The team demonstrated professionalism and maintained high-quality standards.",
+    },
+    {
+      name: "Amit Patil",
+      feedback:
+        "Reliable and efficient project management. Would work with them again!",
+    },
+  ];
+
+  res.render("Services", { services, testimonials, benefits });
+});
+
+// Plans Page
+
+const plans = [
+  {
+    name: "Basic Plan",
+    description: "Perfect for small projects and startups.",
+    price: 299,
+    features: [
+      "Basic Construction Support",
+      "Project Management Tools",
+      "Standard Safety Guidelines",
+    ],
+  },
+  {
+    name: "Standard Plan",
+    description: "Ideal for medium-sized projects.",
+    price: 599,
+    features: [
+      "Advanced Construction Planning",
+      "Priority Project Management",
+      "Extended Safety Protocols",
+      "Dedicated Support",
+    ],
+  },
+  {
+    name: "Premium Plan",
+    description: "Best for large-scale and complex projects.",
+    price: 999,
+    features: [
+      "End-to-End Project Management",
+      "Customized Construction Solutions",
+      "On-Site Safety & Quality Control",
+      "24/7 Premium Support",
+    ],
+  },
+];
+
+const faqs = [
+  {
+    question: "Which plan is best for my project?",
+    answer:
+      "It depends on the size and complexity of your project. Our Standard and Premium plans are best for larger-scale projects.",
+  },
+  {
+    question: "Can I switch plans after starting?",
+    answer:
+      "Yes, you can upgrade or switch to a different plan anytime during the project.",
+  },
+  {
+    question: "Is there any cancellation policy?",
+    answer:
+      "You can cancel your plan within 14 days of subscription with a full refund.",
+  },
+];
+
+// Render Plans Page
+app.get("/plans", (req, res) => {
+  res.render("Plans", { plans, faqs });
+});
+
+// Contact page
+app.get("/contact", (req, res) => {
+  const contactInfo = [
+    {
+      icon: "📍", // Location Icon
+      title: "Our Office",
+      detail: "123 Main Street, Ahmednagar, Maharashtra",
+    },
+    {
+      icon: "📞", // Phone Icon
+      title: "Phone Number",
+      detail: "+91 7387539006",
+    },
+    {
+      icon: "✉️", // Email Icon
+      title: "Email Address",
+      detail: "rokadevaibhav04@gmail.com",
+    },
+  ];
+
+  res.render("contact", { contactInfo });
 });
 
 app.use("/api/appointment", appointmentRoutes);

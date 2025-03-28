@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Plans | Construction Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-gray-50">
+    <!-- Header -->
+    <%- include('partials/Header') %>
+
+    <!-- Hero Section -->
+    <section
+      class="relative bg-cover bg-center h-[200px] flex items-center justify-center text-white"
+      style="
+        background-image: url('https://media.istockphoto.com/id/524176987/photo/construction-worker-supervisor-discuss-blueprints-at-work-site-building.jpg?s=612x612&w=0&k=20&c=9oWDvVQROpeu7ShZvq6sxGqz8rx0RNTFCttHIYCzkMw=');
+      "
+    >
+      <div class="bg-black bg-opacity-60 p-8 rounded-lg text-center">
+        <h1 class="text-5xl font-bold text-orange-500">Our Plans</h1>
+        <p class="text-lg mt-2 text-white">
+          Choose the best plan that suits your construction needs.
+        </p>
+      </div>
+    </section>
+
+    <!-- Plans Section -->
+    <section class="container mx-auto px-6 py-12">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-orange-500">Our Pricing Plans</h2>
+        <p class="text-gray-700 mt-2">
+          We offer flexible plans for all project sizes and requirements.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <% plans.forEach(plan => { %>
+        <div
+          class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition transform hover:scale-105"
+        >
+          <h3 class="text-2xl font-bold text-orange-500"><%= plan.name %></h3>
+          <p class="mt-2 text-gray-600"><%= plan.description %></p>
+          <p class="text-3xl font-bold text-gray-800 mt-4">
+            $<%= plan.price %>
+          </p>
+          <ul class="mt-4 text-left space-y-2">
+            <% plan.features.forEach(feature => { %>
+            <li class="text-gray-700 flex items-center">
+              ✅ <span class="ml-2"><%= feature %></span>
+            </li>
+            <% }) %>
+          </ul>
+          <a
+            href="/contact"
+            class="mt-6 inline-block bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition"
+            >Get Started</a
+          >
+        </div>
+        <% }) %>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="bg-gray-100 py-12">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-orange-500 text-center">
+          Frequently Asked Questions
+        </h2>
+        <div class="mt-8">
+          <% faqs.forEach(faq => { %>
+          <div class="bg-white p-6 rounded-lg shadow-md mb-4">
+            <h3 class="text-xl font-semibold text-gray-800">
+              <%= faq.question %>
+            </h3>
+            <p class="text-gray-600 mt-2"><%= faq.answer %></p>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <section class="bg-white py-12 text-center">
+      <h2 class="text-3xl font-bold text-orange-500">
+        Ready to Start Your Project?
+      </h2>
+      <p class="mt-4 text-gray-600">
+        Contact us today to choose a plan that fits your needs!
+      </p>
+      <a
+        href="/contact"
+        class="mt-6 inline-block bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition"
+        >Contact Us</a
+      >
+    </section>
+
+    <!-- Footer -->
+    <%- include('partials/Footer') %>
+  </body>
+</html>

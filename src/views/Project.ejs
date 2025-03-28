@@ -7,38 +7,48 @@
     <title>Our Projects</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="bg-gray-100">
+  <body class="bg-gray-50">
     <!-- Header Section -->
     <%- include('partials/Header') %>
 
     <!-- Projects Section -->
-    <div class="container mx-auto px-4 pb-5 pt-10">
-      <h1
-        class="bg-orange-500 rounded text-white py-4 mb-4 text-3xl text-center font-bold"
+    <div class="">
+      <!-- Hero Section -->
+      <section
+        class="relative bg-cover bg-center h-[300px] mb-12 flex items-center justify-center text-white"
+        style="
+          background-image: url('https://media.istockphoto.com/id/1176581571/photo/large-construction-site-including-several-cranes-with-clear-sky-and-the-sun.jpg?s=612x612&w=0&k=20&c=jOtmetjH-lOQ9oMnjsqLm33e0LOm2_SdhUb8X1btUGo=');
+        "
       >
-        Projects
-      </h1>
+        <div class="bg-black bg-opacity-60 p-8 rounded-lg text-center">
+          <h1 class="text-5xl font-bold text-orange-500">Our Projects</h1>
+          <p class="text-lg mt-2 text-white">
+            Expert solutions tailored for your construction needs.
+          </p>
+        </div>
+      </section>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-5 gap-8">
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         <% projects.forEach((project, index) => { %>
-        <!-- Project Card with Hover Shadow Effect -->
+        <!-- Project Card -->
         <div
-          class="bg-white rounded-lg shadow-lg overflow-hidden transition duration-300 ease-in-out transform hover:shadow-2xl hover:scale-105"
+          class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl duration-300"
         >
           <img
             src="<%= project.image %>"
             alt="<%= project.name %>"
-            class="w-full h-52 object-cover"
+            class="w-full h-56 object-cover"
           />
-          <div class="p-6">
-            <h3 class="text-2xl font-semibold text-gray-800">
+          <div class="p-5">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">
               <%= project.name %>
             </h3>
-            <p class="mt-2 text-gray-600"><%= project.description %></p>
+            <p class="text-gray-600 mb-4"><%= project.description %></p>
             <button
               type="button"
               onclick="openModal('<%= index %>')"
-              class="mt-4 inline-block text-orange-500 font-semibold hover:underline"
+              class="text-orange-500 font-semibold hover:text-orange-600 transition-colors"
             >
               Read More →
             </button>
@@ -48,15 +58,15 @@
         <!-- Modal Popup -->
         <div
           id="modal-<%= index %>"
-          class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50"
+          class="fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center z-50"
         >
           <div
-            class="bg-white rounded-lg p-6 w-11/12 md:w-2/3 lg:w-1/2 shadow-lg relative"
+            class="bg-white rounded-lg p-6 w-11/12 md:w-2/3 lg:w-1/2 shadow-xl relative transform transition-transform scale-90 hover:scale-100"
           >
             <button
               type="button"
               onclick="closeModal('<%= index %>')"
-              class="absolute top-3 right-3 text-gray-700 text-2xl hover:text-red-500"
+              class="absolute top-3 right-3 text-gray-700 text-3xl hover:text-red-500 transition-colors"
             >
               &times;
             </button>
@@ -66,12 +76,14 @@
             <img
               src="<%= project.image %>"
               alt="<%= project.name %>"
-              class="w-full h-60 object-cover mb-4 rounded"
+              class="w-full h-60 object-cover mb-4 rounded-lg"
             />
-            <p class="text-lg text-gray-700 mb-4"><%= project.description %></p>
+            <p class="text-lg text-gray-700 mb-4 leading-relaxed">
+              <%= project.description %>
+            </p>
             <a
               href="<%= project.link %>"
-              class="text-orange-500 font-semibold hover:underline"
+              class="text-orange-500 font-semibold hover:text-orange-600 transition-colors"
               target="_blank"
             >
               View Full Project →
@@ -90,11 +102,13 @@
       // Open modal function
       function openModal(index) {
         document.getElementById("modal-" + index).classList.remove("hidden");
+        document.body.classList.add("overflow-hidden");
       }
 
       // Close modal function
       function closeModal(index) {
         document.getElementById("modal-" + index).classList.add("hidden");
+        document.body.classList.remove("overflow-hidden");
       }
     </script>
   </body>
