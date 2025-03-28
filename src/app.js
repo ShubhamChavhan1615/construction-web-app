@@ -18,8 +18,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api-user", UserRout);
 app.use("/api-contact",contactrouter)
 app.use("/api-plan", planRouter)
-
 app.use("/api-gallary", gallaryroute)
+
 app.get("/admin", (req, res) => {
   res.render("Admin/admin", { title: "Admin" });
 });
