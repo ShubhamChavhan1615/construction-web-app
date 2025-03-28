@@ -19,11 +19,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api-user", UserRout);
-app.use("/api-contact",contactrouter)
-app.use("/api-plan", planRouter)
-app.use("/api-gallary", gallaryroute)
-
 app.get("/admin", (req, res) => {
   res.render("Admin/admin", { title: "Admin" });
 });
@@ -44,7 +39,7 @@ app.get("/admin/manage/slider", (req, res) => {
 });
 
 // index Page
-app.get("/", checkAuth,async (req, res) => {
+app.get("/", checkAuth, async (req, res) => {
   try {
     const user = await UserModel.findById(req.user);
     const news = [
@@ -320,7 +315,7 @@ app.get("/services", (req, res) => {
 // Plans Page
 
 const plans = [
-  { 
+  {
     image: "https://media.istockphoto.com/id/1164943425/photo/turning-dreams-into-winning-designs.jpg?s=612x612&w=0&k=20&c=SFAZx9crVcqMxaSpkOIhF4ZQOIPwSGfelcseU2aURXs=",
     name: "Basic Plan",
     description: "Perfect for small projects and startups.",
@@ -404,6 +399,10 @@ app.get("/contact", (req, res) => {
 });
 
 app.use("/api/appointment", appointmentRoutes);
+app.use("/api/user", UserRout);
+app.use("/api/contact", contactrouter)
+app.use("/api/plan", planRouter)
+app.use("/api/gallary", gallaryroute)
 
 app.listen(PORT, () => {
   dbConnect();
