@@ -61,3 +61,31 @@ export const usersignin = async (req, res) => {
         return res.status(500).json({ message: "Interal Server Error!" })
     }
 }
+
+
+export const teamMember = async (req, res) => {
+    try {
+        const { name, email, role,image } = req.body;
+
+        if (!name || !email) {
+            return res.status(400).json({ message: "All Field Required!" })
+        }
+        const checkemail = await UserModel.findOne({ email })
+        if (checkemail) {
+            return res.status(400).json({ message: "User allredy Exsite" });
+        }
+
+
+        const UserRegister = new UserModel({
+            name,
+            email,
+            role,
+            image,
+        })
+        await UserRegister.save();
+        res.redirect("/admin")
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Interal Server Error!" })
+    }
+}
