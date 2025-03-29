@@ -51,6 +51,7 @@ export const usersignin = async (req, res) => {
         }
 
         const token = generated(emailcheck.id);
+        res.cookie("authToken", token, { httpOnly: true, secure: true, maxAge: 3600000 });
         res.redirect("/")
 
         // return res.status(200).json({ message: "Login Successfully", token })
