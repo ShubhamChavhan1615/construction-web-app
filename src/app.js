@@ -41,7 +41,6 @@ app.get("/admin/manage/slider", (req, res) => {
 // index Page
 app.get("/", checkAuth, async (req, res) => {
   try {
-    const user = await UserModel.findById(req.user);
     const news = [
       {
         title: "New Project Launched",
@@ -116,15 +115,30 @@ app.get("/", checkAuth, async (req, res) => {
         link: "/services/3",
       },
     ];
+    // Check if user is authenticated
+    if (req.user) {
+      const user = await UserModel.findById(req.user);
+     
+      return res.render("index", {
+        title: "Construction Management",
+        news,
+        user,
+        projects,
+        services,
+      });
+    }
+    
 
-    res.render("index", {
+    return res.render("index", {
       title: "Construction Management",
       news,
-      user,
+      user: null,
       projects,
       services,
     });
+
   } catch (error) {
+    console.log(error.message)
     res.render("error");
   }
 });
