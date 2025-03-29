@@ -40,6 +40,9 @@ app.get("/admin/manage/plan", (req, res) => {
 app.get("/admin/manage/slider", (req, res) => {
   res.render("Admin/slider");
 });
+app.get("/admin/manage/team", (req, res) => {
+  res.render("Admin/team");
+});
 
 // index Page
 app.get("/", checkAuth, async (req, res) => {
@@ -148,23 +151,23 @@ app.get("/", checkAuth, async (req, res) => {
 });
 
 app.get("/About", checkAuth, async (req, res) => {
-  const teamMembers = [
-    {
-      name: "John Doe",
-      role: "Senior Engineer",
-      img: "https://media.istockphoto.com/id/916160804/photo/construction-workers-at-outdoor-drilling-site.jpg?s=612x612&w=0&k=20&c=zXcJ8mBqky98xLu85kx0WSTR2jOiAbOAtkeGqwbs4zw=",
-    },
-    {
-      name: "Jane Smith",
-      role: "Lead Architect",
-      img: "https://media.istockphoto.com/id/1499135871/photo/construction-team-collaboration-and-portrait-outdoor-for-building-and-architecture-happy.jpg?s=612x612&w=0&k=20&c=nch12b6ANUTZsEixHEJ4yU3-nPVq5V_Bj7R4Srn6kms=",
-    },
-    {
-      name: "Michael Brown",
-      role: "Project Manager",
-      img: "https://media.istockphoto.com/id/1331285358/photo/portrait-of-smiling-construction-engineers-with-protective-helmets-and-reflective-wests.jpg?s=612x612&w=0&k=20&c=8zrO23i_1tzd2RAcOa8abRYUWREKZ7u1T5V6mtdwK60=",
-    },
-  ];
+  // const teamMembers = [
+  //   {
+  //     name: "John Doe",
+  //     role: "Senior Engineer",
+  //     img: "https://media.istockphoto.com/id/916160804/photo/construction-workers-at-outdoor-drilling-site.jpg?s=612x612&w=0&k=20&c=zXcJ8mBqky98xLu85kx0WSTR2jOiAbOAtkeGqwbs4zw=",
+  //   },
+  //   {
+  //     name: "Jane Smith",
+  //     role: "Lead Architect",
+  //     img: "https://media.istockphoto.com/id/1499135871/photo/construction-team-collaboration-and-portrait-outdoor-for-building-and-architecture-happy.jpg?s=612x612&w=0&k=20&c=nch12b6ANUTZsEixHEJ4yU3-nPVq5V_Bj7R4Srn6kms=",
+  //   },
+  //   {
+  //     name: "Michael Brown",
+  //     role: "Project Manager",
+  //     img: "https://media.istockphoto.com/id/1331285358/photo/portrait-of-smiling-construction-engineers-with-protective-helmets-and-reflective-wests.jpg?s=612x612&w=0&k=20&c=8zrO23i_1tzd2RAcOa8abRYUWREKZ7u1T5V6mtdwK60=",
+  //   },
+  // ];
   const milestones = [
     { year: 2010, event: "Founded the company with a vision to excel." },
     { year: 2015, event: "Completed 100 successful projects." },
@@ -181,7 +184,7 @@ app.get("/About", checkAuth, async (req, res) => {
     },
     { title: "15+", description: "Years of Excellence" },
   ];
-
+  const teamMembers = await UserModel.find({})
   if (req.user) {
     const user = await UserModel.findById(req.user);
 
