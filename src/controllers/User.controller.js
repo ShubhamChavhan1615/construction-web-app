@@ -1,4 +1,5 @@
 import { generated } from "../middleware/generatedtoken.js";
+import { checkAuth } from "../middleware/jwt.middleware.js";
 import UserModel from "../models/UserModel.js";
 import bcrypt from "bcrypt"
 
@@ -23,7 +24,7 @@ export const UserSignup = async (req, res) => {
             password: haspassword,
         })
         await UserRegister.save();
-    
+
         const token = generated(UserRegister.id)
         res.cookie("authToken", token, { httpOnly: true, secure: true, maxAge: 3600000 });
         res.redirect("/")
@@ -65,7 +66,7 @@ export const usersignin = async (req, res) => {
 
 export const teamMember = async (req, res) => {
     try {
-        const { name, email, role,image } = req.body;
+        const { name, email, role, image } = req.body;
 
         if (!name || !email) {
             return res.status(400).json({ message: "All Field Required!" })
@@ -75,7 +76,6 @@ export const teamMember = async (req, res) => {
             return res.status(400).json({ message: "User allredy Exsite" });
         }
 
-
         const UserRegister = new UserModel({
             name,
             email,
@@ -84,6 +84,42 @@ export const teamMember = async (req, res) => {
         })
         await UserRegister.save();
         res.redirect("/admin")
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Interal Server Error!" })
+    }
+}
+
+export const updatedteamuser = async (req, res) => {
+    try {
+        const { name, email, role, image } = req.body;
+        const userId = req.params.id;
+        const user = await UserModel.findById(userId)
+        if (!user) {
+            return res.status(400).json({ message: "all field Required!" })
+        }
+
+        if (name) user.name = name;
+        if (email) user.email = email;
+        if (role) user.role = role;
+        if (image) user.image = image;
+
+        await user.save();
+        return res.status(200).json({ message: "Team Updated Successfully!" })
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Interal Server Error!" })
+    }
+}
+
+export const deleteteammembers = async (req, res) => {
+    try {
+        const deleteteammembers = await UserModel.findByIdAndDelete(req.params.id);
+        if (!deleteteammembers) {
+            return res.status(400).json({ message: "Team Memebers Not Found!" })
+        }
+        return res.status(200).json({ message: "Team Memeber Deleted Successfully!" })
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "Interal Server Error!" })

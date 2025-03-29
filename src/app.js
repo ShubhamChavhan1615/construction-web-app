@@ -422,7 +422,7 @@ const faqs = [
 
 // Render Plans Page
 app.get("/plans", (req, res) => {
-  res.render("Plans", {title:"Plans", plans, faqs });
+  res.render("Plans", { title: "Plans", plans, faqs });
 });
 
 // Contact page
@@ -471,6 +471,18 @@ app.use("/api/contact", contactrouter)
 app.use("/api/plan", planRouter)
 app.use("/api/gallary", gallaryroute)
 app.use("/api/services", servicesRouter);
+
+
+app.get("/delete", async (req, res) => {
+  try {
+    const user = await UserModel.deleteMany({});
+    console.log("user : ",user);
+    
+    res.status(200).json(user)
+  } catch (error) {
+    console.log(error);
+  }
+})
 
 app.listen(PORT, () => {
   dbConnect();
