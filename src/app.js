@@ -9,7 +9,9 @@ import appointmentRoutes from "./routes/appointment.js";
 import contactrouter from "./routes/contact.js"
 import planRouter from "./routes/plans.js"
 import gallaryroute from "./routes/gallery.js"
+import servicesRouter from "./routes/services.js"
 import { checkAuth } from "./middleware/jwt.middleware.js";
+import { Service } from "./models/services.js";
 
 Router();
 
@@ -28,7 +30,7 @@ app.get("/dashbord", (req, res) => {
 });
 
 app.get("/admin/manage/service", (req, res) => {
-  res.render("Admin/servises");
+  res.render("Admin/services");
 });
 
 app.get("/admin/manage/plan", (req, res) => {
@@ -92,29 +94,30 @@ app.get("/", checkAuth, async (req, res) => {
       },
     ];
 
-    const services = [
-      {
-        title: "Project Management",
-        description:
-          "Ensure efficient project execution with real-time monitoring and reporting.",
-        icon: "🏗️",
-        link: "/services/1",
-      },
-      {
-        title: "Structural Engineering",
-        description:
-          "Advanced structural solutions ensuring safety and durability.",
-        icon: "🏢",
-        link: "/services/2",
-      },
-      {
-        title: "Geotechnical Analysis",
-        description:
-          "Comprehensive soil analysis and ground engineering expertise.",
-        icon: "🌱",
-        link: "/services/3",
-      },
-    ];
+    // const services = [
+    //   {
+    //     title: "Project Management",
+    //     description:
+    //       "Ensure efficient project execution with real-time monitoring and reporting.",
+    //     icon: "🏗️",
+    //     link: "/services/1",
+    //   },
+    //   {
+    //     title: "Structural Engineering",
+    //     description:
+    //       "Advanced structural solutions ensuring safety and durability.",
+    //     icon: "🏢",
+    //     link: "/services/2",
+    //   },
+    //   {
+    //     title: "Geotechnical Analysis",
+    //     description:
+    //       "Comprehensive soil analysis and ground engineering expertise.",
+    //     icon: "🌱",
+    //     link: "/services/3",
+    //   },
+    // ];
+    const services = await Service.find({});
     // Check if user is authenticated
     if (req.user) {
       const user = await UserModel.findById(req.user);
@@ -417,6 +420,7 @@ app.use("/api/user", UserRout);
 app.use("/api/contact", contactrouter)
 app.use("/api/plan", planRouter)
 app.use("/api/gallary", gallaryroute)
+app.use("/api/services", servicesRouter);
 
 app.listen(PORT, () => {
   dbConnect();
