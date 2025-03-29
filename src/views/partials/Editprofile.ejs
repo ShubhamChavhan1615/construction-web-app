@@ -6,34 +6,36 @@
     <title><%= title %></title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex items-center justify-center min-h-screen bg-gray-100">
+<body class="bg-gray-100 ">
     
     <!-- ✅ Corrected Include Syntax -->
-    <%- include('Header', { user: user._id }) %> 
+    <%- include('Header', { user: user}) %> 
 
-    <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
-        <h1 class="text-3xl font-bold mb-4 text-center">Edit Profile</h1>
+    <div class="bg-white mx-auto py-4 mt-4 items-center p-6 md:p-8 rounded-lg shadow-md w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+        <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Edit Profile</h1>
 
         <% if (user) { %>
-            <form action="/update-profile/<%= user._id %>" method="POST" class="space-y-4">
+            <form action="/update-profile/<%= user._id %>" method="POST" class="space-y-6">
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                     <input type="text" id="name" name="name" value="<%= user.name %>" 
-                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500" required>
+                        class="mt-2 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500" required>
                 </div>
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                     <input type="email" id="email" name="email" value="<%= user.email %>" 
-                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500" required>
+                        class="mt-2 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500" required>
                 </div>
-                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-md shadow-lg hover:bg-blue-700 transition duration-300">
                     Update Profile
                 </button>
             </form>
         <% } else { %>
-            <p class="text-center text-red-500">User not found!</p>
+            <p class="text-center text-red-500 text-lg font-semibold">User not found!</p>
         <% } %>
     </div>
+  <%- include('Footer') %> 
 
+   
 </body>
 </html>

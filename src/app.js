@@ -421,8 +421,14 @@ const faqs = [
 ];
 
 // Render Plans Page
-app.get("/plans", (req, res) => {
-  res.render("Plans", {title:"Plans", plans, faqs });
+app.get("/plans",checkAuth,async (req, res) => {
+  if(req.user){
+    const user = await UserModel.findById(req.user);
+    return res.render("Plans", {
+      title: "Plans", user, plans, faqs
+    });
+  }
+  res.render("Plans", {title:"Plans",user:null, plans, faqs });
 });
 
 // Contact page
@@ -465,14 +471,24 @@ app.get("/profile", checkAuth, async (req, res) => {
   res.render("partials/login", { title: "Profile", user:null });
 })
 app.get("/EditProfile", checkAuth, async (req, res) => {
-  if(req.params.id){      
-    const user = await UserModel.findById(req.params.id);
-    console.log(user);
-    res.render("partials/EditProfile", { title: "Edit Profile", user });
-  }
+  const userId = req.query.id; // Get ID from query parameters
+  if (userId) {      
+    try {
+      const user = await UserModel.findById(userId);
+      if (!user) {
+        return res.status(404).send("User not found");
+      }
+      res.render("partials/EditProfile", { title: "Edit Profile", user });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    }
+  } 
+});
+
  
-  // res.render("partials/EditProfile", { title: "Edit Profile", user });
-})
+ 
+
 
 
 app.use("/api/appointment", appointmentRoutes);
