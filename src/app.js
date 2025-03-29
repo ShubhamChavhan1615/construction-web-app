@@ -122,7 +122,7 @@ app.get("/", checkAuth, async (req, res) => {
     // Check if user is authenticated
     if (req.user) {
       const user = await UserModel.findById(req.user);
-     
+
       return res.render("index", {
         title: "Construction Management",
         news,
@@ -131,7 +131,7 @@ app.get("/", checkAuth, async (req, res) => {
         services,
       });
     }
-    
+
 
     return res.render("index", {
       title: "Construction Management",
@@ -147,9 +147,7 @@ app.get("/", checkAuth, async (req, res) => {
   }
 });
 
-
-
-app.get("/About", (req, res) => {
+app.get("/About", checkAuth, async (req, res) => {
   const teamMembers = [
     {
       name: "John Doe",
@@ -183,9 +181,22 @@ app.get("/About", (req, res) => {
     },
     { title: "15+", description: "Years of Excellence" },
   ];
+
+  if (req.user) {
+    const user = await UserModel.findById(req.user);
+
+    return res.render("About", {
+      title: "About",
+      user,
+      teamMembers,
+      milestones,
+      achievements,
+    });
+  }
+
   res.render("About", {
     title: "About",
-    user:null,
+    user: null,
     teamMembers,
     milestones,
     achievements,
@@ -193,11 +204,11 @@ app.get("/About", (req, res) => {
 });
 
 app.get("/Login", (req, res) => {
-  res.render("Login",{title:"Login",user:null});
+  res.render("Login", { title: "Login", user: null });
 });
 
 app.get("/signup", (req, res) => {
-  res.render("Register",{title:"Registration",user:null});
+  res.render("Register", { title: "Registration", user: null });
 });
 
 // Project Page
@@ -253,13 +264,22 @@ const projects = [
   },
 ];
 
-app.get("/projects", (req, res) => {
-  res.render("Project", {title:"Project", user:null, projects });
+app.get("/projects", checkAuth, async (req, res) => {
+
+  if (req.user) {
+    const user = await UserModel.findById(req.user);
+
+    return res.render("Project", {
+      title: "Project", user, projects,
+    });
+  }
+
+  res.render("Project", { title: "Project", user: null, projects });
 });
 
 // Services Page
 
-app.get("/services", (req, res) => {
+app.get("/services", checkAuth, async (req, res) => {
   const services = [
     {
       title: "Project Planning",
@@ -328,7 +348,15 @@ app.get("/services", (req, res) => {
     },
   ];
 
-  res.render("Services", {title:"Services", services,user:null, testimonials, benefits });
+  if (req.user) {
+    const user = await UserModel.findById(req.user);
+
+    return res.render("Services", {
+      title: "Services", services, user, testimonials, benefits
+    });
+  }
+
+  res.render("Services", { title: "Services", services, user: null, testimonials, benefits });
 });
 
 // Plans Page
@@ -391,12 +419,11 @@ const faqs = [
 
 // Render Plans Page
 app.get("/plans", (req, res) => {
-  
-  res.render("Plans", {title:"Plans" , user:null, plans, faqs });
+  res.render("Plans", {title:"Plans", plans, faqs });
 });
 
 // Contact page
-app.get("/contact", (req, res) => {
+app.get("/contact", checkAuth, async (req, res) => {
   const contactInfo = [
     {
       icon: "📍", // Location Icon
@@ -415,16 +442,24 @@ app.get("/contact", (req, res) => {
     },
   ];
 
-  res.render("contact", {title:"Contact", user:null, contactInfo });
+  if (req.user) {
+    const user = await UserModel.findById(req.user);
+
+    return res.render("Contact", {
+      title: "Contact", user, contactInfo
+    });
+  }
+
+  res.render("contact", { title: "Contact", user: null, contactInfo });
 });
 
-app.get("/profile",checkAuth,async (req,res)=>{
+app.get("/profile", checkAuth, async (req, res) => {
   // const user = req.user;
   const user = await UserModel.findById(req.user);
   if (!user) {
     return res.redirect("/Login");
   }
-  res.render("partials/Profile", {title:"Profile", user});
+  res.render("partials/Profile", { title: "Profile", user });
 })
 
 app.use("/api/appointment", appointmentRoutes);
