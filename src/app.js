@@ -410,11 +410,11 @@ app.get("/contact", (req, res) => {
     },
   ];
 
-  res.render("contact", { user:null, contactInfo });
+  res.render("contact", {title:"Contact", user:null, contactInfo });
 });
 
 app.use("/api/appointment", appointmentRoutes);
-app.use("/api/user", UserRout);
+app.use("/api-user", UserRout);
 app.use("/api/contact", contactrouter)
 app.use("/api/plan", planRouter)
 app.use("/api/gallary", gallaryroute)
