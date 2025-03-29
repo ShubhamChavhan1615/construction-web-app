@@ -49,7 +49,7 @@
                     <% users.forEach(user => { %>
                     <tr class="border-b hover:bg-gray-100">
                         <td class="py-3 px-6"><%= user.name %></td>
-                        <td class="py-3 px-6"><%= user.email %></td>
+                        <td class="py-3 px-6"><%= user.email || "Team Membar" %></td>
                         <td class="py-3 px-6 text-center">
                             <a href="/delete/<%= user._id %>" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</a>
                         </td>
@@ -80,7 +80,7 @@
                             <img src="<%= member.image %>" alt="" class="w-12 h-12 rounded-full object-cover border">
                         </td>
                         <td class="py-3 px-4 font-medium text-gray-700"><%= member.name %></td>
-                        <td class="py-3 px-4 font-medium text-gray-700"><%= member.role %></td>
+                        <td class="py-3 px-4 font-medium text-gray-700"><%= member.role || "User" %></td>
                         <td class="py-3 px-4 text-center">
                             <a href="/delete/<%= member._id %>" 
                                 class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-all">Delete</a>
