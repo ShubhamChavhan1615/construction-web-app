@@ -3,12 +3,23 @@ import plan from "../models/plans.model.js"
 export const createplan = async (req, res) => {
     try {
         const { name, type, description, status, price, rating, startDate, endDate, image } = req.body
-
+        const planseimages = req.files
         if (!name || !type || !description || !status || !price || !rating || !startDate || !endDate || !image) {
-
             res.status(401).json({ message: "all field is reqoured" })
-
         }
+
+        if (!planseimages || planseimages.length === 0) {
+            return res.status(401).json({ message: "At least one file is required!" });
+        }
+
+        let uploadedImages = [];
+
+        // Upload each file to Cloudinary
+        for (let file of planseimages) {
+            const result = await cloudinary.uploader.upload(file.path);
+            uploadedImages.push(result.secure_url);
+        }
+
         const Registerplan = new plan({
             name,
             type,
@@ -18,16 +29,16 @@ export const createplan = async (req, res) => {
             rating,
             startDate,
             endDate,
-            image
+            image: uploadedImages
         });
         await Registerplan.save()
+
         res.status(200).json({ message: "Plan Registration succesfully!" })
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: "internal server error" })
     }
 }
-
 
 export const getplan = async (req, res) => {
     try {
@@ -66,16 +77,16 @@ export const updateplan = async (req, res) => {
     }
 }
 
-export const Deleteplan = async ( req , res)=>{
+export const Deleteplan = async (req, res) => {
     try {
 
         const deleteplan = await plan.findByIdAndDelete(req.params.id)
 
-        if(!deleteplan)res.status(401).json({message:"Plan Not Found!"})
+        if (!deleteplan) res.status(401).json({ message: "Plan Not Found!" })
 
-         res.status(200).json({message:"Plan Deleted succesfully!"})           
+        res.status(200).json({ message: "Plan Deleted succesfully!" })
     } catch (error) {
         console.log(error)
-        res.status(500).json({message:"Internal Serever Error"})
+        res.status(500).json({ message: "Internal Serever Error" })
     }
 }

@@ -26,8 +26,8 @@ app.get("/admin", (req, res) => {
   res.render("Admin/admin", { title: "Admin" });
 });
 
-app.get("/dashbord", (req, res) => {
-  res.render("Admin/dashboard");
+app.get("/blogs", (req, res) => {
+  res.render("Admin/blogs", { title: "Blogs" });
 });
 
 app.get("/admin/manage/service", (req, res) => {
@@ -421,17 +421,8 @@ const faqs = [
 ];
 
 // Render Plans Page
-app.get("/plans", checkAuth, async (req, res) => {
-
-  if (req.user) {
-    const user = await UserModel.findById(req.user);
-
-    return res.render("Plans", {
-      title: "Plans", plans, faqs, user
-    });
-  }
-
-  res.render("Plans", { title: "Plans", plans, faqs });
+app.get("/plans", (req, res) => {
+  res.render("Plans", {title:"Plans", plans, faqs });
 });
 
 // Contact page
