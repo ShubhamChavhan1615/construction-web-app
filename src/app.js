@@ -12,6 +12,7 @@ import gallaryroute from "./routes/gallery.js"
 import servicesRouter from "./routes/services.js"
 import { checkAuth } from "./middleware/jwt.middleware.js";
 import { Service } from "./models/services.js";
+import UserModel from "./models/UserModel.js";
 
 Router();
 
