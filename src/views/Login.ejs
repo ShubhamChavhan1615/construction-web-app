@@ -91,7 +91,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <%- include('partials/Header') %>
+    <%- include('partials/Header', { title: title, user: user || {} }) %>
 
     <!-- Background Section -->
     <div

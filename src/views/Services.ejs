@@ -8,7 +8,7 @@
   </head>
   <body class="bg-gray-50">
     <!-- Include Custom Header -->
-    <%- include('partials/header') %>
+    <%- include('partials/Header', { title: title, user: user || {} }) %>
 
     <!-- Hero Section -->
     <section
