@@ -22,8 +22,26 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/admin", (req, res) => {
-  res.render("Admin/admin", { title: "Admin" });
+// app.get("/admin", checkAuth, async (req, res) => {
+//   try {
+//     const users = await UserModel.find({},req.email);
+//     const team = await UserModel.find()
+//     res.render("Admin/admin", { title: "Admin", users,team });
+//   } catch (error) {
+//     console.error("Error fetching users:", error);
+//     res.status(500).send("Internal Server Error");
+//   }
+// });
+app.get("/admin", checkAuth, async (req, res) => {
+  try {
+    const users = await UserModel.find({}); // Fetch all users
+    const team = await UserModel.find({}); // Fetch only team members (assuming there's a `role` field)
+
+    res.render("Admin/admin", { title: "Admin", users, team });
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 app.get("/blogs", (req, res) => {
@@ -40,8 +58,13 @@ app.get("/admin/manage/plan", (req, res) => {
 app.get("/admin/manage/slider", (req, res) => {
   res.render("Admin/slider");
 });
-app.get("/admin/manage/team", (req, res) => {
-  res.render("Admin/team");
+app.get("/admin/manage/team",async (req, res) => {
+  try { 
+    res.render("Admin/team", { title: "Admin" });
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 // index Page
@@ -486,10 +509,6 @@ app.get("/logout", (req, res) => {
   res.redirect("/login");  
 });
 
- 
-
-
-
 app.use("/api/appointment", appointmentRoutes);
 app.use("/api-user", UserRout);
 app.use("/api/contact", contactrouter)
@@ -500,10 +519,16 @@ app.use("/api/services", servicesRouter);
 
 app.get("/delete", async (req, res) => {
   try {
-    const user = await UserModel.deleteMany({});
-    console.log("user : ",user);
-    
+    const user = await UserModel.deleteMany({});    
     res.status(200).json(user)
+  } catch (error) {
+    console.log(error);
+  }
+})
+app.get("/delete/:id", async (req, res) => {
+  try {
+    const team = await UserModel.findByIdAndDelete(req.params.id);    
+    res.status(200).json(team)
   } catch (error) {
     console.log(error);
   }
