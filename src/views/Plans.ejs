@@ -9,7 +9,7 @@
 
   <body class="bg-gray-50">
     <!-- Header -->
-    <%- include('partials/Header') %>
+    <%- include('partials/Header', { title: title, user: user || {} }) %>
 
     <!-- Hero Section -->
     <section

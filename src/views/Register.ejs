@@ -95,7 +95,7 @@
 </head>
 
 <body>
-  <%- include('partials/Header') %>
+  <%- include('partials/Header', { title: title, user: user || {} }) %>
 
     <!-- Background Section -->
     <div class="bg-gradient-to-r from-orange-500 to-red-500 min-h-screen flex items-center justify-center py-12 px-4">

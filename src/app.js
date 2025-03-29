@@ -181,6 +181,7 @@ app.get("/About", (req, res) => {
   ];
   res.render("About", {
     title: "About",
+    user:null,
     teamMembers,
     milestones,
     achievements,
@@ -188,11 +189,11 @@ app.get("/About", (req, res) => {
 });
 
 app.get("/Login", (req, res) => {
-  res.render("Login");
+  res.render("Login",{title:"Login",user:null});
 });
 
 app.get("/signup", (req, res) => {
-  res.render("Register");
+  res.render("Register",{title:"Registration",user:null});
 });
 
 // Project Page
@@ -249,7 +250,7 @@ const projects = [
 ];
 
 app.get("/projects", (req, res) => {
-  res.render("Project", { projects });
+  res.render("Project", {title:"Project", user:null, projects });
 });
 
 // Services Page
@@ -323,7 +324,7 @@ app.get("/services", (req, res) => {
     },
   ];
 
-  res.render("Services", { services, testimonials, benefits });
+  res.render("Services", {title:"Services", services,user:null, testimonials, benefits });
 });
 
 // Plans Page
@@ -386,7 +387,7 @@ const faqs = [
 
 // Render Plans Page
 app.get("/plans", (req, res) => {
-  res.render("Plans", { plans, faqs });
+  res.render("Plans", {title:"Plans", plans, faqs });
 });
 
 // Contact page
@@ -409,7 +410,7 @@ app.get("/contact", (req, res) => {
     },
   ];
 
-  res.render("contact", { contactInfo });
+  res.render("contact", { user:null, contactInfo });
 });
 
 app.use("/api/appointment", appointmentRoutes);
