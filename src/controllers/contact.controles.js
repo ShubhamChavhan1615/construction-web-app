@@ -6,12 +6,12 @@ export const createcontact = async (req,res) => {
         if(!name || !email || !message){
             return res.status(400).json({messahe:"All field require"})
         }
-        const jedhe = new contact({
+        const contactreg = new contact({
             name,
             email,
             message
         })
-        await jedhe.save()
+        await contactreg.save()
         res.status(200).json({msg:"message send successfully"})
     } catch (error) {
         console.log(error);
