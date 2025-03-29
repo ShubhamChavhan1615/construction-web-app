@@ -486,7 +486,12 @@ app.get("/EditProfile", checkAuth, async (req, res) => {
   } 
 });
 
- 
+app.get("/logout", (req, res) => {
+  // Clear the authToken cookie
+  res.clearCookie("authToken", { path: "/" });
+  res.redirect("/login");  
+});
+
  
 
 
