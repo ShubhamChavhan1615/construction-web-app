@@ -417,6 +417,15 @@ app.get("/contact", (req, res) => {
   res.render("contact", {title:"Contact", user:null, contactInfo });
 });
 
+app.get("/profile",checkAuth,async (req,res)=>{
+  // const user = req.user;
+  const user = await UserModel.findById(req.user);
+  if (!user) {
+    return res.redirect("/Login");
+  }
+  res.render("partials/Profile", {title:"Profile", user});
+})
+
 app.use("/api/appointment", appointmentRoutes);
 app.use("/api-user", UserRout);
 app.use("/api/contact", contactrouter)
