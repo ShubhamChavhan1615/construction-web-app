@@ -444,7 +444,6 @@ app.get("/contact", checkAuth, async (req, res) => {
 
   if (req.user) {
     const user = await UserModel.findById(req.user);
-
     return res.render("Contact", {
       title: "Contact", user, contactInfo
     });
@@ -455,12 +454,23 @@ app.get("/contact", checkAuth, async (req, res) => {
 
 app.get("/profile", checkAuth, async (req, res) => {
   // const user = req.user;
+  if(req.user){
   const user = await UserModel.findById(req.user);
-  if (!user) {
-    return res.redirect("/Login");
+  return res.render("partials/Profile", { title: "Profile", user });
   }
-  res.render("partials/Profile", { title: "Profile", user });
+ 
+  res.render("partials/login", { title: "Profile", user:null });
 })
+app.get("/EditProfile", checkAuth, async (req, res) => {
+  if(req.params.id){      
+    const user = await UserModel.findById(req.params.id);
+    console.log(user);
+    res.render("partials/EditProfile", { title: "Edit Profile", user });
+  }
+ 
+  // res.render("partials/EditProfile", { title: "Edit Profile", user });
+})
+
 
 app.use("/api/appointment", appointmentRoutes);
 app.use("/api-user", UserRout);
