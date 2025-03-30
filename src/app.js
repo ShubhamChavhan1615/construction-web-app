@@ -33,11 +33,9 @@ app.use(express.urlencoded({ extended: true }));
 //   }
 // });
 app.get("/admin", checkAuth, async (req, res) => {
-  try {
-    const users = await UserModel.find({}); // Fetch all users
-    const team = await UserModel.find({}); // Fetch only team members (assuming there's a `role` field)
-
-    res.render("Admin/admin", { title: "Admin", users, team });
+  try {   
+    const users = await UserModel.find(); // Fetch all users
+    res.render("Admin/admin", { title: "Admin", users:users});
   } catch (error) {
     console.error("Error fetching users:", error);
     res.status(500).send("Internal Server Error");
@@ -444,9 +442,16 @@ const faqs = [
 ];
 
 // Render Plans Page
-app.get("/plans", (req, res) => {
-  res.render("Plans", {title:"Plans", plans, faqs });
+app.get("/plans",checkAuth,async (req, res) => {
+  if (req.user) {
+    const user = await UserModel.findById(req.user);
+    return res.render("Plans", {
+      title: "Plans", user, plans, faqs 
+    });
+  }
+  res.render("Plans", { title: "Plans", user: null, plans, faqs  });
 });
+  
 
 // Contact page
 app.get("/contact", checkAuth, async (req, res) => {

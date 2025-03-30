@@ -24,32 +24,35 @@
 
     <!-- Main Content -->
     <div class="flex-1 p-6">
-        <h1 class="text-3xl font-bold">Welcome to Admin Dashboard</h1>
-
-        <!-- Tab Navigation -->
-        <div class="flex space-x-4 mt-6">
-            <button class="tab-button bg-blue-500 text-white px-4 py-2 rounded" onclick="showTab('users')">All Users</button>
-            <button class="tab-button bg-blue-500 text-white px-4 py-2 rounded" onclick="showTab('team')">All Team Members</button>
-        </div>
-       
+        <h1 class="text-3xl font-bold">Welcome to Admin Dashboard</h1>       
         <!-- Users Table -->
         
-        <div id="users" class="tab-content mt-6 bg-white p-4 shadow rounded-lg">
+        <div class="mt-6 bg-white p-4 shadow rounded-lg">
             <h2 class="text-xl font-semibold mb-4">All Users</h2>
             <input type="text" id="userFilter" placeholder="Search users..." class="mb-4 p-2 border rounded w-full">
             <table class="min-w-full border border-gray-300">
                 <thead class="bg-gray-200">
                     <tr>
+                        <th class="py-3 px-4 text-left">Image</th>
                         <th class="py-3 px-6 text-left">Name</th>
                         <th class="py-3 px-6 text-left">Email</th>
+                        <th class="py-3 px-4 text-left">Role</th>
                         <th class="py-3 px-6 text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody id="userTableBody">
                     <% users.forEach(user => { %>
                     <tr class="border-b hover:bg-gray-100">
+                        <td class="py-3 px-4">
+                            <img src="<%= user.image %>" alt="" class="w-12 h-12 rounded-full object-cover border">
+                        </td>
                         <td class="py-3 px-6"><%= user.name %></td>
-                        <td class="py-3 px-6"><%= user.email || "Team Membar" %></td>
+                        <td class="py-3 px-6" style="color: <%= user.email ? 'black' : 'red' %>;">
+                            <%= user.email || "Team Member" %>
+                        </td>
+                        <td class="py-3 px-4 font-medium" style="color: <%= user.role ? 'black' : 'red' %>;">
+                            <%= user.role || "User" %>
+                        </td>
                         <td class="py-3 px-6 text-center">
                             <a href="/delete/<%= user._id %>" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</a>
                         </td>
@@ -58,45 +61,8 @@
                 </tbody>
             </table>
         </div>
-
-        <!-- Team Members Table -->
-         
-        <div id="team" class="tab-content hidden mt-6 w-full max-w-4xl bg-white p-6 rounded-lg shadow-lg overflow-x-auto">
-            <h2 class="text-xl font-semibold mb-4 text-center">All Team Members</h2>
-            <input type="text" id="teamFilter" placeholder="Search team members..." class="mb-4 p-2 border rounded w-full">
-            <table class="w-full border border-gray-300 text-sm md:text-base">
-                <thead class="bg-gray-200">
-                    <tr>
-                        <th class="py-3 px-4 text-left">Image</th>
-                        <th class="py-3 px-4 text-left">Name</th>
-                        <th class="py-3 px-4 text-left">Role</th>
-                        <th class="py-3 px-4 text-center">Action</th>
-                    </tr>
-                </thead>
-                <tbody id="teamTableBody">
-                    <% team.forEach(member => { %>
-                    <tr class="border-b hover:bg-gray-100">
-                        <td class="py-3 px-4">
-                            <img src="<%= member.image %>" alt="" class="w-12 h-12 rounded-full object-cover border">
-                        </td>
-                        <td class="py-3 px-4 font-medium text-gray-700"><%= member.name %></td>
-                        <td class="py-3 px-4 font-medium text-gray-700"><%= member.role || "User" %></td>
-                        <td class="py-3 px-4 text-center">
-                            <a href="/delete/<%= member._id %>" 
-                                class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-all">Delete</a>
-                        </td>
-                    </tr>
-                    <% }); %>
-                </tbody>
-            </table>
-        </div>
     </div>
+    
 
-    <script>
-        function showTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
-            document.getElementById(tabId).classList.remove('hidden');
-        }
-    </script>
 </body>
 </html>
