@@ -66,19 +66,20 @@ export const usersignin = async (req, res) => {
 
 export const teamMember = async (req, res) => {
     try {
-        const { name, role, image } = req.body;
+        const { name, role, email, image } = req.body;
 
-        if (!name || !role || !image) {
+        if (!name || !role || !email || !image) {
             return res.status(400).json({ message: "All Field Required!" })
         }
-        // const checkemail = await UserModel.findOne({ email })
-        // if (checkemail) {
-        //     return res.status(400).json({ message: "User allredy Exsite" });
-        // }
+        const checkemail = await UserModel.findOne({ email })
+        if (checkemail) {
+            return res.status(400).json({ message: "User allredy Exsite" });
+        }
 
         const UserRegister = new UserModel({
             name,
             role,
+            email,
             image,
         })
         await UserRegister.save();

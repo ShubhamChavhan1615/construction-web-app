@@ -7,7 +7,7 @@ const router = express.Router();
 router.route("/").post(createService)
 
 //edit a route for the services page
-router.route("/:id").put(editService)
+router.route("/:id").post(editService)
 
 //delete a route for the services page
 router.route("/:id").delete(deleteService)

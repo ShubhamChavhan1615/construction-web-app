@@ -46,8 +46,26 @@ app.get("/blogs", (req, res) => {
   res.render("Admin/blogs", { title: "Blogs" });
 });
 
-app.get("/admin/manage/service", (req, res) => {
-  res.render("Admin/services");
+app.get("/admin/manage/service", async (req, res) => {
+  const services = await Service.find()
+  
+  res.render("Admin/services" ,{title:"Sarvices" , services: services});
+  
+});
+app.get("/edit/:id", async (req, res) => {
+  try {
+      const service = await Service.findById(req.params.id); // Correct query
+
+      if (!service) {
+          return res.status(404).send("Service not found");
+      }
+
+      console.log(service);
+      res.render("Admin/editsarvice", { title: "Edit Service", service });
+  } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+  }
 });
 
 app.get("/admin/manage/plan", (req, res) => {
@@ -59,6 +77,15 @@ app.get("/admin/manage/slider", (req, res) => {
 app.get("/admin/manage/team",async (req, res) => {
   try { 
     res.render("Admin/team", { title: "Admin" });
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.get("/admin/manage/gallarymanage",async (req, res) => {
+  try { 
+    res.render("Admin/gallarymanage", { title: "Admin" });
   } catch (error) {
     console.error("Error fetching users:", error);
     res.status(500).send("Internal Server Error");
