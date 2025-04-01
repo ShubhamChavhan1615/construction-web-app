@@ -9,6 +9,7 @@ import appointmentRoutes from "./routes/appointment.js";
 import contactrouter from "./routes/contact.js";
 import planRouter from "./routes/plans.js";
 import gallaryroute from "./routes/gallery.js";
+import projectrouter from "./routes/project.js"
 import servicesRouter from "./routes/services.js";
 import { checkAuth } from "./middleware/jwt.middleware.js";
 import { Service } from "./models/services.js";
@@ -490,16 +491,8 @@ const faqs = [
 ];
 
 // Render Plans Page
-app.get("/plans",checkAuth, async(req, res) => {
-  if (req.user) {
-    const user = await UserModel.findById(req.user);
-    return res.render("Plans", {
-      title: "Plans",
-      user,
-      plans, faqs 
-    });
-  }
-  res.render("Plans", {title:"Plans", user: null, plans, faqs });
+app.get("/plans", (req, res) => {
+  res.render("Plans", {title:"Plans", plans, faqs });
 });
 
 // Contact page
@@ -540,8 +533,8 @@ app.get("/profile", checkAuth, async (req, res) => {
     const user = await UserModel.findById(req.user);
     return res.render("partials/Profile", { title: "Profile", user });
   }
- 
-  res.render("partials/login", { title: "Profile", user:null });
+
+  res.render("partials/login", { title: "Profile", user: null });
 })
 app.get("/EditProfile", checkAuth, async (req, res) => {
   const userId = req.query.id; // Get ID from query parameters
@@ -559,23 +552,19 @@ app.get("/EditProfile", checkAuth, async (req, res) => {
   }
 });
 
- 
- 
-
-
-
 app.use("/api/appointment", appointmentRoutes);
 app.use("/api-user", UserRout);
 app.use("/api/contact", contactrouter);
 app.use("/api/plan", planRouter);
 app.use("/api/gallary", gallaryroute);
 app.use("/api/services", servicesRouter);
+app.use("/api-project", projectrouter)
 
 app.get("/delete", async (req, res) => {
   try {
     const user = await UserModel.deleteMany({});
-    console.log("user : ",user);
-    
+    console.log("user : ", user);
+
     res.status(200).json(user)
   } catch (error) {
     console.log(error);
