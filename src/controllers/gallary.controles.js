@@ -1,22 +1,28 @@
 import galleryModel from "../models/gallery.model.js"
-import cloudinary from "../middleware/cloudinaryConfig.js";
+
 
 export const Creategallery = async (req, res) => {
     try {
-        const {imagallaryimage}= req.body
-        if(!imagallaryimage){
-           res.status(400).json({msg:"field is required"})
+        const { image } = req.body;
+    console.log(req.body)
+        if (!image) {
+            return res.status(400).json({ msg: "Field is required" }); // Ensure the function stops here
         }
+
         const insertimage = new galleryModel({
-            imagallaryimage : imagallaryimage,
-        })
-        await insertimage.save()
-        res.status(200).json({ message: "Gallary Image Upload Succesfully!" })
+           image,
+        });
+
+        await insertimage.save();
+
+        res.status(200).json({ message: "Gallery Image Uploaded Successfully!" });
+
     } catch (error) {
-        console.log(error)
-        res.status(500).json({ message: "Internal Server Error" })
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
     }
-}
+};
+
 
 export const getGallary = async (req, res) => {
     try {

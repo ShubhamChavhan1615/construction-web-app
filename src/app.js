@@ -14,6 +14,7 @@ import servicesRouter from "./routes/services.js";
 import { checkAuth } from "./middleware/jwt.middleware.js";
 import { Service } from "./models/services.js";
 import UserModel from "./models/UserModel.js";
+import galleryModel from "./models/gallery.model.js";
 
 Router();
 
@@ -95,12 +96,14 @@ app.get("/admin/manage/team", async (req, res) => {
 
 app.get("/admin/manage/gallarymanage", async (req, res) => {
   try {
-    res.render("Admin/gallarymanage", { title: "Admin" });
+    const gallary = await galleryModel.find()
+    res.render("Admin/gallarymanage", { title: "Admin", gallary });
   } catch (error) {
     console.error("Error fetching users:", error);
     res.status(500).send("Internal Server Error");
   }
 });
+
 
 // index Page
 app.get("/", checkAuth, async (req, res) => {
