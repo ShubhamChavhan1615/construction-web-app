@@ -34,6 +34,13 @@ app.use(express.urlencoded({ extended: true }));
 // });
 app.get("/admin", checkAuth, async (req, res) => {
   try {
+    const AdminUser = await UserModel.findById(req.user);
+
+    // Proper Admin Check
+    if (!AdminUser || AdminUser.isAdmin !== "Admin") {
+      return res.redirect("/");
+    }
+
     const users = await UserModel.find(); // Fetch all users
     res.render("Admin/admin", { title: "Admin", users: users });
   } catch (error) {
