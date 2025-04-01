@@ -3,17 +3,13 @@ import cloudinary from "../middleware/cloudinaryConfig.js";
 
 export const Creategallery = async (req, res) => {
     try {
-        const galleryImage = req.file
-
-        if (!galleryImage) res.status(401).json({ message: "Field is Required!" })
-
-        const result = await cloudinary.uploader.upload(req.file.path);
-        console.log("result", result.secure_url);
-
+        const {imagallaryimage}= req.body
+        if(!imagallaryimage){
+           res.status(400).json({msg:"field is required"})
+        }
         const insertimage = new galleryModel({
-            gallaryimage: result.secure_url
+            imagallaryimage : imagallaryimage,
         })
-
         await insertimage.save()
         res.status(200).json({ message: "Gallary Image Upload Succesfully!" })
     } catch (error) {
