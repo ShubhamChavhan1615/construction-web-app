@@ -1,24 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Gallery Image</title>
+    <title>Manage Gallery</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
 
-    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-        <button class=" bg-blue-500 rounded-lg py-2  text-white px-3"><a href="/admin"> Back</a></button>
-        <h2 class="text-xl font-semibold mb-4 text-center">Upload Gallery Image</h2>
-        <form action="/api/gallary/insert-gallaryimg" method="post" enctype="multipart/form-data" class="space-y-4">
-            <input type="file" name="gallaryimage" required class="w-full p-2 border border-gray-300 rounded-md">
-            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">Upload</button>
+<body class="bg-gray-100 min-h-screen p-8">
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-semibold">Manage Gallery</h2>
+            <a href="/admin" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Back</a>
+        </div>
+
+        <!-- Upload Form -->
+        <form action="/api/gallary/insert-gallaryimg" method="post" class="mb-6 space-y-4">
+            <label class="block text-gray-600 text-sm font-medium">Image URL</label>
+            <input type="text" name="image" id="image"
+                class="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300 focus:outline-none">
+            <button type="submit"
+                class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600">Upload</button>
         </form>
-        <div class="text-center mt-4">
-            <a href="/gallery" class="text-blue-500 hover:underline">View Gallery</a>
+
+        <!-- Gallery Images -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <% gallary.forEach((img) => { %>
+            <div class="relative bg-gray-200 p-4 rounded-lg shadow-md">
+                <img src="<%= img.image %>" alt="Gallery Image"
+                    class="w-full h-48 object-cover rounded-lg">
+                <button onclick="deleteImage('<%= img._id %>')" 
+                    class="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600">
+                    Delete
+                </button>
+            </div>
+            <% }); %>
         </div>
     </div>
 
+    <script>
+        function deleteImage(id) {
+            fetch(`/api/gallary/delete-gallaryimg/${id}`, {
+                method: 'DELETE',
+            }).then(() => {
+                window.location.reload(); // Refresh page after delete
+            });
+        }
+    </script>
 </body>
+
 </html>

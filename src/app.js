@@ -9,10 +9,12 @@ import appointmentRoutes from "./routes/appointment.js";
 import contactrouter from "./routes/contact.js";
 import planRouter from "./routes/plans.js";
 import gallaryroute from "./routes/gallery.js";
+import projectrouter from "./routes/project.js"
 import servicesRouter from "./routes/services.js";
 import { checkAuth } from "./middleware/jwt.middleware.js";
 import { Service } from "./models/services.js";
 import UserModel from "./models/UserModel.js";
+import galleryModel from "./models/gallery.model.js";
 
 Router();
 
@@ -94,12 +96,14 @@ app.get("/admin/manage/team", async (req, res) => {
 
 app.get("/admin/manage/gallarymanage", async (req, res) => {
   try {
-    res.render("Admin/gallarymanage", { title: "Admin" });
+    const gallary = await galleryModel.find()
+    res.render("Admin/gallarymanage", { title: "Admin", gallary });
   } catch (error) {
     console.error("Error fetching users:", error);
     res.status(500).send("Internal Server Error");
   }
 });
+
 
 // index Page
 app.get("/", checkAuth, async (req, res) => {
@@ -490,39 +494,14 @@ const faqs = [
 ];
 
 // Render Plans Page
-// app.get("/plans",checkAuth,async (req, res) => {
-//   if (req.user) {
-//     const user = await UserModel.findById(req.user);
-//     return res.render("Plans", {
-//       title: "Plans", user, plans, faqs
-//     });
-//   }
-//   res.render("Plans", { title: "Plans", user: null, plans, faqs  });
-// });
-
-app.get("/plans", checkAuth, async (req, res) => {
-  let user = null;
-  try {
-    if (req.user) {
-      user = await UserModel.findById(req.user);
-    }
-    res.render("Plans", {
-      title: "Plans",
-      user: user || null, // Ensuring user is either a valid object or null
-      plans,
-      faqs,
-    });
-  } catch (error) {
-    console.error("Error fetching user:", error);
-    res.render("Plans", {
-      title: "Plans",
-      user: null,
-      plans,
-      faqs,
-    });
-  }
+app.get("/plans", checkAuth,async (req, res) => {
+  if(req.user){
+  const user = await UserModel.findById(req.user)
+  res.render("Plans", {title:"Plans",user, plans, faqs });
+   
+};
+res.render("Plans", {title:"Plans",user:null, plans, faqs });
 });
-
 // Contact page
 app.get("/contact", checkAuth, async (req, res) => {
   const contactInfo = [
@@ -563,7 +542,7 @@ app.get("/profile", checkAuth, async (req, res) => {
   }
 
   res.render("partials/login", { title: "Profile", user: null });
-});
+})
 app.get("/EditProfile", checkAuth, async (req, res) => {
   const userId = req.query.id; // Get ID from query parameters
   if (userId) {
@@ -580,31 +559,20 @@ app.get("/EditProfile", checkAuth, async (req, res) => {
   }
 });
 
-app.get("/logout", (req, res) => {
-  // Clear the authToken cookie
-  res.clearCookie("authToken", { path: "/" });
-  res.redirect("/login");
-});
-
 app.use("/api/appointment", appointmentRoutes);
 app.use("/api-user", UserRout);
 app.use("/api/contact", contactrouter);
 app.use("/api/plan", planRouter);
 app.use("/api/gallary", gallaryroute);
 app.use("/api/services", servicesRouter);
+app.use("/api-project", projectrouter)
 
 app.get("/delete", async (req, res) => {
   try {
     const user = await UserModel.deleteMany({});
-    res.status(200).json(user);
-  } catch (error) {
-    console.log(error);
-  }
-});
-app.get("/delete/:id", async (req, res) => {
-  try {
-    const team = await UserModel.findByIdAndDelete(req.params.id);
-    res.status(200).json(team);
+    console.log("user : ", user);
+
+    res.status(200).json(user)
   } catch (error) {
     console.log(error);
   }

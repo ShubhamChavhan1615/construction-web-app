@@ -109,13 +109,14 @@ export const updatedteamuser = async (req, res) => {
     if (role) user.role = role;
     if (image) user.image = image;
 
-    await user.save();
-    return res.status(200).json({ message: "Team Updated Successfully!" });
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ message: "Interal Server Error!" });
-  }
-};
+        await user.save();
+        return res.status(200).json({ message: "Team Updated Successfully!" })
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Interal Server Error!" })
+    }
+}
 
 export const deleteteammembers = async (req, res) => {
   try {

@@ -1,54 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title || "Profile - InfraConnect" %></title>
+    <title>
+        <%= title || "Profile - InfraConnect" %>
+    </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
+
 <body class="bg-gradient-to-b from-gray-200 to-gray-50 w-full h-auto  ">
 
     <!-- Navbar -->
     <%- include('Header', { title: title, user: user || {} }) %>
 
-    <!-- Profile Section -->
-    <div class="w-full items-center mx-auto max-w-3xl mt-10 p-8 bg-white shadow-lg rounded-2xl border border-gray-200">
-        
-        <h2 class="text-3xl font-extrabold text-gray-800 text-center">User Profile</h2>
+        <!-- Profile Section -->
+        <div
+            class="w-full items-center mx-auto max-w-3xl mt-10 p-8 bg-white shadow-lg rounded-2xl border border-gray-200">
 
-        <div class="flex flex-col items-center mt-6">
-            <!-- Profile Image -->
-            <div class="relative">
-                <img src="https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg?w=900" 
-                     alt="Profile Picture" 
-                     class="w-32 h-32 rounded-full shadow-lg border-4 border-orange-500 hover:scale-105 transition-transform duration-300" />
-            </div>
+            <h2 class="text-3xl font-extrabold text-gray-800 text-center">User Profile</h2>
 
-            <!-- User Info -->
-            <h3 class="mt-4 text-2xl font-semibold text-gray-900"><%= user.name || "Guest User" %></h3>
-            <p class="text-gray-600 text-lg"><%= user.email || "Not Provided" %></p>
+            <div class="flex flex-col items-center mt-6">
+                <!-- Profile Image -->
+                <div class="relative">
+                    <img src="https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg?w=900"
+                        alt="Profile Picture"
+                        class="w-32 h-32 rounded-full shadow-lg border-4 border-orange-500 hover:scale-105 transition-transform duration-300" />
+                </div>
 
-            <!-- Buttons -->
-            <div class="flex flex-col space-y-3 mt-5 w-full px-6">
-                <!-- Edit Profile Button -->
-                <a href="/EditProfile?id=<%= user._id %>" 
-                   class="w-full text-center bg-orange-500 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-orange-600 transition-all duration-300">
-                    <i class="fas fa-edit mr-2"></i> Edit Profile
-                </a>
+                <!-- User Info -->
+                <h3 class="mt-4 text-2xl font-semibold text-gray-900">
+                    <%= user.name || "Guest User" %>
+                </h3>
+                <p class="text-gray-600 text-lg">
+                    <%= user.email || "Not Provided" %>
+                </p>
 
-                <!-- Logout Button -->
-                <a href="/logout"
-                   class="w-full text-center bg-red-500 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-red-600 transition-all duration-300">
-                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
-                </a>
+                <!-- Buttons -->
+                <div class="flex flex-col space-y-3 mt-5 w-full px-6">
+                    <!-- Edit Profile Button -->
+                    <a href="/EditProfile?id=<%= user._id %>"
+                        class="w-full text-center bg-orange-500 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-orange-600 transition-all duration-300">
+                        <i class="fas fa-edit mr-2"></i> Edit Profile
+                    </a>
+
+                    <!-- Logout Button -->
+                    <a href="/logout"
+                        class="w-full text-center bg-red-500 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-red-600 transition-all duration-300">
+                        <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Footer -->
-    <%- include('Footer') %>
-   
+        <!-- Footer -->
+        <%- include('Footer') %>
+
 
 </body>
+
 </html>

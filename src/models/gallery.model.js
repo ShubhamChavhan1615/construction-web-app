@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const gallarySchema = new mongoose.Schema({
-    gallaryimage :{
+    image :{
         type: String,        
     }
 })
