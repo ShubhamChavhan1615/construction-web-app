@@ -10,7 +10,8 @@
   <body class="bg-gray-50">
     <!-- Header -->
      <div>
-    <%- include('partials/Header', { title: title , user:user}) %>
+      <%- include('partials/Header', { title: title, user: user || null }) %>
+
   </div>
     <!-- Hero Section -->
     <section
