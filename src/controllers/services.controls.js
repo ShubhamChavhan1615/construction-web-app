@@ -31,7 +31,7 @@ export const editService = async (req, res) => {
 }
 
 export const deleteService = async (req, res) => {
-    const { id } = req.params;
+    const  id  = req.params.id;
     try {
         const deletedService = await Service.findByIdAndDelete(id);
         if (!deletedService) {

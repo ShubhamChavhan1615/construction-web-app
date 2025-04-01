@@ -59,14 +59,17 @@ app.get("/edit/:id", async (req, res) => {
       if (!service) {
           return res.status(404).send("Service not found");
       }
-
-      console.log(service);
       res.render("Admin/editsarvice", { title: "Edit Service", service });
   } catch (error) {
       console.error(error);
       res.status(500).send("Internal Server Error");
   }
 });
+app.get("/delete/:id", async (req,res)=>{
+  const id = req.params.id
+  const services = await Service.findByIdAndDelete(id)
+  res.render("Admin/services" ,{title: "Service", services})
+})
 
 app.get("/admin/manage/plan", (req, res) => {
   res.render("Admin/plan");
