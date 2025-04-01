@@ -105,6 +105,7 @@ export const updatedteamuser = async (req, res) => {
         if (image) user.image = image;
 
         await user.save();
+        
         return res.status(200).json({ message: "Team Updated Successfully!" })
 
     } catch (error) {
