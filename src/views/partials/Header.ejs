@@ -92,22 +92,17 @@
       </ul>
 
       <!-- Login Button Section with Gradient -->
-      <div class="hidden lg:flex items-center">
-        <% if (typeof user !=="" && user.name) { %>
-
-          <a href="/profile" class="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-2 px-6 rounded-full shadow-md
-            nav-link text-lg font-medium text-white hover:text-white transition duration-300"><i
-              class="fas fa-user mr-2"></i>
-            <%= user.name %>
-          </a>
-          <% } else { %>
-            <a href="/login"
-              class="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-2 px-6 rounded-full shadow-md">
-              <i class="fas fa-user mr-2"></i> Login
-            </a>
-            <% } %>
-
-      </div>
+      <% if (user && user.name) { %>
+        <a href="/profile" class="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-2 px-6 rounded-full shadow-md">
+          <i class="fas fa-user mr-2"></i> <%= user.name %>
+        </a>
+      <% } else { %>
+        <a href="/login" class="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-2 px-6 rounded-full shadow-md">
+          <i class="fas fa-user mr-2"></i> Login
+        </a>
+      <% } %>
+      
+      
 
       <!-- Mobile Menu Button -->
       <button class="lg:hidden text-3xl text-orange-600 focus:outline-none" id="menu-toggle">
@@ -135,18 +130,16 @@
       </li>
       <li>
         <div class="block lg:flex items-center">
-          <% if (typeof user !=="" && user.name) { %>
-            <a href="/profile" class="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-2 px-6 rounded-full shadow-md
-              nav-link text-lg font-medium text-white hover:text-white transition duration-300"><i
-                class="fas fa-user mr-2"></i>
-              <%= user.name %>
+          <% if (user && user.name) { %>
+            <a href="/profile" class="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-2 px-6 rounded-full shadow-md">
+              <i class="fas fa-user mr-2"></i> <%= user.name %>
             </a>
-            <% } else { %>
-              <a href="/login"
-                class="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-2 px-6 rounded-full shadow-md">
-                <i class="fas fa-user mr-2"></i> Login
-              </a>
-              <% } %>
+          <% } else { %>
+            <a href="/login" class="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-2 px-6 rounded-full shadow-md">
+              <i class="fas fa-user mr-2"></i> Login
+            </a>
+          <% } %>
+          
         </div>
       </li>
     </ul>

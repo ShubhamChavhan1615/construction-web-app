@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const ProjectSchema = new mongoose.Schema({
+const PlansSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -42,4 +42,4 @@ const ProjectSchema = new mongoose.Schema({
     },
 });
 
- export default mongoose.model("Project", ProjectSchema);
+ export default mongoose.model("plans", PlansSchema);
