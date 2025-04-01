@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Service</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+        <button class="bg-blue-500 text-white py-2 px-3 rounded-md hover:bg-blue-600 transition duration-300">
+            <a href="/admin">⬅ Back</a>
+        </button>
+        <h2 class="text-2xl font-semibold mb-4 text-center text-gray-800">Edit Service</h2>
+
+        <!-- Form for Editing Service -->
+        <form action="/api/services/<%= service?._id || '' %>" method="post" class="space-y-4">
+            <input type="hidden" name="_method" value="PUT"> <!-- Override method for PUT -->
+
+            <div>
+                <label for="icon" class="block text-sm font-medium text-gray-700">Icon</label>
+                <input type="text" id="icon" name="icon" value="<%= service?.icon || '🔧 Default Icon' %>" 
+                    class="mt-1 block w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+            </div>
+            <div>
+                <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                <input type="text" id="title" name="title" value="<%= service?.title || 'Default Service Title' %>" 
+                    class="mt-1 block w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+            </div>
+            <div>
+                <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                <textarea id="description" name="description" rows="4" 
+                    class="mt-1 block w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required><%= service?.description || 'Default description for this service.' %></textarea>
+            </div>
+            <div>
+                <label for="link" class="block text-sm font-medium text-gray-700">Link (optional)</label>
+                <input type="text" id="link" name="link" value="<%= service?.link || 'https://default-link.com' %>" 
+                    class="mt-1 block w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+            <button type="submit" 
+                class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition duration-300">
+                Update Service
+            </button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,7 +1,7 @@
 import express from "express"
 import { createplan, Deleteplan, getplan, updateplan } from "../controllers/plans.controles.js" 
 import { checkAuth } from "../middleware/jwt.middleware.js"
-import { upload } from "../middleware/Multer_Middleware.js"
+import  upload  from "../middleware/Multer_Middleware.js"
 const Router = express.Router()
 
 Router.post("/plan-register",checkAuth, upload.array("image",5) ,createplan)

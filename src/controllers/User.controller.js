@@ -66,9 +66,9 @@ export const usersignin = async (req, res) => {
 
 export const teamMember = async (req, res) => {
     try {
-        const { name, email, role, image } = req.body;
+        const { name, role, email, image } = req.body;
 
-        if (!name || !email) {
+        if (!name || !role || !email || !image) {
             return res.status(400).json({ message: "All Field Required!" })
         }
         const checkemail = await UserModel.findOne({ email })
@@ -78,8 +78,8 @@ export const teamMember = async (req, res) => {
 
         const UserRegister = new UserModel({
             name,
-            email,
             role,
+            email,
             image,
         })
         await UserRegister.save();

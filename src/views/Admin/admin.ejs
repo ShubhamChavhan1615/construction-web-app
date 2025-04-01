@@ -7,13 +7,9 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
     <title>Admin Dashboard</title>
 </head>
 <body class="bg-gray-100 flex">
-
     <!-- Sidebar -->
     <div class="w-64 min-h-screen bg-orange-600 text-white p-5">
         <h2 class="text-2xl font-bold mb-4">Admin Panel</h2>
@@ -23,29 +19,51 @@
             <li class="py-2 px-4 hover:bg-white hover:text-black"><a href="/admin/manage/plan">Plan</a></li>
             <li class="py-2 px-4 hover:bg-white hover:text-black"><a href="/admin/manage/slider">Slider</a></li>
             <li class="py-2 px-4 hover:bg-white hover:text-black"><a href="/admin/manage/team">Manage Team</a></li>
+            <li class="py-2 px-4 hover:bg-white hover:text-black"><a href="/admin/manage/gallarymanage">Manage Gallery</a></li>
         </ul>
     </div>
 
     <!-- Main Content -->
     <div class="flex-1 p-6">
-        <h1 class="text-3xl font-bold">Welcome to Admin Dashboard</h1>
-
-        <!-- Statistics Cards -->
-        <div class="grid grid-cols-3 gap-4 mt-6">
-            <div class="p-6 bg-white shadow rounded-lg">
-                <h2 class="text-xl font-semibold">Total Users</h2>
-                <p class="text-2xl font-bold">120</p>
-            </div>
-            <div class="p-6 bg-white shadow rounded-lg">
-                <h2 class="text-xl font-semibold">Total Posts</h2>
-                <p class="text-2xl font-bold">75</p>
-            </div>
-            <div class="p-6 bg-white shadow rounded-lg">
-                <h2 class="text-xl font-semibold">Total Comments</h2>
-                <p class="text-2xl font-bold">340</p>
-            </div>
+        <h1 class="text-3xl font-bold">Welcome to Admin Dashboard</h1>       
+        <!-- Users Table -->
+        
+        <div class="mt-6 bg-white p-4 shadow rounded-lg">
+            <h2 class="text-xl font-semibold mb-4">All Users</h2>
+            <input type="text" id="userFilter" placeholder="Search users..." class="mb-4 p-2 border rounded w-full">
+            <table class="min-w-full border border-gray-300">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="py-3 px-4 text-left">Image</th>
+                        <th class="py-3 px-6 text-left">Name</th>
+                        <th class="py-3 px-6 text-left">Email</th>
+                        <th class="py-3 px-4 text-left">Role</th>
+                        <th class="py-3 px-6 text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    <% users.forEach(user => { %>
+                    <tr class="border-b hover:bg-gray-100">
+                        <td class="py-3 px-4">
+                            <img src="<%= user.image %>" alt="" class="w-12 h-12 rounded-full object-cover border">
+                        </td>
+                        <td class="py-3 px-6"><%= user.name %></td>
+                        <td class="py-3 px-6" style="color: <%= user.email ? 'black' : 'red' %>;">
+                            <%= user.email || "Team Member" %>
+                        </td>
+                        <td class="py-3 px-4 font-medium" style="color: <%= user.role ? 'black' : 'red' %>;">
+                            <%= user.role || "User"  %>
+                        </td>
+                        <td class="py-3 px-6 text-center">
+                            <a href="/delete/<%= user._id %>" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</a>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
         </div>
     </div>
+    
 
 </body>
 </html>

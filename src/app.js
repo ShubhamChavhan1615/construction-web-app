@@ -6,10 +6,10 @@ const PORT = process.env.PORT;
 const app = express();
 import UserRout from "./routes/user.js";
 import appointmentRoutes from "./routes/appointment.js";
-import contactrouter from "./routes/contact.js"
-import planRouter from "./routes/plans.js"
-import gallaryroute from "./routes/gallery.js"
-import servicesRouter from "./routes/services.js"
+import contactrouter from "./routes/contact.js";
+import planRouter from "./routes/plans.js";
+import gallaryroute from "./routes/gallery.js";
+import servicesRouter from "./routes/services.js";
 import { checkAuth } from "./middleware/jwt.middleware.js";
 import { Service } from "./models/services.js";
 import UserModel from "./models/UserModel.js";
@@ -22,16 +22,59 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/admin", (req, res) => {
-  res.render("Admin/admin", { title: "Admin" });
+// app.get("/admin", checkAuth, async (req, res) => {
+//   try {
+//     const users = await UserModel.find({},req.email);
+//     const team = await UserModel.find()
+//     res.render("Admin/admin", { title: "Admin", users,team });
+//   } catch (error) {
+//     console.error("Error fetching users:", error);
+//     res.status(500).send("Internal Server Error");
+//   }
+// });
+app.get("/admin", checkAuth, async (req, res) => {
+  try {
+    const AdminUser = await UserModel.findById(req.user);
+
+    // Proper Admin Check
+    if (!AdminUser || AdminUser.isAdmin !== "Admin") {
+      return res.redirect("/");
+    }
+
+    const users = await UserModel.find(); // Fetch all users
+    res.render("Admin/admin", { title: "Admin", users: users });
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 app.get("/blogs", (req, res) => {
   res.render("Admin/blogs", { title: "Blogs" });
 });
 
-app.get("/admin/manage/service", (req, res) => {
-  res.render("Admin/services");
+app.get("/admin/manage/service", async (req, res) => {
+  const services = await Service.find();
+
+  res.render("Admin/services", { title: "Sarvices", services: services });
+});
+app.get("/edit/:id", async (req, res) => {
+  try {
+    const service = await Service.findById(req.params.id); // Correct query
+
+    if (!service) {
+      return res.status(404).send("Service not found");
+    }
+    res.render("Admin/editsarvice", { title: "Edit Service", service });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+app.get("/delete/:id", async (req, res) => {
+  const id = req.params.id;
+  const services = await Service.findByIdAndDelete(id);
+  res.render("Admin/services", { title: "Service", services });
 });
 
 app.get("/admin/manage/plan", (req, res) => {
@@ -40,8 +83,22 @@ app.get("/admin/manage/plan", (req, res) => {
 app.get("/admin/manage/slider", (req, res) => {
   res.render("Admin/slider");
 });
-app.get("/admin/manage/team", (req, res) => {
-  res.render("Admin/team");
+app.get("/admin/manage/team", async (req, res) => {
+  try {
+    res.render("Admin/team", { title: "Admin" });
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.get("/admin/manage/gallarymanage", async (req, res) => {
+  try {
+    res.render("Admin/gallarymanage", { title: "Admin" });
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 // index Page
@@ -135,7 +192,6 @@ app.get("/", checkAuth, async (req, res) => {
       });
     }
 
-
     return res.render("index", {
       title: "Construction Management",
       news,
@@ -143,9 +199,8 @@ app.get("/", checkAuth, async (req, res) => {
       projects,
       services,
     });
-
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
     res.render("error");
   }
 });
@@ -184,7 +239,7 @@ app.get("/About", checkAuth, async (req, res) => {
     },
     { title: "15+", description: "Years of Excellence" },
   ];
-  const teamMembers = await UserModel.find({})
+  const teamMembers = await UserModel.find({});
   if (req.user) {
     const user = await UserModel.findById(req.user);
 
@@ -268,12 +323,13 @@ const projects = [
 ];
 
 app.get("/projects", checkAuth, async (req, res) => {
-
   if (req.user) {
     const user = await UserModel.findById(req.user);
 
     return res.render("Project", {
-      title: "Project", user, projects,
+      title: "Project",
+      user,
+      projects,
     });
   }
 
@@ -355,18 +411,29 @@ app.get("/services", checkAuth, async (req, res) => {
     const user = await UserModel.findById(req.user);
 
     return res.render("Services", {
-      title: "Services", services, user, testimonials, benefits
+      title: "Services",
+      services,
+      user,
+      testimonials,
+      benefits,
     });
   }
 
-  res.render("Services", { title: "Services", services, user: null, testimonials, benefits });
+  res.render("Services", {
+    title: "Services",
+    services,
+    user: null,
+    testimonials,
+    benefits,
+  });
 });
 
 // Plans Page
 
 const plans = [
   {
-    image: "https://media.istockphoto.com/id/1164943425/photo/turning-dreams-into-winning-designs.jpg?s=612x612&w=0&k=20&c=SFAZx9crVcqMxaSpkOIhF4ZQOIPwSGfelcseU2aURXs=",
+    image:
+      "https://media.istockphoto.com/id/1164943425/photo/turning-dreams-into-winning-designs.jpg?s=612x612&w=0&k=20&c=SFAZx9crVcqMxaSpkOIhF4ZQOIPwSGfelcseU2aURXs=",
     name: "Basic Plan",
     description: "Perfect for small projects and startups.",
     price: 299,
@@ -377,7 +444,8 @@ const plans = [
     ],
   },
   {
-    image: "https://media.istockphoto.com/id/1164943425/photo/turning-dreams-into-winning-designs.jpg?s=612x612&w=0&k=20&c=SFAZx9crVcqMxaSpkOIhF4ZQOIPwSGfelcseU2aURXs=",
+    image:
+      "https://media.istockphoto.com/id/1164943425/photo/turning-dreams-into-winning-designs.jpg?s=612x612&w=0&k=20&c=SFAZx9crVcqMxaSpkOIhF4ZQOIPwSGfelcseU2aURXs=",
     name: "Standard Plan",
     description: "Ideal for medium-sized projects.",
     price: 599,
@@ -389,7 +457,8 @@ const plans = [
     ],
   },
   {
-    image: "https://media.istockphoto.com/id/1164943425/photo/turning-dreams-into-winning-designs.jpg?s=612x612&w=0&k=20&c=SFAZx9crVcqMxaSpkOIhF4ZQOIPwSGfelcseU2aURXs=",
+    image:
+      "https://media.istockphoto.com/id/1164943425/photo/turning-dreams-into-winning-designs.jpg?s=612x612&w=0&k=20&c=SFAZx9crVcqMxaSpkOIhF4ZQOIPwSGfelcseU2aURXs=",
     name: "Premium Plan",
     description: "Best for large-scale and complex projects.",
     price: 999,
@@ -422,7 +491,7 @@ const faqs = [
 
 // Render Plans Page
 app.get("/plans", (req, res) => {
-  res.render("Plans", { title: "Plans", plans, faqs });
+  res.render("Plans", {title:"Plans", plans, faqs });
 });
 
 // Contact page
@@ -448,7 +517,9 @@ app.get("/contact", checkAuth, async (req, res) => {
   if (req.user) {
     const user = await UserModel.findById(req.user);
     return res.render("Contact", {
-      title: "Contact", user, contactInfo
+      title: "Contact",
+      user,
+      contactInfo,
     });
   }
 
@@ -461,8 +532,8 @@ app.get("/profile", checkAuth, async (req, res) => {
     const user = await UserModel.findById(req.user);
     return res.render("partials/Profile", { title: "Profile", user });
   }
-
-  res.render("partials/login", { title: "Profile", user: null });
+ 
+  res.render("partials/login", { title: "Profile", user:null });
 })
 app.get("/EditProfile", checkAuth, async (req, res) => {
   const userId = req.query.id; // Get ID from query parameters
@@ -480,25 +551,28 @@ app.get("/EditProfile", checkAuth, async (req, res) => {
   }
 });
 
+ 
+ 
+
+
 
 app.use("/api/appointment", appointmentRoutes);
 app.use("/api-user", UserRout);
-app.use("/api/contact", contactrouter)
-app.use("/api/plan", planRouter)
-app.use("/api/gallary", gallaryroute)
+app.use("/api/contact", contactrouter);
+app.use("/api/plan", planRouter);
+app.use("/api/gallary", gallaryroute);
 app.use("/api/services", servicesRouter);
-
 
 app.get("/delete", async (req, res) => {
   try {
     const user = await UserModel.deleteMany({});
-    console.log("user : ", user);
-
+    console.log("user : ",user);
+    
     res.status(200).json(user)
   } catch (error) {
     console.log(error);
   }
-})
+});
 
 app.listen(PORT, () => {
   dbConnect();
