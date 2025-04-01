@@ -422,7 +422,7 @@ const faqs = [
 
 // Render Plans Page
 app.get("/plans", (req, res) => {
-  res.render("Plans", {title:"Plans", plans, faqs });
+  res.render("Plans", { title: "Plans", plans, faqs });
 });
 
 // Contact page
@@ -457,16 +457,16 @@ app.get("/contact", checkAuth, async (req, res) => {
 
 app.get("/profile", checkAuth, async (req, res) => {
   // const user = req.user;
-  if(req.user){
-  const user = await UserModel.findById(req.user);
-  return res.render("partials/Profile", { title: "Profile", user });
+  if (req.user) {
+    const user = await UserModel.findById(req.user);
+    return res.render("partials/Profile", { title: "Profile", user });
   }
- 
-  res.render("partials/login", { title: "Profile", user:null });
+
+  res.render("partials/login", { title: "Profile", user: null });
 })
 app.get("/EditProfile", checkAuth, async (req, res) => {
   const userId = req.query.id; // Get ID from query parameters
-  if (userId) {      
+  if (userId) {
     try {
       const user = await UserModel.findById(userId);
       if (!user) {
@@ -477,12 +477,8 @@ app.get("/EditProfile", checkAuth, async (req, res) => {
       console.error(error);
       res.status(500).send("Internal Server Error");
     }
-  } 
+  }
 });
-
- 
- 
-
 
 
 app.use("/api/appointment", appointmentRoutes);
@@ -496,8 +492,8 @@ app.use("/api/services", servicesRouter);
 app.get("/delete", async (req, res) => {
   try {
     const user = await UserModel.deleteMany({});
-    console.log("user : ",user);
-    
+    console.log("user : ", user);
+
     res.status(200).json(user)
   } catch (error) {
     console.log(error);
