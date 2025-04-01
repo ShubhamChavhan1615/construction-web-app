@@ -492,7 +492,7 @@ const faqs = [
 
 // Render Plans Page
 app.get("/plans", (req, res) => {
-  res.render("Plans", { title: "Plans", plans, faqs });
+  res.render("Plans", {title:"Plans", plans, faqs });
 });
 
 // Contact page
