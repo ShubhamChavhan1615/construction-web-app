@@ -1,26 +1,28 @@
 import mongoose from "mongoose";
 
-const ProjectSchema = new mongoose.Schema({
-    name: {
+// Define the schema for the Project
+const projectSchema = new mongoose.Schema({
+    title: {
         type: String,
-        required: true
+        
     },
-    type: {
-        type: String,
-        required: true
+    completionDate: {
+        type: Date,
+       
     },
     description: {
         type: String,
-        required: true
-    },   
-    price: {
-        type: String,
-        required: true
-    },    
-    image: {
-        type: [String],
-        required: true
+        
     },
+    image: {
+        type: String,
+        required: true,  // Assuming it's a URL or path to the image
+    },
+}, {
+    timestamps: true, // Automatically adds createdAt and updatedAt fields
 });
 
- export default mongoose.model("Project", ProjectSchema);
+// Create and export the Project model based on the schema
+export default mongoose.model('Project', projectSchema);
+
+

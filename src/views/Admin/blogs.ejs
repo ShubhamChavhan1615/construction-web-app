@@ -10,10 +10,10 @@
     <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
         <button class="bg-blue-500 text-white py-2 px-3 rounded-md"><a href="/admin">Back</a></button>
         <h1 class="text-2xl font-bold mb-4">Manage Projects</h1>
-        <form id="projectForm" action="/admin/projects" method="POST" enctype="multipart/form-data" class="space-y-4">
+        <form id="projectForm" action="/api-project/createProject-register" method="POST"  class="space-y-4">
             <div>
                 <label class="block font-semibold">Project Images</label>
-                <input type="file" id="imageInput" name="images" multiple class="mt-1 block w-full p-2 border rounded-md" accept="image/*">
+                <input type="text" id="image" name="image"  class="mt-1 block w-full p-2 border rounded-md" >
             </div>
             <div id="imagePreview" class="flex flex-wrap gap-4"></div>
             <div>
@@ -31,43 +31,41 @@
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Submit</button>
         </form>
     </div>
+    <div class="container mx-auto mt-10">
+        <h2 class="text-2xl font-semibold text-center mb-6 text-gray-800">Admin Panel - Manage project</h2>
 
-    <script>
-        let selectedFiles = [];
-
-        document.getElementById('imageInput').addEventListener('change', function(event) {
-            let preview = document.getElementById('imagePreview');
-            let newFiles = Array.from(event.target.files);
+        <div class="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% if (project && project.length > 0) { %>
+                <% project.map(item => { %>
+                    <div class="bg-white p-6 items-center rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+                        <div class="flex flex-col items-center gap-4">
+                            <img src="<%= item.image %>" class="h-[220px] w-full" alt="<%= item.title %>">
+                            <h3 class="text-lg font-semibold text-gray-800"><%= item.title %></h3>
+                        </div>
+                        <div class="justify-center text-center item-center">
+                            <p class="text-gray-600 mt-2"><%= item.description %></p>
+                            <% if (item.link) { %>
+                                <p class="text-gray-600 mt-2"><a href="<%= item.link %>" class="text-blue-500 underline">More Info</a></p>
+                            <% } %>
+                        </div>
+                        <div class="flex justify-between mt-4">
+                            <a href="/edit/<%= item._id %>" 
+                                class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition duration-300">
+                                ✏ Edit
+                            </a>
+                            <a href="/delete/<%= item._id %>" 
+                                class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition duration-300"
+                                onclick="return confirm('Are you sure?');">
+                                🗑 Delete
+                            </a>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p class="text-center text-gray-600">No projrcts available.</p>
+            <% } %>
             
-            newFiles.forEach(file => {
-                if (!selectedFiles.some(f => f.name === file.name)) {
-                    selectedFiles.push(file);
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        let div = document.createElement('div');
-                        div.classList.add('relative', 'w-32', 'h-32', 'border', 'rounded-md', 'overflow-hidden');
-                        div.innerHTML = `
-                            <img src="${e.target.result}" class="w-full h-full object-cover">
-                            <button type="button" class="absolute top-1 right-1 bg-red-500 text-white text-xs px-2 py-1 rounded-md remove-btn" data-name="${file.name}">X</button>
-                        `;
-                        preview.appendChild(div);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-        });
-
-        document.getElementById('imagePreview').addEventListener('click', function(event) {
-            if (event.target.classList.contains('remove-btn')) {
-                let fileNameToRemove = event.target.getAttribute('data-name');
-                selectedFiles = selectedFiles.filter(file => file.name !== fileNameToRemove);
-                
-                let newFileList = new DataTransfer();
-                selectedFiles.forEach(file => newFileList.items.add(file));
-                document.getElementById('imageInput').files = newFileList.files;
-                event.target.parentElement.remove();
-            }
-        });
-    </script>
-</body>
+        </div>
+    </div>
+   </body>
 </html>

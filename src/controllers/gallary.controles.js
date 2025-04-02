@@ -4,7 +4,7 @@ import galleryModel from "../models/gallery.model.js"
 export const Creategallery = async (req, res) => {
     try {
         const { image ,description } = req.body;
-    console.log(req.body)
+  
         if (!image || !description) {
             return res.status(400).json({ msg: "Field is required" }); // Ensure the function stops here
         }
