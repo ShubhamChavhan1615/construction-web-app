@@ -217,6 +217,7 @@ app.get("/", checkAuth, async (req, res) => {
       user: null,
       projects,
       services,
+      galleryItems
     });
   } catch (error) {
     console.log(error.message);
