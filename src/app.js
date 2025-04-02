@@ -196,7 +196,7 @@ app.get("/", checkAuth, async (req, res) => {
     //   },
     // ];
     const services = await Service.find({});
-    const galleryItems= await galleryModel.find({})
+    const galleryItems= await galleryModel.find()
     // Check if user is authenticated
     if (req.user) {
       const user = await UserModel.findById(req.user);
@@ -581,9 +581,11 @@ app.get("/EditProfile", checkAuth, async (req, res) => {
     }
   }
 });
-app.get("/logout",checkAuth,async(req,res)=>{
-  res.render("Login", {title:"Login" ,user:null})
-})
+app.get("/logout", async (req, res) => {
+  res.clearCookie("authToken"); // Remove the authToken cookie
+  res.render("Login", { title: "Login", user: null });
+});
+
 
 
 
