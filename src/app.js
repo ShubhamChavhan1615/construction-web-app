@@ -349,9 +349,9 @@ app.get("/signup", (req, res) => {
 //];
 
 app.get("/projects", checkAuth, async (req, res) => {
+  const projects = await projectModel.find()
   if (req.user) {
     const user = await UserModel.findById(req.user);
-    const projects = await projectModel.find()
     return res.render("Project", {
       title: "Project",
       user,
