@@ -358,40 +358,40 @@ app.get("/projects", checkAuth, async (req, res) => {
 // Services Page
 
 app.get("/services", checkAuth, async (req, res) => {
-  const services = [
-    {
-      title: "Project Planning",
-      description:
-        "Detailed project plans that ensure timely delivery with minimal risks.",
-      icon: "📋",
-    },
-    {
-      title: "Site Management",
-      description: "Effective on-site management to oversee daily operations.",
-      icon: "🏗️",
-    },
-    {
-      title: "Budget Estimation",
-      description: "Accurate cost estimation to ensure budget control.",
-      icon: "💰",
-    },
-    {
-      title: "Quality Assurance",
-      description: "Ensuring high-quality standards in every phase.",
-      icon: "✅",
-    },
-    {
-      title: "Safety Management",
-      description:
-        "Safety protocols to protect workers and maintain compliance.",
-      icon: "⚠️",
-    },
-    {
-      title: "Post-Construction Support",
-      description: "Reliablesupport even after project completion.",
-      icon: "🏢",
-    },
-  ];
+  // const services = [
+  //   {
+  //     title: "Project Planning",
+  //     description:
+  //       "Detailed project plans that ensure timely delivery with minimal risks.",
+  //     icon: "📋",
+  //   },
+  //   {
+  //     title: "Site Management",
+  //     description: "Effective on-site management to oversee daily operations.",
+  //     icon: "🏗️",
+  //   },
+  //   {
+  //     title: "Budget Estimation",
+  //     description: "Accurate cost estimation to ensure budget control.",
+  //     icon: "💰",
+  //   },
+  //   {
+  //     title: "Quality Assurance",
+  //     description: "Ensuring high-quality standards in every phase.",
+  //     icon: "✅",
+  //   },
+  //   {
+  //     title: "Safety Management",
+  //     description:
+  //       "Safety protocols to protect workers and maintain compliance.",
+  //     icon: "⚠️",
+  //   },
+  //   {
+  //     title: "Post-Construction Support",
+  //     description: "Reliablesupport even after project completion.",
+  //     icon: "🏢",
+  //   },
+  // ];
   const benefits = [
     {
       title: "Expert Professionals",
@@ -426,9 +426,10 @@ app.get("/services", checkAuth, async (req, res) => {
     },
   ];
 
+  const services = await Service.find({})
   if (req.user) {
     const user = await UserModel.findById(req.user);
-
+    // const services = await Service.find({})
     return res.render("Services", {
       title: "Services",
       services,
