@@ -3,18 +3,18 @@ import galleryModel from "../models/gallery.model.js"
 
 export const Creategallery = async (req, res) => {
     try {
-        const { image } = req.body;
+        const { image ,description } = req.body;
     console.log(req.body)
-        if (!image) {
+        if (!image || !description) {
             return res.status(400).json({ msg: "Field is required" }); // Ensure the function stops here
         }
 
         const insertimage = new galleryModel({
            image,
+           description
         });
 
         await insertimage.save();
-
         res.status(200).json({ message: "Gallery Image Uploaded Successfully!" });
 
     } catch (error) {

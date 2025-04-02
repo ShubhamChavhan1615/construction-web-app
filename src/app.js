@@ -15,6 +15,7 @@ import { checkAuth } from "./middleware/jwt.middleware.js";
 import { Service } from "./models/services.js";
 import UserModel from "./models/UserModel.js";
 import galleryModel from "./models/gallery.model.js";
+import { getGallary } from "./controllers/gallary.controles.js";
 
 Router();
 
@@ -183,6 +184,7 @@ app.get("/", checkAuth, async (req, res) => {
     //   },
     // ];
     const services = await Service.find({});
+    const galleryItems= await galleryModel.find({})
     // Check if user is authenticated
     if (req.user) {
       const user = await UserModel.findById(req.user);
@@ -193,6 +195,7 @@ app.get("/", checkAuth, async (req, res) => {
         user,
         projects,
         services,
+        galleryItems
       });
     }
 
@@ -558,6 +561,8 @@ app.get("/EditProfile", checkAuth, async (req, res) => {
     }
   }
 });
+
+
 
 app.use("/api/appointment", appointmentRoutes);
 app.use("/api-user", UserRout);

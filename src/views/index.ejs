@@ -10,6 +10,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+ 
 </head>
 
 <body class="bg-gray-100">
@@ -245,70 +246,57 @@
 
 
         <!-- Featured Projects Section -->
-        <section class="bg-gray-100 py-16 w-full">
+        <!-- <section class="bg-gray-100 py-16 w-full">
           <h2 class="text-4xl font-bold text-center text-gray-800 mb-8 uppercase">
-            🏗️ Work Lifecycle
+             Gallery
           </h2>
-
-          <div
-            class="card relative mx-auto flex h-[254px] w-full max-w-6xl space-x-2 overflow-hidden rounded-md bg-[#f3f4f6] bg-orange-50 p-2 md:h-[300px] lg:h-[350px]">
-            <!-- Project Planning -->
-            <div
-              class="hover-box group flex h-full w-[33.33%] cursor-pointer items-center justify-center overflow-hidden rounded-sm border border-[#f59e0b] bg-cover bg-center transition-all duration-500 hover:w-[90%] md:w-[25%] lg:w-[20%]"
-              style="
-        background-image: url('https://media.istockphoto.com/id/1332558192/photo/three-multi-ethnic-construction-workers-chatting.jpg?s=612x612&w=0&k=20&c=m6Sevw_6Xw-5LhpnT1C_P6UitIo04em3lhjfx-BGsKg=');
-      ">
-              <span
-                class="min-w-[14em] -rotate-90 transform rounded-b-md bg-white/90 px-4 text-center font-medium tracking-wider text-[#f98119] uppercase transition-all duration-500 group-hover:rotate-0">Project
-                Planning</span> 
-            </div>
-
-            <!-- Site Analysis -->
-            <div
-              class="hover-box group flex h-full w-[33.33%] cursor-pointer items-center justify-center overflow-hidden rounded-sm border border-[#f59e0b] bg-white bg-cover bg-center transition-all duration-500 hover:w-[90%] md:w-[25%] lg:w-[20%]"
-              style="
-        background-image: url('https://media.istockphoto.com/id/862758024/photo/construction-site.jpg?s=612x612&w=0&k=20&c=gYl455m4B91lwQpIidx9YBCxwLaeLKFR632FRaPqffc=');
-      ">
-              <span
-                class="min-w-[14em] -rotate-90 transform rounded-b-md bg-white/90 px-4 text-center font-medium tracking-wider text-[#f98119] uppercase transition-all duration-500 group-hover:rotate-0">Site
-                Analysis</span>
-            </div>
-
-            <!-- Safety Measures -->
-            <div
-              class="hover-box group flex h-full w-[33.33%] cursor-pointer items-center justify-center overflow-hidden rounded-sm border border-[#f59e0b] bg-white bg-cover bg-center transition-all duration-500 hover:w-[90%] md:w-[25%] lg:w-[20%]"
-              style="
-        background-image: url('https://media.istockphoto.com/id/1165384568/photo/europe-modern-complex-of-residential-buildings.jpg?s=612x612&w=0&k=20&c=iW4NBiMPKEuvaA7h8wIsPHikhS64eR-5EVPfjQ9GPOA=');
-      ">
-              <span
-                class="min-w-[14em] -rotate-90 transform rounded-b-md bg-white/90 px-4 text-center font-medium tracking-wider text-[#f98119] uppercase transition-all duration-500 group-hover:rotate-0">Safety
-                Measures</span>
-            </div>
-
-            <!-- Quality Assurance -->
-            <div
-              class="hover-box group flex h-full w-[33.33%] cursor-pointer items-center justify-center overflow-hidden rounded-sm border border-[#f59e0b] bg-white bg-cover bg-center transition-all duration-500 hover:w-[90%] md:w-[25%] lg:w-[20%]"
-              style="
-        background-image: url('https://media.istockphoto.com/id/1453963806/video/time-lapse-low-angle-of-tall-corporate-buildings-skyscraper-with-reflection-of-clouds-among.jpg?s=640x640&k=20&c=wCAPTGEuVUSQbX1YehBMysxxLkdT8S-GXwaYuXDlV5M=');
-      ">
-              <span
-                class="min-w-[14em] -rotate-90 transform rounded-b-md bg-white/90 px-4 text-center font-medium tracking-wider text-[#f98119] uppercase transition-all duration-500 group-hover:rotate-0">Quality
-                Assurance</span>
-            </div>
-
-            <!-- Risk Assessment -->
-            <div
-              class="hover-box group flex h-full w-[33.33%] cursor-pointer items-center justify-center overflow-hidden rounded-sm border border-[#f59e0b] bg-white bg-cover bg-center transition-all duration-500 hover:w-[90%] md:w-[25%] lg:w-[20%]"
-              style="
-        background-image: url('https://media.istockphoto.com/id/2117759132/photo/four-construction-workers-having-meeting.jpg?s=612x612&w=0&k=20&c=qLV__HuqWfnV9RWbXgzQDrYxsmQXbDRm4RO-RP9vEIs=');
-      ">
-              <span
-                class="min-w-[14em] -rotate-90 transform rounded-b-md bg-white/90 px-4 text-center font-medium tracking-wider text-[#f98119] uppercase transition-all duration-500 group-hover:rotate-0">Risk
-                Assessment</span>
-            </div>
+        
+          <div class="card relative mx-auto flex h-auto w-full max-w-6xl flex-wrap gap-4 p-4">
+            
+            <% galleryItems.forEach(item => { %>
+              <div class="hover-box group flex h-[250px] w-[30%] cursor-pointer items-center justify-center overflow-hidden rounded-md border border-[#f59e0b] bg-cover bg-center transition-all duration-500 hover:scale-105" 
+                style="background-image: url('<%= item.image %>');">
+                
+                <span class="absolute bottom-0 left-0 w-full bg-black/60 text-white text-center py-2 text-sm uppercase">
+                  <%= item.description %>
+                </span>
+        
+              </div>
+            <% }); %>
+        
           </div>
-        </section>
-
+        </section> -->
+        <section class="bg-gradient-to-b from-orange-400 to-yellow-300 py-10 w-full">
+          <h2 class="text-4xl font-bold text-center text-white mb-8 uppercase">📸 Gallery</h2>
+      
+          <div class="relative rounded-md mx-auto flex h-auto w-full max-w-6xl flex-wrap justify-between">
+              <% galleryItems.forEach((item, index) => { %>
+                  <% if (index % 5 === 0) { %> <!-- Start a new row after every 4 images -->
+                      <div class="w-full flex ">
+                  <% } %>
+                  
+                  <div class="group relative flex h-[400px] w-[23%] cursor-pointer items-center justify-center overflow-hidden 
+                      border border-[#f59e0b] bg-cover bg-center transition-all duration-500 hover:w-[100%] hover:h-[400px]"
+                      style="background-image: url('<%= item.image %>');">
+                      
+                      <!-- Vertical Text (Default) - Moves to Center on Hover -->
+                      <span class="absolute flex items-center justify-center text-black text-center text-sm uppercase font-bold bg-white/80 
+                          w-[40px] h-full left-0 top-0 transform -rotate-90 origin-bottom-left transition-all duration-500 group-hover:w-full group-hover:h-[40px] 
+                          group-hover:rotate-0 group-hover:left-1/2 group-hover:top-1/2 group-hover:-translate-x-1/2 group-hover:-translate-y-1/2">
+                          <%= item.description %>
+                      </span>
+                  </div>
+      
+                  <% if (index % 5 === 4 || index === galleryItems.length - 1) { %> <!-- Close the row after every 4 images -->
+                      </div>
+                  <% } %>
+              <% }); %>
+          </div>
+      </section>
+      
+      
+      
+      
         <!-- Include Footer -->
         <%- include('partials/Footer') %>
 
