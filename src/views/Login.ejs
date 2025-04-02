@@ -92,7 +92,6 @@
   </head>
   <body>
     <%- include('partials/Header', { title: title, user: user || {} }) %>
-
     <!-- Background Section -->
     <div
       class="bg-gradient-to-r from-orange-500 to-red-500 min-h-screen flex items-center justify-center py-12 px-4"
@@ -108,7 +107,7 @@
         <!-- Login Form -->
         <form action="/api-user/login" method="POST">
           <!-- Role Selection with New Radio Buttons -->
-          <div class="flex justify-center space-x-6 mb-6">
+          <!-- <div class="flex justify-center space-x-6 mb-6">
             <label class="custom-radio">
               <input type="radio" name="role" value="user" checked />
               <span>User</span>
@@ -117,7 +116,7 @@
               <input type="radio" name="role" value="admin" />
               <span>Admin</span>
             </label>
-          </div>
+          </div> -->
 
           <!-- Email Input -->
           <div class="mb-4">

@@ -280,9 +280,15 @@ app.get("/About", checkAuth, async (req, res) => {
   });
 });
 
-app.get("/Login", (req, res) => {
-  res.render("Login", { title: "Login", user: null });
+app.get('/login',async (req, res) => {
+  const user = await UserModel.find()
+  if(user){
+    
+    res.render('Login', { title: 'Login | InfraConnect', user: user  });
+  }
+  res.render('Login', { title: 'Login | InfraConnect', user: null });
 });
+
 
 app.get("/signup", (req, res) => {
   res.render("Register", { title: "Registration", user: null });
@@ -574,6 +580,10 @@ app.get("/EditProfile", checkAuth, async (req, res) => {
     }
   }
 });
+app.get("/logout",checkAuth,async(req,res)=>{
+  res.render("Login", {title:"Login" ,user:null})
+})
+
 
 
 
