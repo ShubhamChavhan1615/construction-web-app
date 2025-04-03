@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Plan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 py-10">
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <!-- Edit Plan Form -->
+        <form action="/api/plan/edit/<%= plan._id %>" method="POST" class="space-y-4">
+            <!-- Plan Name -->
+            <div>
+                <label for="name" class="block font-medium text-gray-700">Plan Name</label>
+                <input type="text" id="name" name="name" value="<%= plan.name %>" class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
+            </div>
+
+            <!-- Plan Description -->
+            <div>
+                <label for="description" class="block font-medium text-gray-700">Description</label>
+                <textarea id="description" name="description" class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required><%= plan.description %></textarea>
+            </div>
+
+            <!-- Plan Price -->
+            <div>
+                <label for="price" class="block font-medium text-gray-700">Price</label>
+                <input type="number" id="price" name="price" value="<%= plan.price %>" class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
+            </div>
+
+            <!-- Plan Features -->
+            <div>
+                <label for="features" class="block font-medium text-gray-700">Features (comma-separated)</label>
+                <input type="text" id="features" name="features" value="<%= plan.features.join(', ') %>" class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
+            </div>
+
+            <!-- Main Image -->
+            <div>
+                <label for="image" class="block font-medium text-gray-700">Main Image</label>
+                <input type="text" id="image" name="image" value="<%= plan.image %>" class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
+            </div>
+
+            <!-- Additional Images -->
+            <div>
+                <label for="images" class="block font-medium text-gray-700">Additional Images (comma-separated URLs)</label>
+                <input type="text" id="images" name="images" value="<%= plan.images.join(', ') %>" class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200">
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg shadow-md hover:bg-blue-700">Update Plan</button>
+        </form>
+
+        <!-- Back to Plans Button -->
+        <div class="mt-6 text-center">
+            <a href="/plans" class="bg-gray-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-600 transition-colors">
+                Back to Plans
+            </a>
+        </div>
+    </div>
+</body>
+</html>

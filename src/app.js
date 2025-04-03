@@ -17,6 +17,7 @@ import UserModel from "./models/UserModel.js";
 import galleryModel from "./models/gallery.model.js";
 import { getGallary } from "./controllers/gallary.controles.js";
 import projectModel from "./models/project.model.js";
+import plansModel from "./models/plans.model.js";
 
 Router();
 
@@ -71,11 +72,14 @@ app.get("/admin/manage/service", async (req, res) => {
 app.get("/edit/:id", async (req, res) => {
   try {
     const service = await Service.findById(req.params.id);
-    const project = await projectModel.findById(req.params.id) // Correct query
+    const project = await projectModel.findById(req.params.id)
+    const plan = await plansModel.findById(req.params.id) // Correct query
     if(service)
     res.render("Admin/editsarvice", { title: "Edit Service", service });
     else if(project)
     res.render("Admin/editblog", { title: "Edit blog", project });
+    else if(plan)
+    res.render("Admin/editplan", { title: "Edit blog", plan });
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -85,15 +89,20 @@ app.get("/delete/:id", async (req, res) => {
   
   const services = await Service.findByIdAndDelete(req.params.id);
   const project = await projectModel.findByIdAndDelete(req.params.id)
+  const plan = await plansModel.findByIdAndDelete(req.params.id)
   if(services)
     res.render("Admin/services", { title: "Service", services });
    else if(project)
     res.render("Admin/blogs", { title: "project", project });
+    else if(plan)
+    res.render("Admin/plan", { title: "project", plan });
    
 });
 
-app.get("/admin/manage/plan", (req, res) => {
-  res.render("Admin/plan");
+app.get("/admin/manage/plan", async(req, res) => {
+  const plan = await plansModel.find({})
+  
+  res.render("Admin/plan" ,{title:"plan",plan});
 });
 app.get("/admin/manage/slider", (req, res) => {
   res.render("Admin/slider");
@@ -224,6 +233,7 @@ app.get("/", checkAuth, async (req, res) => {
     res.render("error");
   }
 });
+
 
 app.get("/About", checkAuth, async (req, res) => {
   // const teamMembers = [
@@ -457,46 +467,46 @@ app.get("/services", checkAuth, async (req, res) => {
 
 // Plans Page
 
-const plans = [
-  {
-    image:
-      "https://media.istockphoto.com/id/1164943425/photo/turning-dreams-into-winning-designs.jpg?s=612x612&w=0&k=20&c=SFAZx9crVcqMxaSpkOIhF4ZQOIPwSGfelcseU2aURXs=",
-    name: "Basic Plan",
-    description: "Perfect for small projects and startups.",
-    price: 299,
-    features: [
-      "Basic Construction Support",
-      "Project Management Tools",
-      "Standard Safety Guidelines",
-    ],
-  },
-  {
-    image:
-      "https://media.istockphoto.com/id/1164943425/photo/turning-dreams-into-winning-designs.jpg?s=612x612&w=0&k=20&c=SFAZx9crVcqMxaSpkOIhF4ZQOIPwSGfelcseU2aURXs=",
-    name: "Standard Plan",
-    description: "Ideal for medium-sized projects.",
-    price: 599,
-    features: [
-      "Advanced Construction Planning",
-      "Priority Project Management",
-      "Extended Safety Protocols",
-      "Dedicated Support",
-    ],
-  },
-  {
-    image:
-      "https://media.istockphoto.com/id/1164943425/photo/turning-dreams-into-winning-designs.jpg?s=612x612&w=0&k=20&c=SFAZx9crVcqMxaSpkOIhF4ZQOIPwSGfelcseU2aURXs=",
-    name: "Premium Plan",
-    description: "Best for large-scale and complex projects.",
-    price: 999,
-    features: [
-      "End-to-End Project Management",
-      "Customized Construction Solutions",
-      "On-Site Safety & Quality Control",
-      "24/7 Premium Support",
-    ],
-  },
-];
+// const plans = [
+//   {
+//     image:
+//       "https://media.istockphoto.com/id/1164943425/photo/turning-dreams-into-winning-designs.jpg?s=612x612&w=0&k=20&c=SFAZx9crVcqMxaSpkOIhF4ZQOIPwSGfelcseU2aURXs=",
+//     name: "Basic Plan",
+//     description: "Perfect for small projects and startups.",
+//     price: 299,
+//     features: [
+//       "Basic Construction Support",
+//       "Project Management Tools",
+//       "Standard Safety Guidelines",
+//     ],
+//   },
+//   {
+//     image:
+//       "https://media.istockphoto.com/id/1164943425/photo/turning-dreams-into-winning-designs.jpg?s=612x612&w=0&k=20&c=SFAZx9crVcqMxaSpkOIhF4ZQOIPwSGfelcseU2aURXs=",
+//     name: "Standard Plan",
+//     description: "Ideal for medium-sized projects.",
+//     price: 599,
+//     features: [
+//       "Advanced Construction Planning",
+//       "Priority Project Management",
+//       "Extended Safety Protocols",
+//       "Dedicated Support",
+//     ],
+//   },
+//   {
+//     image:
+//       "https://media.istockphoto.com/id/1164943425/photo/turning-dreams-into-winning-designs.jpg?s=612x612&w=0&k=20&c=SFAZx9crVcqMxaSpkOIhF4ZQOIPwSGfelcseU2aURXs=",
+//     name: "Premium Plan",
+//     description: "Best for large-scale and complex projects.",
+//     price: 999,
+//     features: [
+//       "End-to-End Project Management",
+//       "Customized Construction Solutions",
+//       "On-Site Safety & Quality Control",
+//       "24/7 Premium Support",
+//     ],
+//   },
+// ];
 
 const faqs = [
   {
@@ -518,6 +528,7 @@ const faqs = [
 
 // Render Plans Page
 app.get("/plans", checkAuth,async (req, res) => {
+  const plans = await plansModel.find({})
   if(req.user){
   const user = await UserModel.findById(req.user)
   res.render("Plans", {title:"Plans",user, plans, faqs });
@@ -525,6 +536,15 @@ app.get("/plans", checkAuth,async (req, res) => {
 };
 res.render("Plans", {title:"Plans",user:null, plans, faqs });
 });
+app.get("/plans/:id",async(req,res)=>{
+  const plans = await plansModel.findById(req.params.id)
+  if(req.user){
+    if(!plans)
+    res.status(400).json({msg:"plans not found"})
+    res.render("partials/moreplaninfo" ,{title:"More Plan Info",user, plans})
+  }
+  res.render("partials/moreplaninfo" ,{title:"More Plan Info", user:null, plans :[plans]})
+})
 // Contact page
 app.get("/contact", checkAuth, async (req, res) => {
   const contactInfo = [

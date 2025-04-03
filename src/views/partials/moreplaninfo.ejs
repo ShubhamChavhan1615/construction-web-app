@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Plans</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Function to update the main image when an additional image is clicked
+        function updateMainImage(imageSrc, id) {
+            document.getElementById(`mainImage-${id}`).src = imageSrc;
+        }
+    </script>
+</head>
+<body class="bg-gray-50 ">
+
+    <%- include('Header', { title: title, user: user || {} }) %>
+    <div class="max-w-full mx-auto bg-white p-6  md:p-12 rounded-2xl shadow-lg">
+        <section class="container mx-auto px-4 py-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-orange-500">Our Pricing Plans</h2>
+                <p class="text-gray-600 mt-3 text-base md:text-lg">
+                    We offer flexible plans for all project sizes and requirements.
+                </p>
+            </div>
+
+            <% if (!plans || !Array.isArray(plans) || plans.length === 0) { %>
+                <p class="text-center text-red-500 text-lg font-semibold">No plans available at the moment.</p>
+            <% } else { %>
+                <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-10">
+                    <% plans.forEach((plan, index) => { %>
+                        <div class="flex flex-col bg-white p-4 md:p-6 rounded-xl shadow-md hover:shadow-xl transition-transform transform hover:scale-105 border border-gray-200">
+                            
+                            <!-- Image Section -->
+                            <div class="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 md:space-x-5 mb-4">
+                                <div class="flex flex-row md:flex-col space-x-3 md:space-x-0 md:space-y-3">
+                                    <% plan.images.forEach(image => { %>
+                                        <img 
+                                            src="<%= image %>" 
+                                            alt="Thumbnail" 
+                                            class="w-16 h-16 md:w-32 md:h-32 object-cover rounded-lg border-2 border-transparent hover:border-orange-500 cursor-pointer transition-all"
+                                            onclick="updateMainImage('<%= image %>', '<%= index %>')">
+                                    <% }) %>
+                                </div>
+                                <div class="w-full ">
+                                    <img id="mainImage-<%= index %>" src="<%= plan.image %>" class="w-full  md:h-[400px] object-cover rounded-xl shadow-md" alt="<%= plan.name %>" />
+                                </div>
+                            </div>
+
+                            <!-- Plan Details -->
+                            <div class=" ">
+                                <!-- Plan Name -->
+                                <h3 class="text-2xl md:text-3xl font-extrabold text-orange-500 mb-3"><%= plan.name %></h3>
+
+                                <!-- Plan Description -->
+                                <p class="text-gray-600 text-sm md:text-lg mb-4"><%= plan.description %></p>
+
+                                <!-- Plan Price -->
+                                <p class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                                    $<%= plan.price %>
+                                </p>
+
+                                <!-- Plan Features -->
+                                <ul class="flex flex-col  r space-y-3 mb-6 px-4">
+                                    <% plan.features.forEach(feature => { %>
+                                        <li class="text-gray-700 text-left flex  text-sm md:text-lg">
+                                            ✅ <span class="ml-2"><%= feature %></span>
+                                        </li>
+                                    <% }) %>
+                                </ul>                             
+                                <!-- Get Started Button -->
+                              <a href="/contact">
+                                <button class="bg-blue-600 w-full text-white px-4 md:px-6 py-2 md:py-3 rounded-xl font-semibold text-sm md:text-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg">
+                                    Get Started
+                                </button>
+                              </a>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            <% } %>
+        </section>
+    </div>
+    <%- include('Footer') %>
+</body>
+</html>

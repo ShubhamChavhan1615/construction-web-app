@@ -3,87 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Form</title>
+    <title>Premium Plan</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
-        <button class="bg-blue-500 text-white py-2 px-3 rounded-md"><a href="/admin">Back</a></button>
-        <h2 class="text-2xl font-semibold text-gray-700 text-center mb-4">Property Form</h2>
-        <form action="add-property" method="POST" class="space-y-4" enctype="multipart/form-data">
+<body class="bg-gray-100 py-10">
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <!-- Plan registration form -->
+        <form action="/api/plan/plan-register" method="POST" class="mt-6 space-y-4">
             <div>
-                <label class="block text-gray-600 font-medium">Name:</label>
-                <input type="text" name="name" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <label for="name" class="block font-medium text-gray-700">Plan Name</label>
+                <input type="text" id="name" name="name" class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
             </div>
-
             <div>
-                <label class="block text-gray-600 font-medium">Type:</label>
-                <select name="type" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="1BHK">1BHK</option>
-                    <option value="2BHK">2BHK</option>
-                    <option value="3BHK">3BHK</option>
-                </select>
+                <label for="description" class="block font-medium text-gray-700">Description</label>
+                <textarea id="description" name="description" class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required></textarea>
             </div>
-
             <div>
-                <label class="block text-gray-600 font-medium">Description:</label>
-                <textarea name="description" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                <label for="price" class="block font-medium text-gray-700">Price</label>
+                <input type="number" id="price" name="price" class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
             </div>
-
             <div>
-                <label class="block text-gray-600 font-medium">Status:</label>
-                <select name="status" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="ongoing">Ongoing</option>
-                    <option value="completed">Completed</option>
-                    <option value="pending">Pending</option>
-                </select>
+                <label for="features" class="block font-medium text-gray-700">Features (comma-separated)</label>
+                <input type="text" id="features" name="features" class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
             </div>
-
             <div>
-                <label class="block text-gray-600 font-medium">Price:</label>
-                <input type="text" name="price" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <label for="image" class="block font-medium text-gray-700">Main Image</label>
+                <input type="text" id="image" name="image" class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
             </div>
-
             <div>
-                <label class="block text-gray-600 font-medium">Rating:</label>
-                <input type="number" name="rating" min="0" max="5" step="0.1" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <label for="images" class="block font-medium text-gray-700">Additional Images</label>
+                <input type="text" id="images" name="images" multiple class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200">
             </div>
-
-            <div>
-                <label class="block text-gray-600 font-medium">Start Date:</label>
-                <input type="date" name="startDate" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-
-            <div>
-                <label class="block text-gray-600 font-medium">End Date:</label>
-                <input type="date" name="endDate" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-
-            <div>
-                <label class="block text-gray-600 font-medium">Image:</label>
-                <input type="file" name="image" id="imageInput" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" accept="image/*">
-                <div class="mt-3">
-                    <img id="imagePreview" class="hidden w-60 max-h-40 object-cover rounded-lg" />
-                </div>
-            </div>
-
-            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">Submit</button>
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg shadow-md hover:bg-blue-700">Submit Plan</button>
         </form>
     </div>
 
-    <script>
-        document.getElementById('imageInput').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = document.getElementById('imagePreview');
-                    img.src = e.target.result;
-                    img.classList.remove('hidden');
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    </script>
+    <!-- Display Plan Details -->
+    <section class="container mx-auto px-2 py-4">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-orange-500">Our Pricing Plans</h2>
+            <p class="text-gray-700 mt-2">
+                We offer flexible plans for all project sizes and requirements.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <% if (Array.isArray(plan) && plan.length > 0) { %>
+                <% plan.forEach(plan => { %>
+                    <div class="flex flex-col bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105">
+                        <div class="flex flex-wrap gap-4 mb-4">
+                            <!-- Display Additional Images -->
+                            <ul class="flex space-x-4">
+                                <% plan.images.forEach(image => { %>
+                                    <li class="w-24 h-24">
+                                        <img src="<%= plan.image %>" alt="Additional Image" class="w-full h-full object-cover rounded-md">
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        </div>
+
+                        <!-- Main Image -->
+                        <img src="<%= plan.image %>" class="w-full h-64 object-cover rounded-lg mb-4" alt="<%= plan.name %>" />
+
+                        <!-- Plan Name -->
+                        <h3 class="text-2xl font-bold text-orange-500 mb-2"><%= plan.name %></h3>
+
+                        <!-- Plan Description -->
+                        <p class="text-gray-600 mb-4"><%= plan.description %></p>
+
+                        <!-- Plan Price -->
+                        <p class="text-3xl font-bold text-gray-800 mb-4">
+                            $<%= plan.price %>
+                        </p>
+
+                        <!-- Plan Features -->
+                        <ul class="text-left space-y-2 mb-4">
+                            <% plan.features.forEach(feature => { %>
+                                <li class="text-gray-700 flex items-center">
+                                    ✅ <span class="ml-2"><%= feature %></span>
+                                </li>
+                            <% }) %>
+                        </ul>
+
+                        <!-- Edit and Delete Buttons -->
+                        <div class="flex space-x-4">
+                            <a href="/edit/<%= plan._id %>" class="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors">
+                                Edit
+                            </a>
+                            <a href="/delete/<%= plan._id %>" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                                Delete
+                            </a>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>No plans available.</p>
+            <% } %>
+        </div>
+    </section>
+
 </body>
 </html>
