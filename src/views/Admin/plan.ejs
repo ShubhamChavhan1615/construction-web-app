@@ -1,40 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premium Plan</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-100 py-10">
     <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+
+        <div class="flex items-center justify-between w-full p-4">
+            <!-- Back Button (Left) -->
+            <a href="/admin">
+                <button class="bg-blue-500 text-white py-2 px-3 rounded-md hover:bg-blue-600 transition duration-300">
+                    ⬅ Back
+                </button>
+            </a>
+
+            <!-- Animated Gradient Text (Centered) -->
+            <h1 class="flex-grow text-4xl font-bold text-center bg-gradient-to-r from-orange-500 via-red-500 to-orange-500 
+                       text-transparent bg-clip-text bg-[length:200%_200%] animate-gradient">
+                Manage Plans
+            </h1>
+        </div>
+
+
         <!-- Plan registration form -->
         <form action="/api/plan/plan-register" method="POST" class="mt-6 space-y-4">
             <div>
                 <label for="name" class="block font-medium text-gray-700">Plan Name</label>
-                <input type="text" id="name" name="name" class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
+                <input type="text" id="name" name="name"
+                    class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
             </div>
             <div>
                 <label for="description" class="block font-medium text-gray-700">Description</label>
-                <textarea id="description" name="description" class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required></textarea>
+                <textarea id="description" name="description"
+                    class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200"
+                    required></textarea>
             </div>
             <div>
                 <label for="price" class="block font-medium text-gray-700">Price</label>
-                <input type="number" id="price" name="price" class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
+                <input type="number" id="price" name="price"
+                    class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
             </div>
             <div>
                 <label for="features" class="block font-medium text-gray-700">Features (comma-separated)</label>
-                <input type="text" id="features" name="features" class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
+                <input type="text" id="features" name="features"
+                    class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
             </div>
             <div>
                 <label for="image" class="block font-medium text-gray-700">Main Image</label>
-                <input type="text" id="image" name="image" class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
+                <input type="text" id="image" name="image"
+                    class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
             </div>
             <div>
                 <label for="images" class="block font-medium text-gray-700">Additional Images</label>
-                <input type="text" id="images" name="images" multiple class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200">
+                <input type="text" id="images" name="images" multiple
+                    class="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200">
             </div>
-            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg shadow-md hover:bg-blue-700">Submit Plan</button>
+            <button type="submit"
+                class="w-full bg-blue-600 text-white py-2 rounded-lg shadow-md hover:bg-blue-700">Submit Plan</button>
         </form>
     </div>
 
@@ -48,28 +75,35 @@
         </div>
 
         <div class="grid md:grid-cols-3 gap-8">
-            <% if (Array.isArray(plan) && plan.length > 0) { %>
-                <% plan.forEach(plan => { %>
-                    <div class="flex flex-col bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105">
+            <% if (Array.isArray(plan) && plan.length> 0) { %>
+                <% plan.forEach(plan=> { %>
+                    <div
+                        class="flex flex-col bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105">
                         <div class="flex flex-wrap gap-4 mb-4">
                             <!-- Display Additional Images -->
                             <ul class="flex space-x-4">
-                                <% plan.images.forEach(image => { %>
+                                <% plan.images.forEach(image=> { %>
                                     <li class="w-24 h-24">
-                                        <img src="<%= plan.image %>" alt="Additional Image" class="w-full h-full object-cover rounded-md">
+                                        <img src="<%= plan.image %>" alt="Additional Image"
+                                            class="w-full h-full object-cover rounded-md">
                                     </li>
-                                <% }) %>
+                                    <% }) %>
                             </ul>
                         </div>
 
                         <!-- Main Image -->
-                        <img src="<%= plan.image %>" class="w-full h-64 object-cover rounded-lg mb-4" alt="<%= plan.name %>" />
+                        <img src="<%= plan.image %>" class="w-full h-64 object-cover rounded-lg mb-4"
+                            alt="<%= plan.name %>" />
 
                         <!-- Plan Name -->
-                        <h3 class="text-2xl font-bold text-orange-500 mb-2"><%= plan.name %></h3>
+                        <h3 class="text-2xl font-bold text-orange-500 mb-2">
+                            <%= plan.name %>
+                        </h3>
 
                         <!-- Plan Description -->
-                        <p class="text-gray-600 mb-4"><%= plan.description %></p>
+                        <p class="text-gray-600 mb-4">
+                            <%= plan.description %>
+                        </p>
 
                         <!-- Plan Price -->
                         <p class="text-3xl font-bold text-gray-800 mb-4">
@@ -78,29 +112,34 @@
 
                         <!-- Plan Features -->
                         <ul class="text-left space-y-2 mb-4">
-                            <% plan.features.forEach(feature => { %>
+                            <% plan.features.forEach(feature=> { %>
                                 <li class="text-gray-700 flex items-center">
-                                    ✅ <span class="ml-2"><%= feature %></span>
+                                    ✅ <span class="ml-2">
+                                        <%= feature %>
+                                    </span>
                                 </li>
-                            <% }) %>
+                                <% }) %>
                         </ul>
 
                         <!-- Edit and Delete Buttons -->
                         <div class="flex space-x-4">
-                            <a href="/edit/<%= plan._id %>" class="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors">
+                            <a href="/edit/<%= plan._id %>"
+                                class="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors">
                                 Edit
                             </a>
-                            <a href="/delete/<%= plan._id %>" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                            <a href="/delete/<%= plan._id %>"
+                                class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
                                 Delete
                             </a>
                         </div>
                     </div>
-                <% }) %>
-            <% } else { %>
-                <p>No plans available.</p>
-            <% } %>
+                    <% }) %>
+                        <% } else { %>
+                            <p>No plans available.</p>
+                            <% } %>
         </div>
     </section>
 
 </body>
+
 </html>
